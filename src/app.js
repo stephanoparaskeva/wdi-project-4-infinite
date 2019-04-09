@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
-import Graph2 from './graph2'
+import CandlePlot1 from './candlePlot1'
 
 
 class App extends React.Component {
@@ -20,7 +20,7 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <Graph2 />
+        <CandlePlot1 />
       </div>
     )
   }
