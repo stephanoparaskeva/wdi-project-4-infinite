@@ -11,7 +11,7 @@ class CandlePlot1 extends React.Component {
       x: [],
       close: [],
       decreasing: {line: {color: 'red'}},
-      increasing: {line: {color: 'blue'}},
+      increasing: {line: {color: 'green'}},
       high: [],
       low: [],
       open: [],
@@ -21,23 +21,31 @@ class CandlePlot1 extends React.Component {
     }
 
     this.layout = {
+      font: {
+        family: 'Courier New, monospace',
+        size: 10,
+        color: 'white'
+      },
+      paper_bgcolor: 'black',
+      plot_bgcolor: 'black',
       dragmode: 'zoom',
       margin: {
         r: 10,
-        t: 25,
-        b: 40,
-        l: 60
+        t: 15,
+        b: 10,
+        l: 35
       },
       showlegend: false,
       xaxis: {
+        showgrid: false,
         autorange: true,
         domain: [0, 1],
         range: ['2017-01-03 12:00', '2017-02-15 12:00'],
-        rangeslider: {range: ['2017-01-03 12:00', '2017-02-15 12:00']},
-        title: 'Date',
         type: 'date'
       },
       yaxis: {
+        showlegend: false,
+        showgrid: false,
         autorange: true,
         domain: [0, 1],
         range: [114.609999778, 137.410004222],
