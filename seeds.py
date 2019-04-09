@@ -21,9 +21,9 @@ with app.app_context():
 
     db.session.add(stephano)
 
-    alexander, errors = user_schema.load({
-        'username': 'alexander',
-        'email': 'alexander@email.com',
+    sabo, errors = user_schema.load({
+        'username': 'sabo',
+        'email': 'sabo@email.com',
         'password': 'password',
         'password_confirmation': 'password'
     })
@@ -31,7 +31,7 @@ with app.app_context():
     if errors:
         raise Exception(errors)
 
-    db.session.add(alexander)
+    db.session.add(sabo)
 
     btc = Coin(symbol='BTC', full_name='Bitcoin')
     eth = Coin(symbol='ETH', full_name='Ethereum')
@@ -40,8 +40,8 @@ with app.app_context():
 
     transaction1 = Transaction(user=stephano, buy=1000, coin=btc)
     transaction2 = Transaction(user=stephano, sell=500, coin=btc)
-    transaction3 = Transaction(user=alexander, buy=840, coin=eth)
-    transaction4 = Transaction(user=alexander, buy=302, coin=ltc)
+    transaction3 = Transaction(user=sabo, buy=840, coin=eth)
+    transaction4 = Transaction(user=sabo, buy=302, coin=ltc)
 
     db.session.add_all([btc, eth, ltc, usdt, transaction1, transaction2, transaction3, transaction4])
 

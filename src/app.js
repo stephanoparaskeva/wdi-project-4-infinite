@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
+import Graph2 from './graph2'
+
 
 class App extends React.Component {
   constructor(){
@@ -17,7 +19,9 @@ class App extends React.Component {
 
   render() {
     return(
-      <div>Hello World</div>
+      <div>
+        <Graph2 />
+      </div>
     )
   }
 }
