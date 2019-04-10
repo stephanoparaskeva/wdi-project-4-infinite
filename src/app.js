@@ -12,11 +12,11 @@ class App extends React.Component {
 
     this.state = {}
   }
-  componentDidMount() {
-    axios
-      .get('/api/transactions')
-      .then(res => console.log(res))
-  }
+  // componentDidMount() {
+  //   axios
+  //     .get('/api/transactions')
+  //     .then(res => console.log(res))
+  // }
 
   render() {
     return(

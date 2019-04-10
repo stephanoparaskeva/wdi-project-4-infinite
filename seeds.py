@@ -52,7 +52,11 @@ with app.app_context():
     transaction6 = Transaction(user=stephano, sell=500, sell_quantity=2, coin=ltc)
     transaction7 = Transaction(user=stephano, buy=1000, buy_quantity=8, coin=xrp)
     transaction8 = Transaction(user=stephano, sell=500, sell_quantity=1, coin=xrp)
+    transaction9 = Transaction(user=stephano, sell=500, buy_quantity=3, coin=ltc)
+    transaction10 = Transaction(user=stephano, sell=500, coin=ltc)
+    transaction11 = Transaction(user=stephano, sell=500, coin=btc)
+    transaction12 = Transaction(user=stephano, sell=500, sell_quantity=6, coin=btc)
 
-    db.session.add_all([btc, eth, xrp, ltc, bch, eos, bnb, xlm, ada, usdt, transaction1, transaction2, transaction3, transaction4, transaction5, transaction6, transaction7, transaction8])
+    db.session.add_all([btc, eth, xrp, ltc, bch, eos, bnb, xlm, ada, usdt, transaction1, transaction2, transaction3, transaction4, transaction5, transaction6, transaction7, transaction8, transaction9, transaction10, transaction11, transaction12])
 
     db.session.commit()

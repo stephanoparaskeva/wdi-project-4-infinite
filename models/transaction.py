@@ -12,6 +12,8 @@ class Transaction(db.Model, BaseModel):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     buy = db.Column(db.Integer)
     sell = db.Column(db.Integer)
+    buy_quantity = db.Column(db.Integer)
+    sell_quantity = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', backref='user_transaction')
     coin_id = db.Column(db.Integer, db.ForeignKey('coins.id'))
@@ -19,6 +21,6 @@ class Transaction(db.Model, BaseModel):
 
 class TransactionSchema(ma.ModelSchema, BaseSchema):
     user = fields.Nested('UserSchema', only=('id', 'username'))
-    coin = fields.Nested('CoinSchema', only=('symbol', 'full_name'))
+    coin = fields.Nested('CoinSchema', only=('currency', 'full_name'))
     class Meta:
         model = Transaction
