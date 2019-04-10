@@ -56,9 +56,8 @@ class CandlePlot1 extends React.Component {
 
   componentDidMount() {
     axios
-      .get('https://api.nomics.com/v1/candles?key=cfa361e67a06d9209da08f36a340410b', {
+      .get('/api/nomics/candles', {
         params: {
-          interval: '1d',
           currency: 'BTC',
           start: moment().subtract(30, 'days').format(),
           end: moment().format()
@@ -70,7 +69,7 @@ class CandlePlot1 extends React.Component {
           close: [...this.state.close, parseFloat(day.close)],
           high: [...this.state.high, parseFloat(day.high)],
           low: [...this.state.low, parseFloat(day.low)],
-          open: [...this.state.open, parseFloat(day.close)]
+          open: [...this.state.open, parseFloat(day.open)]
         })
       }))
       .catch(err => console.log(err))
