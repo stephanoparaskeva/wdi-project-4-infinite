@@ -5,6 +5,8 @@ import axios from 'axios'
 import './styles/main.scss'
 
 import CandlePlot1 from './candlePlot1'
+import Ticker from './components/ticker'
+import CoinIndex from './components/coinIndex'
 import Portfolio from './components/portfolio/portfolioMain'
 
 
@@ -14,6 +16,7 @@ class App extends React.Component {
 
     this.state = {}
   }
+
   componentDidMount() {
     axios
       .get('/api/transactions')
@@ -23,8 +26,7 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <CandlePlot1 />
-        <Portfolio />
+        <CoinIndex />
       </div>
     )
   }

@@ -10,6 +10,8 @@ class Coin(db.Model, BaseModel):
     full_name = db.Column(db.String(20), unique=True)
 
 class CoinSchema(ma.ModelSchema, BaseSchema):
+
     user_transaction = fields.Nested('TransactionSchema', many=True)
     class Meta:
+        
         model = Coin

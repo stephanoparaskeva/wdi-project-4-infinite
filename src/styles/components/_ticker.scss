@@ -1,0 +1,15 @@
+.ticker {
+  display: inline-block;
+  height: 4rem;
+  line-height: 4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-left: 100%;
+  animation: ticker-scroll 10s linear infinite;
+
+  &__item {
+    display: inline-block;
+    padding: 0 2rem;
+    font-size: 2rem;
+  }
+}
