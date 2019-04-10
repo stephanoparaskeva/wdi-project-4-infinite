@@ -2,8 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
+import './styles/main.scss'
+
 import CandlePlot1 from './candlePlot1'
-import Portfolio from './portfolio/portfolioMain'
+import Ticker from './components/ticker'
+import CoinIndex from './components/coinIndex'
+import Portfolio from './components/portfolio/portfolioMain'
 
 
 class App extends React.Component {
@@ -21,8 +25,7 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <CandlePlot1 />
-        <Portfolio />
+        <CoinIndex />
       </div>
     )
   }

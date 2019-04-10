@@ -63,8 +63,12 @@ class Portfolio extends React.Component{
   render(){
     // console.log(this.state)
     return(
-      <div>
-          helloworld
+      <div className="container">
+        <div className="row">
+          <div className="col-1 test">
+          hello world
+          </div>
+        </div>
       </div>
     )
   }
