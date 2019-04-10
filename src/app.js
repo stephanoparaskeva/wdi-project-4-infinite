@@ -2,8 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
+import './styles/main.scss'
+
 import CandlePlot1 from './candlePlot1'
-import Portfolio from './portfolio/portfolioMain'
+import Portfolio from './components/portfolio/portfolioMain'
 
 
 class App extends React.Component {

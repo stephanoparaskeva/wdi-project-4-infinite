@@ -58,8 +58,8 @@ class CandlePlot1 extends React.Component {
     axios
       .get('/api/nomics/candles', {
         params: {
-          currency: 'BTC',
-          start: moment().subtract(30, 'days').format(),
+          currency: 'XRP',
+          start: moment().subtract(1000, 'days').format(),
           end: moment().format()
         }
       })
