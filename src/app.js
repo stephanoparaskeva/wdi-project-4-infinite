@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 
 import CandlePlot1 from './candlePlot1'
+import Portfolio from './portfolio/portfolioMain'
 
 
 class App extends React.Component {
@@ -21,6 +22,7 @@ class App extends React.Component {
     return(
       <div>
         <CandlePlot1 />
+        <Portfolio />
       </div>
     )
   }

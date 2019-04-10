@@ -6,7 +6,7 @@ class Coin(db.Model, BaseModel):
 
     __tablename__ = 'coins'
 
-    symbol = db.Column(db.String(6), nullable=False, unique=True)
+    currency = db.Column(db.String(6), nullable=False, unique=True)
     full_name = db.Column(db.String(20), unique=True)
 
 class CoinSchema(ma.ModelSchema, BaseSchema):

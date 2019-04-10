@@ -20,29 +20,39 @@ with app.app_context():
         raise Exception(errors)
 
     db.session.add(stephano)
+    #
+    # sabo, errors = user_schema.load({
+    #     'username': 'sabo',
+    #     'email': 'sabo@email.com',
+    #     'password': 'password',
+    #     'password_confirmation': 'password'
+    # })
+    #
+    # if errors:
+    #     raise Exception(errors)
+    #
+    # db.session.add(sabo)
 
-    sabo, errors = user_schema.load({
-        'username': 'sabo',
-        'email': 'sabo@email.com',
-        'password': 'password',
-        'password_confirmation': 'password'
-    })
+    btc = Coin(currency='BTC', full_name='Bitcoin')
+    eth = Coin(currency='ETH', full_name='Ethereum')
+    xrp = Coin(currency='XRP', full_name='Ripple')
+    ltc = Coin(currency='LTC', full_name='Litecoin')
+    bch = Coin(currency='BCH', full_name='Bitcoin Cash')
+    eos = Coin(currency='EOS', full_name='Eos')
+    bnb = Coin(currency='BNB', full_name='Binance Coin')
+    xlm = Coin(currency='XLM', full_name='Stellar')
+    ada = Coin(currency='ADA', full_name='Cardano')
+    usdt = Coin(currency='USDT', full_name='Tether')
 
-    if errors:
-        raise Exception(errors)
+    transaction1 = Transaction(user=stephano, buy=1000, buy_quantity=3, coin=btc)
+    transaction2 = Transaction(user=stephano, sell=500, sell_quantity=2, coin=btc)
+    transaction3 = Transaction(user=stephano, buy=1000, buy_quantity=5, coin=eth)
+    transaction4 = Transaction(user=stephano, sell=500, sell_quantity=3, coin=eth)
+    transaction5 = Transaction(user=stephano, buy=1000, buy_quantity=6, coin=ltc)
+    transaction6 = Transaction(user=stephano, sell=500, sell_quantity=2, coin=ltc)
+    transaction7 = Transaction(user=stephano, buy=1000, buy_quantity=8, coin=xrp)
+    transaction8 = Transaction(user=stephano, sell=500, sell_quantity=1, coin=xrp)
 
-    db.session.add(sabo)
-
-    btc = Coin(symbol='BTC', full_name='Bitcoin')
-    eth = Coin(symbol='ETH', full_name='Ethereum')
-    ltc = Coin(symbol='LTC', full_name='Litecoin')
-    usdt = Coin(symbol='USDT', full_name='Tether')
-
-    transaction1 = Transaction(user=stephano, buy=1000, coin=btc)
-    transaction2 = Transaction(user=stephano, sell=500, coin=btc)
-    transaction3 = Transaction(user=sabo, buy=840, coin=eth)
-    transaction4 = Transaction(user=sabo, buy=302, coin=ltc)
-
-    db.session.add_all([btc, eth, ltc, usdt, transaction1, transaction2, transaction3, transaction4])
+    db.session.add_all([btc, eth, xrp, ltc, bch, eos, bnb, xlm, ada, usdt, transaction1, transaction2, transaction3, transaction4, transaction5, transaction6, transaction7, transaction8])
 
     db.session.commit()
