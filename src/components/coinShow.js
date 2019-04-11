@@ -6,16 +6,28 @@ class Coin extends React.Component {
   constructor() {
     super()
 
-    this.state = {}
+    this.state = {
+      time: '30'
+    }
+    this.handleTime = this.handleTime.bind(this)
+  }
+
+  handleTime(e) {
+    this.setState({time: e.target.value})
   }
 
   render() {
     const coin = this.props.location.state.coin
+    const time = this.state.time
     return(
       <div>
         <h1>{coin.currency}</h1>
+        <button onClick={this.handleTime} value="7">1w</button>
+        <button onClick={this.handleTime} value="30">1m</button>
+        <button onClick={this.handleTime} value="365">1y</button>
         <Candle
-          coin={coin.currency}
+          coin={ coin.currency }
+          time={ time }
         />
         <span className="col-2">${parseFloat(coin.price).toFixed(2)}</span>
         <p>Price Change</p>

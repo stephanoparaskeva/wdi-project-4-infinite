@@ -27,29 +27,26 @@ class CoinIndex extends React.Component {
     const coins = this.state.tickerData
     if (!coins) return null
     return(
-      <div className="container border">
+      <table className="u-full-width">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>ATH</th>
+          </tr>
+        </thead>
         {coins.map(coin =>
-          <Link key={coin.rank} to={
-            {
-              pathname: '/coin',
-              state: { coin }
-            }
-          }>
-            <div>
-              <div className="row border">
-                <h2 className="col-10">{coin.rank}. {coin.currency}</h2>
-                <span className="col-2">${parseFloat(coin.price).toFixed(2)}</span>
-              </div>
-              <p>Price Change</p>
-              <span>{coin['1d'].price_change_pct}%</span>
-              <p>Market Cap</p>
-              <span>${coin.market_cap}</span>
-              <p>Circulating Supply</p>
-              <span>{coin.circulating_supply} {coin.currency}</span>
-            </div>
-          </Link>
+          <tbody key={coin.rank}>
+            <tr>
+              <td>{coin.rank}. {coin.currency}</td>
+              <td>${parseFloat(coin.price).toFixed(2)}</td>
+              <td>{coin['1d'].price_change_pct}%</td>
+              <td>${parseFloat(coin.high).toFixed(2)}</td>
+            </tr>
+          </tbody>
         )}
-      </div>
+      </table>
     )
   }
 }

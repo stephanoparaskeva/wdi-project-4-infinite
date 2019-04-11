@@ -11,8 +11,7 @@ class Header extends React.Component {
 
   render(){
     return(
-      <div>
-        <Ticker />
+      <div className="header">
         <h1>Crypto</h1>
         <Link to='/register'>Register</Link>
       </div>

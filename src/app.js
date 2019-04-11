@@ -30,8 +30,8 @@ class App extends React.Component {
   render() {
     return(
       <BrowserRouter>
-        <div className="container">
-          <Header />
+        <Header />
+        <div className="content container">
           <Switch>
             <Route path='/portfolio' component={ Portfolio } />
             <Route path='/coin' component={ CoinShow } />
