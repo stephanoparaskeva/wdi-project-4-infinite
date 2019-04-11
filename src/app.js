@@ -27,6 +27,7 @@ class App extends React.Component {
     return(
       <div>
         <Header />
+        <Portfolio />
         <CoinIndex />
       </div>
     )
