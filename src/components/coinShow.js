@@ -1,4 +1,5 @@
 import React from 'react'
+import Candle from './candle'
 
 class Coin extends React.Component {
   constructor() {
@@ -10,6 +11,7 @@ class Coin extends React.Component {
   render() {
     return(
       <div>
+        <Candle />
       </div>
     )
   }

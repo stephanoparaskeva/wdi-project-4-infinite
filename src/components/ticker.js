@@ -10,7 +10,12 @@ class Ticker extends React.Component {
 
   getCurrencies() {
     axios.get('https://api.nomics.com/v1/currencies/ticker?key=cfa361e67a06d9209da08f36a340410b')
-      .then(res => this.setState({tickerData: res.data}))
+      .then(res => {
+        this.setState({tickerData: res.data.filter(coin => {
+          return coin.rank <= 20
+        })
+        })
+      })
   }
 
   componentDidMount() {
@@ -21,13 +26,15 @@ class Ticker extends React.Component {
     const coins = this.state.tickerData
     if (!coins) return null
     return(
-      <div className="ticker">
-        {coins.map(coin =>
-          <div key={coin.currency} className="ticker_item">
-            <span>{coin.currency}</span>
-            <span>{coin['1d'].price_change_pct}%</span>
-          </div>
-        )}
+      <div className="col-1">
+        <div className="ticker">
+          {coins.map(coin =>
+            <div key={coin.currency} className="ticker-item">
+              <span>{coin.currency}</span>
+              <span> {coin['1d'].price_change_pct}%</span>
+            </div>
+          )}
+        </div>
       </div>
     )
   }

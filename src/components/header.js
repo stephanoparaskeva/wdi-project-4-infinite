@@ -12,8 +12,8 @@ class Header extends React.Component {
   render(){
     return(
       <div>
-        <h1>Crypto</h1>
         <Ticker />
+        <h1>Crypto</h1>
       </div>
     )
   }
