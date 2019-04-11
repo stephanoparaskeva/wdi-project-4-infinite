@@ -20,18 +20,18 @@ with app.app_context():
         raise Exception(errors)
 
     db.session.add(stephano)
-    #
-    # sabo, errors = user_schema.load({
-    #     'username': 'sabo',
-    #     'email': 'sabo@email.com',
-    #     'password': 'password',
-    #     'password_confirmation': 'password'
-    # })
-    #
-    # if errors:
-    #     raise Exception(errors)
-    #
-    # db.session.add(sabo)
+
+    sabo, errors = user_schema.load({
+        'username': 'sabo',
+        'email': 'sabo@email.com',
+        'password': 'password',
+        'password_confirmation': 'password'
+    })
+
+    if errors:
+        raise Exception(errors)
+
+    db.session.add(sabo)
 
     btc = Coin(currency='BTC', full_name='Bitcoin')
     eth = Coin(currency='ETH', full_name='Ethereum')
@@ -62,9 +62,15 @@ with app.app_context():
     transaction11 = Transaction(user=stephano, sell=500, coin=btc, timestamp='2015-11-18')
     transaction12 = Transaction(user=stephano, sell=500, sell_quantity=6, coin=btc, timestamp='2015-12-18')
 
+    transaction20 = Transaction(user=sabo, buy=200, buy_quantity=6, coin=btc, timestamp='2016-12-18')
+    transaction21 = Transaction(user=sabo, buy=2, buy_quantity=6, coin=ltc, timestamp='2015-12-18')
+    transaction22 = Transaction(user=sabo, sell=10, sell_quantity=6, coin=eth, timestamp='2013-12-18')
+    transaction23 = Transaction(user=sabo, sell=2, sell_quantity=3, coin=ltc, timestamp='2015-2-18')
+    transaction24 = Transaction(user=sabo, buy=10, buy_quantity=6, coin=xrp, timestamp='2015-9-18')
+
     db.session.add_all([btc, eth, xrp, ltc, bch, eos, bnb, xlm, ada, usdt, transaction1,
      transaction2, transaction3, transaction4, transaction5, transaction6, transaction7,
      transaction8, transaction9, transaction10, transaction11, transaction12, transaction13, transaction14,
-     transaction15, transaction16, transaction17])
+     transaction15, transaction16, transaction17, transaction20, transaction21, transaction22, transaction23, transaction24])
 
     db.session.commit()

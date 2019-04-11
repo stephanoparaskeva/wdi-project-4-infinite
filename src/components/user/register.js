@@ -12,7 +12,7 @@ class Register extends React.Component {
         username: '',
         email: '',
         password: '',
-        passwordConfirmation: ''
+        password_confirmation: ''
       },
       errors: {}
     }
@@ -31,6 +31,7 @@ class Register extends React.Component {
     e.preventDefault()
     axios.post('/api/register', this.state.data)
       .then(res => {
+        console.log(res)
         Auth.setToken(res.data.token)
         this.props.history.push('/login')
       })
@@ -72,8 +73,8 @@ class Register extends React.Component {
             <input
               onChange={ this.handleChange }
               type="password"
-              name="passwordConfirmation"
-              value={ this.state.data.passwordConfirmation }
+              name="password_confirmation"
+              value={ this.state.data.password_confirmation }
             />
           </label>
           <button className="button pad-top">Register</button>
