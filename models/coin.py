@@ -7,8 +7,9 @@ class Coin(db.Model):
     __tablename__ = 'coins'
 
     id = db.Column(db.String, primary_key=True)
-    currency = db.Column(db.String(6), nullable=False, unique=True)
-    full_name = db.Column(db.String(20), unique=True)
+    url = db.Column(db.String)
+    currency = db.Column(db.String(), nullable=False)
+    full_name = db.Column(db.String())
 
 class CoinSchema(ma.ModelSchema, BaseSchema):
 
