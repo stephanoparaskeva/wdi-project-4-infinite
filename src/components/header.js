@@ -14,6 +14,7 @@ class Header extends React.Component {
       <div>
         <Ticker />
         <h1>Crypto</h1>
+        <Link to='/register'>Register</Link>
       </div>
     )
   }

@@ -12,6 +12,8 @@ import CoinIndex from './components/coinIndex'
 import CoinShow from './components/coinShow'
 import Portfolio from './components/portfolio/portfolioMain'
 import TransactionForm from './components/transactions/transactionForm'
+import Register from './components/user/register'
+import Login from './components/user/login'
 import Test from './components/portfolio/balanceGraph'
 
 
@@ -31,9 +33,12 @@ class App extends React.Component {
         <div className="container">
           <Header />
           <Switch>
-            <Route path='/coin' component={CoinShow} />
-            <Route path='/transactionform' component={TransactionForm} />
-            <Route path='/' component={CoinIndex} />
+            <Route path='/portfolio' component={ Portfolio } />
+            <Route path='/coin' component={ CoinShow } />
+            <Route path='/transactionform' component={ TransactionForm } />
+            <Route path='/register' component={ Register } />
+            <Route path='/login' component={ Login } />
+            <Route path='/' component={ CoinIndex } />
           </Switch>
         </div>
       </BrowserRouter>

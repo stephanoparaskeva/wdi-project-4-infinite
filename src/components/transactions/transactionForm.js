@@ -45,7 +45,7 @@ class TransactionForm extends React.Component {
         <p>Add {coin.currency}</p>
         <form onSubmit={ this.handleSubmit }>
           <label>
-            Buy Amount in USD
+            Buy Price in USD
             <input
               onChange={ this.handleChange }
               name="buy"
@@ -53,6 +53,16 @@ class TransactionForm extends React.Component {
               value={ this.state.data.buy }
             />
           </label>
+          <label>
+            Amount Bought
+            <input
+              onChange={ this.handleChange }
+              name="buy_quantity"
+              type="number"
+              value={ this.state.data.buy_quantity }
+            />
+          </label>
+          <button>Add Transaction</button>
         </form>
       </div>
     )
