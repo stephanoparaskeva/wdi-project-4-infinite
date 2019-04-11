@@ -26,6 +26,10 @@ class CoinIndex extends React.Component {
     return 'down'
   }
 
+  handleClick(coin){
+    console.log(coin.currency)
+  }
+
   componentDidMount() {
     this.getCurrencies()
   }
@@ -46,10 +50,22 @@ class CoinIndex extends React.Component {
         {coins.map(coin =>
           <tbody key={coin.rank}>
             <tr>
-              <td>{coin.rank}. {coin.currency}</td>
-              <td>${parseFloat(coin.price).toFixed(2)}</td>
-              <td className={this.checkChange(coin)}>{coin['1d'].price_change_pct || 0}%</td>
-              <td>${parseFloat(coin.high).toFixed(2)}</td>
+              <td><Link to={{
+                pathname: '/coin',
+                state: {coin}
+              }}>{coin.rank}. {coin.currency}</Link></td>
+              <td><Link to={{
+                pathname: '/coin',
+                state: {coin}
+              }}>${parseFloat(coin.price).toFixed(2)}</Link></td>
+              <td className={this.checkChange(coin)}><Link to={{
+                pathname: '/coin',
+                state: {coin}
+              }}>{coin['1d'].price_change_pct || 0}%</Link></td>
+              <td><Link to={{
+                pathname: '/coin',
+                state: {coin}
+              }}>${parseFloat(coin.high).toFixed(2)}</Link></td>
             </tr>
           </tbody>
         )}
