@@ -1,28 +1,9 @@
 import React from 'react'
 
-// class Holdings extends React.Component {
-//   constructor() {
-//     super()
-//
-//     this.state = {}
-//   }
-//
-//   render() {
-//     return(
-//       <div>
-//
-//       </div>
-//     )
-//   }
-//
-// }
-//
-// export default Holdings
-
-const Holdings = ({ userCoins }) => {
+const Holdings = ({ holdings }) => {
   return(
     <ul>
-      {Object.keys(userCoins).map(item => <li key={item}>Hello</li>)}
+      {holdings.map(coin => <li key={coin.currency}>{coin.currency} {coin.quantity}</li>)}
     </ul>
   )
 }

@@ -1,6 +1,7 @@
 from lib.secure_route import secure_route
 from flask import Blueprint, request, jsonify, g
 from models.transaction import Transaction, TransactionSchema
+from models.coin import Coin
 
 
 transaction_schema = TransactionSchema()
@@ -20,8 +21,10 @@ def post_transactions():
 
     data = request.get_json()
     transaction, errors = transaction_schema.load(data)
+    coin = Coin.query.get(data['coin_id'])
     if errors:
         return jsonify(errors), 422
+    transaction.coin = coin
     transaction.user = g.current_user
     transaction.save()
 
@@ -35,7 +38,7 @@ def update_transaction(transaction_id):
     if errors:
         return jsonify(errors), 422
 
-    if transaction.creator != g.current_user:
+    if transaction.user != g.current_user:
         return jsonify({'message': 'Unauthorized'}), 401
 
     transaction.save()
@@ -45,7 +48,7 @@ def update_transaction(transaction_id):
 @secure_route
 def delete_transaction(transaction_id):
     transaction = Transaction.query.get(transaction_id)
-    if transaction.creator != g.current_user:
+    if transaction.user != g.current_user:
         return jsonify({'message': 'Unauthorized'}), 401
     transaction.remove()
     return '', 204
