@@ -1,25 +1,29 @@
 import React from 'react'
+import Plot from 'react-plotly.js'
+import Auth from '../../lib/auth'
 import axios from 'axios'
 import moment from 'moment'
 
-class Test extends React.Component{
+class BalanceGraph extends React.Component{
   constructor(){
     super()
-    this.state = {}
+    this.state = {
+      type: 'scatter',
+      mode: 'lines'
+    }
     this.sortTransactionTimestamps = this.sortTransactionTimestamps.bind(this)
   }
 
   sortTransactionTimestamps() {
     axios.get('/api/transactions')
       .then(res => {
-        console.log(res)
         return res.data.sort((a, b) => {
           if (moment(a.timestamp) > moment(b.timestamp)) return 1
           return - 1
         })
       })
       .then(sorted => {
-        this.setState({dates: [...new Set(sorted.map(item => item.timestamp))]})
+        this.setState({x: [...new Set(sorted.map(item => item.timestamp))]})
         return sorted.reduce((acc, obj) => {
           const key = obj['timestamp']
           if (!acc[key]) {
@@ -32,7 +36,6 @@ class Test extends React.Component{
       .then(reduced => Object.values(reduced))
       .then(arrayGroupedByTime => {
         return arrayGroupedByTime.map(transactions => {
-          console.log(transactions)
           return transactions.reduce((acc, current) => {
             return acc += current.buy - current.sell
           }, 0)
@@ -46,7 +49,7 @@ class Test extends React.Component{
           return newBalance
         })
       })
-      .then(res => console.log(res))
+      .then(res => this.setState({y: res}))
   }
 
   componentDidMount() {
@@ -59,6 +62,12 @@ class Test extends React.Component{
       <div className="container">
         <div className="row">
           <div className="col-1 test">
+            {this.state.x &&
+          <Plot
+            data={[this.state]}
+            layout={this.layout}
+          />
+            }
           </div>
         </div>
       </div>
@@ -66,4 +75,4 @@ class Test extends React.Component{
   }
 }
 
-export default Test
+export default BalanceGraph
