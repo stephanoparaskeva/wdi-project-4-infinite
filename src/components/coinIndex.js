@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+import Common from '../lib/common'
+
 class CoinIndex extends React.Component {
   constructor() {
     super()
@@ -17,17 +19,6 @@ class CoinIndex extends React.Component {
         })
         })
       })
-  }
-
-  checkChange(coin) {
-    if(coin['1d'].price_change_pct >= 0) {
-      return 'up'
-    }
-    return 'down'
-  }
-
-  handleClick(coin){
-    console.log(coin.currency)
   }
 
   componentDidMount() {
@@ -58,7 +49,7 @@ class CoinIndex extends React.Component {
                 pathname: '/coin',
                 state: {coin}
               }}>${parseFloat(coin.price).toFixed(2)}</Link></td>
-              <td className={this.checkChange(coin)}><Link to={{
+              <td className={Common.checkChange(coin)}><Link to={{
                 pathname: '/coin',
                 state: {coin}
               }}>{coin['1d'].price_change_pct || 0}%</Link></td>
