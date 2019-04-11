@@ -19,6 +19,13 @@ class CoinIndex extends React.Component {
       })
   }
 
+  checkChange(coin) {
+    if(coin['1d'].price_change_pct >= 0) {
+      return 'up'
+    }
+    return 'down'
+  }
+
   componentDidMount() {
     this.getCurrencies()
   }
@@ -41,7 +48,7 @@ class CoinIndex extends React.Component {
             <tr>
               <td>{coin.rank}. {coin.currency}</td>
               <td>${parseFloat(coin.price).toFixed(2)}</td>
-              <td>{coin['1d'].price_change_pct}%</td>
+              <td className={this.checkChange(coin)}>{coin['1d'].price_change_pct}%</td>
               <td>${parseFloat(coin.high).toFixed(2)}</td>
             </tr>
           </tbody>
