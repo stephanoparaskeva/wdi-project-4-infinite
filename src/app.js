@@ -8,6 +8,7 @@ import CandlePlot1 from './candlePlot1'
 import Ticker from './components/ticker'
 import CoinIndex from './components/coinIndex'
 import Portfolio from './components/portfolio/portfolioMain'
+import Test from './components/portfolio/balanceGraph'
 
 
 class App extends React.Component {
@@ -27,6 +28,7 @@ class App extends React.Component {
       <div>
         <Portfolio />
         <CoinIndex />
+        <Test />
       </div>
     )
   }

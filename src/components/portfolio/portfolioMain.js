@@ -63,7 +63,7 @@ class Portfolio extends React.Component{
       <div className="container">
         <div className="row">
           <div className="col-1 test">
-            Balance {this.state.balance && this.state.balance}
+            {`Balance $${this.state.balance && this.state.balance}`}
           </div>
         </div>
       </div>
