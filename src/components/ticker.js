@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 
+import Common from '../lib/common'
+
 class Ticker extends React.Component {
   constructor() {
     super()
@@ -31,7 +33,7 @@ class Ticker extends React.Component {
           {coins.map(coin =>
             <div key={coin.currency} className="ticker-item">
               <span>{coin.currency}</span>
-              <span> {coin['1d'].price_change_pct}%</span>
+              <span className={Common.checkChange(coin)}> {coin['1d'].price_change_pct}%</span>
             </div>
           )}
         </div>

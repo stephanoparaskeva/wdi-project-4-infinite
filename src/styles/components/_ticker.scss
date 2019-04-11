@@ -5,7 +5,7 @@
   white-space: nowrap;
   overflow: hidden;
   padding-left: 100%;
-  // border: 1px solid black;
+  border: 3px solid white;
   animation: ticker-scroll 20s linear infinite;
 
   &:hover {
@@ -13,6 +13,8 @@
   }
 
   .ticker-item {
+    color: white;
+    font-weight: bold;
     display: inline-block;
     padding: 0 2em;
   }
