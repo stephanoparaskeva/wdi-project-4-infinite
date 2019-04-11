@@ -59,7 +59,7 @@ class Candle extends React.Component {
       .get('/api/nomics/candles', {
         params: {
           currency: this.props.coin,
-          start: moment().subtract(5000, 'days').format(),
+          start: moment().subtract(parseInt(this.props.time), 'days').format(),
           end: moment().format()
         }
       })
