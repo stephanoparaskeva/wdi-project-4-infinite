@@ -3,7 +3,7 @@ import Plot from 'react-plotly.js'
 import axios from 'axios'
 import moment from 'moment'
 
-class CandlePlot1 extends React.Component {
+class Candle extends React.Component {
   constructor() {
     super()
 
@@ -58,8 +58,8 @@ class CandlePlot1 extends React.Component {
     axios
       .get('/api/nomics/candles', {
         params: {
-          currency: 'USDT',
-          start: moment().subtract(1000, 'days').format(),
+          currency: 'BTC',
+          start: moment().subtract(20, 'days').format(),
           end: moment().format()
         }
       })
@@ -75,7 +75,6 @@ class CandlePlot1 extends React.Component {
       .catch(err => console.log(err))
   }
 
-
   render() {
     return (
       <div>
@@ -90,4 +89,4 @@ class CandlePlot1 extends React.Component {
   }
 }
 
-export default CandlePlot1
+export default Candle

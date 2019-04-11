@@ -6,7 +6,7 @@ api = Blueprint('external', __name__)
 
 @api.route('/nomics/candles', methods=['GET'])
 def get_candles():
-    url = f'https://api.nomics.com/v1/candles'
+    url = 'https://api.nomics.com/v1/candles'
     key = os.environ.get('NOMICS_API_KEY')
     interval = '1d'
     currency = request.args.get('currency')

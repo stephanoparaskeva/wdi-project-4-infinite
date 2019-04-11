@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import axios from 'axios'
+import Nomics from './lib/nomics'
 
 import './styles/main.scss'
 
-import CandlePlot1 from './candlePlot1'
-import Ticker from './components/ticker'
+import Header from './components/header'
+import Candle from './candle'
 import CoinIndex from './components/coinIndex'
 import Portfolio from './components/portfolio/portfolioMain'
 import Test from './components/portfolio/balanceGraph'
@@ -17,19 +19,20 @@ class App extends React.Component {
 
     this.state = {}
   }
-  // componentDidMount() {
-  //   axios
-  //     .get('/api/transactions')
-  //     .then(res => console.log(res))
-  // }
+
+  componentDidMount() {
+  }
 
   render() {
     return(
-      <div>
-        <Portfolio />
-        <CoinIndex />
-        <Test />
-      </div>
+      <BrowserRouter>
+        <div className="container">
+          <Header />
+          <Candle />
+          <Portfolio />
+          <CoinIndex />
+        </div>
+      </BrowserRouter>
     )
   }
 }

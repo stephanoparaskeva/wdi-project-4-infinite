@@ -1,15 +1,19 @@
 .ticker {
   display: inline-block;
-  height: 4rem;
-  line-height: 4rem;
+  height: 2em;
+  // max-width: 960px;
   white-space: nowrap;
   overflow: hidden;
   padding-left: 100%;
-  animation: ticker-scroll 10s linear infinite;
+  // border: 1px solid black;
+  animation: ticker-scroll 20s linear infinite;
 
-  &__item {
+  &:hover {
+    animation-play-state: paused;
+  }
+
+  .ticker-item {
     display: inline-block;
-    padding: 0 2rem;
-    font-size: 2rem;
+    padding: 0 2em;
   }
 }
