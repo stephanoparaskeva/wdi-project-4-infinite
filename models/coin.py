@@ -11,7 +11,7 @@ class Coin(db.Model, BaseModel):
 
 class CoinSchema(ma.ModelSchema, BaseSchema):
 
-    user_transaction = fields.Nested('TransactionSchema', many=True)
+    coin_transaction = fields.Nested('TransactionSchema', many=True)
     class Meta:
-        
+
         model = Coin

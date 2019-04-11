@@ -13,7 +13,8 @@ class CoinIndex extends React.Component {
       .then(res => {
         this.setState({tickerData: res.data.filter(coin => {
           return coin.rank < 100
-        })})
+        })
+        })
       })
   }
 
@@ -25,9 +26,9 @@ class CoinIndex extends React.Component {
     const coins = this.state.tickerData
     if (!coins) return null
     return(
-      <div>
+      <div className="container">
         {coins.map(coin =>
-          <div key={coin.rank}>
+          <div key={coin.rank} className="column-1">
             <h2>{coin.rank}. {coin.currency}</h2>
             <p>Price</p>
             <span>${coin.price}</span>
