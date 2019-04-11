@@ -32,9 +32,10 @@ class CoinIndex extends React.Component {
           <Link key={coin.rank} to={
             {
               pathname: '/coin',
-              state: {coin: coin}
+              state: { coin }
             }
-          }><div>
+          }>
+            <div>
               <div className="row border">
                 <h2 className="col-10">{coin.rank}. {coin.currency}</h2>
                 <span className="col-2">${parseFloat(coin.price).toFixed(2)}</span>

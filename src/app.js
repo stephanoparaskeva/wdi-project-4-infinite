@@ -9,7 +9,9 @@ import './styles/main.scss'
 import Header from './components/header'
 import Candle from './candle'
 import CoinIndex from './components/coinIndex'
+import CoinShow from './components/coinShow'
 import Portfolio from './components/portfolio/portfolioMain'
+import TransactionForm from './components/transactions/transactionForm'
 import Test from './components/portfolio/balanceGraph'
 
 
@@ -28,9 +30,11 @@ class App extends React.Component {
       <BrowserRouter>
         <div className="container">
           <Header />
-          <Candle />
-          <Portfolio />
-          <CoinIndex />
+          <Switch>
+            <Route path='/coin' component={CoinShow} />
+            <Route path='/transactionform' component={TransactionForm} />
+            <Route path='/' component={CoinIndex} />
+          </Switch>
         </div>
       </BrowserRouter>
     )
