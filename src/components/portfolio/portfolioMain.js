@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Holdings from './holdings'
 import BalanceGraph from './balanceGraph'
+import TestGraph from './testGraph'
 import Nomics from '../../lib/nomics'
 import Auth from '../../lib/auth'
 
@@ -52,8 +53,9 @@ class Portfolio extends React.Component{
   getTransactionQuantities() {
     axios.get('/api/transactions')
       .then(res => {
-        console.log(res)
-        return res.data
+        return res.data.filter(transaction => {
+          return transaction.user.id === Auth.getPayload().sub
+        })
       })
       .then(res => {
         let data = this.makeUserCoins(res)
@@ -85,6 +87,7 @@ class Portfolio extends React.Component{
         <h3>MAIN PORTFOLIO BALANCE</h3>
         <p>${this.state.balance && this.state.balance}</p>
         <BalanceGraph />
+        <TestGraph />
         {this.state.holdings &&
           <Holdings holdings={this.state.holdings} />
         }

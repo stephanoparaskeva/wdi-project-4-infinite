@@ -17,7 +17,12 @@ class BalanceGraph extends React.Component{
   sortTransactionTimestamps() {
     axios.get('/api/transactions')
       .then(res => {
-        return res.data.sort((a, b) => {
+        return res.data.filter(transaction => {
+          return transaction.user.id === Auth.getPayload().sub
+        })
+      })
+      .then(res => {
+        return res.sort((a, b) => {
           if (moment(a.timestamp) > moment(b.timestamp)) return 1
           return - 1
         })
@@ -42,6 +47,7 @@ class BalanceGraph extends React.Component{
         })
       })
       .then(daysBalances => {
+        console.log(daysBalances)
         return daysBalances.map((balance, i) => {
           if (!i) return balance
           const newBalance =  balance = balance + daysBalances[i - 1]
