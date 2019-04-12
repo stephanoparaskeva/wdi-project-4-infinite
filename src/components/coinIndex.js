@@ -15,10 +15,7 @@ class CoinIndex extends React.Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  getCurrencies() {
-    const tickerData = this.props.nomics.data.filter(coin => coin.rank <= 1000)
-    this.setState({tickerData})
-  }
+
 
   handleChange(e) {
     this.setState({ search: e.target.value })
@@ -26,18 +23,16 @@ class CoinIndex extends React.Component {
 
   filteredBySearch() {
     const regex = new RegExp(this.state.search, 'i')
-    const arr = this.state.tickerData.filter(data => {
+    const arr = this.props.nomics.filter(data => {
       return regex.test(data.currency)
     })
     return arr
   }
 
-  componentDidMount() {
-    this.getCurrencies()
-  }
+
 
   render() {
-    const coins = this.state.tickerData
+    const coins = this.props.nomics
     if (!coins) return null
     return(
       <div>
@@ -59,17 +54,18 @@ class CoinIndex extends React.Component {
               <th>ATH</th>
             </tr>
           </thead>
-          {this.filteredBySearch().map(coin =>
+          {this.props.nomics && this.filteredBySearch().map(coin =>
             <tbody key={coin.rank}>
               <tr>
                 <td><Link to={{
                   pathname: '/coin',
                   state: {coin}
-                }}>{coin.rank}. {coin.currency}</Link></td>
-                <td><Link to={{
-                  pathname: '/coin',
-                  state: {coin}
-                }}>${parseFloat(coin.price).toFixed(2) || 0}</Link></td>
+                }}><img src={coin.image_url}></img>{coin.rank}. {coin.currency}</Link></td>
+                <td>
+                  <Link to={{
+                    pathname: '/coin',
+                    state: {coin}
+                  }}>${parseFloat(coin.price).toFixed(2) || 0}</Link></td>
                 <td className={Common.checkChange(coin)}><Link to={{
                   pathname: '/coin',
                   state: {coin}
