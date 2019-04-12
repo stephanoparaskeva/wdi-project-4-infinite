@@ -24,14 +24,29 @@ class App extends React.Component {
     super()
 
     this.state = {}
+
+    this.attachCoinToNomics = this.attachCoinToNomics.bind(this)
   }
 
   componentDidMount() {
     axios.get('/api/nomics/tickers')
       .then(res => this.setState({nomics: res}))
-    axios.get('/api/coins')
-      .then(res => this.setState({coinData: res.data}))
+      .then(() => {
+        axios.get('/api/coins')
+          .then(res => this.setState({coinData: res.data})).then(() => console.log(this.attachCoinToNomics()))
+      })
   }
+
+  attachCoinToNomics() {
+    const coinLookup = this.state.coinData.reduce((obj, current) => {
+      obj[current.currency] = current.url
+      return obj
+    }, {})
+    const filtered = this.state.nomics.data.filter(nomic => Object.keys(coinLookup).includes(nomic.currency))
+    return filtered.map(item => ({...item, image_url: coinLookup[item.currency] }))
+  }
+
+
 
   render() {
     return(
