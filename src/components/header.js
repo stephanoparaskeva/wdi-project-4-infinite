@@ -13,7 +13,7 @@ class Header extends React.Component {
     return(
       <div className="header">
         <Ticker />
-        <h1>Crypto</h1>
+        <h1><Link to='/'>Crypto</Link></h1>
         <Link to='/register'>Register</Link>
       </div>
     )

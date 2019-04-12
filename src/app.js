@@ -14,6 +14,8 @@ import Portfolio from './components/portfolio/portfolioMain'
 import TransactionForm from './components/transactions/transactionForm'
 import Register from './components/user/register'
 import Login from './components/user/login'
+import Footer from './components/footer'
+import About from './components/about'
 import Test from './components/portfolio/balanceGraph'
 
 
@@ -38,9 +40,11 @@ class App extends React.Component {
             <Route path='/transactionform' component={ TransactionForm } />
             <Route path='/register' component={ Register } />
             <Route path='/login' component={ Login } />
+            <Route path='/about' component={ About } />
             <Route path='/' component={ CoinIndex } />
           </Switch>
         </div>
+        <Footer />
       </BrowserRouter>
     )
   }
