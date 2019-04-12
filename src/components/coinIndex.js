@@ -15,16 +15,14 @@ class CoinIndex extends React.Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-
-
   handleChange(e) {
     this.setState({ search: e.target.value })
   }
 
-  filteredBySearch(num) {
+  filteredBySearch(filterByRank) {
     const regex = new RegExp(this.state.search, 'i')
     const arr = this.props.nomics.filter(data => {
-      return regex.test(data.currency) && data.rank <= num
+      return regex.test(data.currency) && data.rank <= filterByRank
     })
     return arr
   }
@@ -33,6 +31,7 @@ class CoinIndex extends React.Component {
 
   render() {
     const coins = this.props.nomics
+    const filterByRank = this.state.search !== '' ? 10000 : 50
     if (!coins) return null
     return(
       <div>
@@ -54,30 +53,7 @@ class CoinIndex extends React.Component {
               <th>ATH</th>
             </tr>
           </thead>
-          {this.state.search !== '' && this.filteredBySearch(10000).map(coin =>
-            <tbody key={coin.rank}>
-              <tr>
-                <td><Link to={{
-                  pathname: '/coin',
-                  state: {coin}
-                }}><img className="imgimg" src={coin.image_url}></img>{coin.rank}. {coin.currency}</Link></td>
-                <td>
-                  <Link to={{
-                    pathname: '/coin',
-                    state: {coin}
-                  }}>${parseFloat(coin.price).toFixed(2) || 0}</Link></td>
-                <td className={Common.checkChange(coin)}><Link to={{
-                  pathname: '/coin',
-                  state: {coin}
-                }}>{coin['1d'].price_change_pct || 0}%</Link></td>
-                <td><Link to={{
-                  pathname: '/coin',
-                  state: {coin}
-                }}>${parseFloat(coin.high).toFixed(2) || 0}</Link></td>
-              </tr>
-            </tbody>
-          )}
-          {this.state.search === '' && this.filteredBySearch(50).map(coin =>
+          {this.filteredBySearch(filterByRank).map(coin =>
             <tbody key={coin.rank}>
               <tr>
                 <td><Link to={{
