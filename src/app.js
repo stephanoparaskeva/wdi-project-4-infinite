@@ -52,12 +52,12 @@ class App extends React.Component {
   render() {
     return(
       <BrowserRouter>
-        {this.state.nomics && <Header nomics={this.state.nomics}/>}
+        {this.state.nomics2 && <Header nomics={this.state.nomics2}/>}
         <div className="content container">
           {this.state.nomics2 &&
           <Switch>
             <Route path="/portfolio" render={() => {
-              return <Portfolio nomics={this.state.nomics} coinData={this.state.coinData} />
+              return <Portfolio nomics={this.state.nomics2} coinData={this.state.coinData} />
             }} />
             <Route path='/coin' component={ CoinShow } />
             <Route path='/transactionform' component={ TransactionForm } />

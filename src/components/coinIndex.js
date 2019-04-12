@@ -63,7 +63,7 @@ class CoinIndex extends React.Component {
                 <td><Link to={{
                   pathname: '/coin',
                   state: {coin}
-                }}><img className="image" src={coin.image_url}/></Link></td>
+                }}><img className="img" src={coin.image_url}/></Link></td>
                 <td><Link to={{
                   pathname: '/coin',
                   state: {coin}
