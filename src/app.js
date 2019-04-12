@@ -27,22 +27,31 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    axios.get('/api/nomics/tickers')
+      .then(res => this.setState({nomics: res}))
   }
 
   render() {
+    console.log(this.state)
     return(
       <BrowserRouter>
-        <Header />
+        {this.state.nomics && <Header nomics={this.state.nomics}/>}
         <div className="content container">
+          {this.state.nomics &&
           <Switch>
-            <Route path='/portfolio' component={ Portfolio } />
+            <Route path="/portfolio" render={() => {
+              return <Portfolio nomics={this.state.nomics} />
+            }} />
             <Route path='/coin' component={ CoinShow } />
             <Route path='/transactionform' component={ TransactionForm } />
             <Route path='/register' component={ Register } />
             <Route path='/login' component={ Login } />
             <Route path='/about' component={ About } />
-            <Route path='/' component={ CoinIndex } />
+            <Route path="/" render={() => {
+              return <CoinIndex nomics={this.state.nomics} />
+            }} />
           </Switch>
+          }
         </div>
       </BrowserRouter>
     )

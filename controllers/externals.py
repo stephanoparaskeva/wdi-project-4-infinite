@@ -15,3 +15,11 @@ def get_candles():
     payload = {'key': key, 'interval': interval, 'currency': currency, 'start': start, 'end': end}
     r = requests.get(url, params=payload)
     return r.text
+
+@api.route('/nomics/tickers', methods=['GET'])
+def get_tickers():
+    url = 'https://api.nomics.com/v1/currencies/ticker'
+    key = os.environ.get('NOMICS_API_KEY')
+    payload = {'key': key}
+    r = requests.get(url, params=payload)
+    return r.text

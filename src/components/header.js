@@ -12,9 +12,10 @@ class Header extends React.Component {
   render(){
     return(
       <div className="header">
-        <Ticker />
+        <Ticker nomics={this.props.nomics}/>
         <h1><Link to='/'>Crypto</Link></h1>
         <Link to='/register'>Register</Link>
+        <Link to='/portfolio'>Portfolio</Link>
       </div>
     )
   }
