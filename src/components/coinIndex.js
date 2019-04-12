@@ -59,15 +59,12 @@ class CoinIndex extends React.Component {
                 <td><Link to={{
                   pathname: '/coin',
                   state: {coin}
-                }}>{coin.rank}. {coin.currency}</Link></td>
-                <td><Link to={{
-                  pathname: '/coin',
-                  state: {coin}
-                }}><img className="img" src={coin.image_url}/></Link></td>
-                <td><Link to={{
-                  pathname: '/coin',
-                  state: {coin}
-                }}>${parseFloat(coin.price).toFixed(2) || 0}</Link></td>
+                }}><img className="imgimg" src={coin.image_url}></img>{coin.rank}. {coin.currency}</Link></td>
+                <td>
+                  <Link to={{
+                    pathname: '/coin',
+                    state: {coin}
+                  }}>${parseFloat(coin.price).toFixed(2) || 0}</Link></td>
                 <td className={Common.checkChange(coin)}><Link to={{
                   pathname: '/coin',
                   state: {coin}
