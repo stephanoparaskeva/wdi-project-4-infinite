@@ -14,11 +14,13 @@ class Portfolio extends React.Component{
   }
 
   getNomicsPrices() {
+    console.log(this.props.nomics)
     return this.props.nomics
   }
 
   currencyConversion(prices, usersCoins) {
-    return prices.data.reduce((arr, item) => {
+
+    return prices.reduce((arr, item) => {
       if (Object.keys(usersCoins).includes(item.currency)) {
         arr.push(usersCoins[item.currency] * item.price)
       }
