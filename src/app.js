@@ -49,18 +49,15 @@ class App extends React.Component {
     return filtered.map(item => ({...item, image_url: coinLookup[item.currency] }))
   }
 
-
-
   render() {
-    console.log(this.state)
     return(
       <BrowserRouter>
-        {this.state.nomics2 && <Header nomics={this.state.nomics}/>}
+        {this.state.nomics2 && <Header nomics={this.state.nomics2}/>}
         <div className="content container">
           {this.state.nomics2 &&
           <Switch>
             <Route path="/portfolio" render={() => {
-              return <Portfolio nomics={this.state.nomics} />
+              return <Portfolio nomics={this.state.nomics2} coinData={this.state.coinData} />
             }} />
             <Route path='/coin' component={ CoinShow } />
             <Route path='/transactionform' component={ TransactionForm } />

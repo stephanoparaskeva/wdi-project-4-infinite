@@ -11,7 +11,7 @@ class Ticker extends React.Component {
   }
 
   getCurrencies() {
-    const tickerData = this.props.nomics.data.filter(coin => coin.rank <= 20)
+    const tickerData = this.props.nomics.filter(coin => coin.rank <= 20)
     this.setState({tickerData})
   }
 
@@ -27,7 +27,8 @@ class Ticker extends React.Component {
         <div className="ticker">
           {coins.map(coin =>
             <div key={coin.currency} className="ticker-item">
-              <span>{coin.currency}</span>
+              <span><img src={coin.image_url} className="ticker-img"/></span>
+              <span>  {coin.currency}</span>
               <span className={Common.checkChange(coin)}> {coin['1d'].price_change_pct}%</span>
             </div>
           )}

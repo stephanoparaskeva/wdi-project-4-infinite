@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 import Common from '../lib/common'
@@ -59,7 +58,7 @@ class CoinIndex extends React.Component {
                 <td><Link to={{
                   pathname: '/coin',
                   state: {coin}
-                }}><img className="imgimg" src={coin.image_url}></img>{coin.rank}. {coin.currency}</Link></td>
+                }}><img className="imgimg" src={coin.image_url}></img>   {coin.rank}. {coin.currency}</Link></td>
                 <td>
                   <Link to={{
                     pathname: '/coin',

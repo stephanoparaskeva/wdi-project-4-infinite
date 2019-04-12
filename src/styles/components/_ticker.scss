@@ -10,7 +10,7 @@
   white-space: nowrap;
   overflow: hidden;
   padding-left: 100%;
-  animation: ticker-scroll 20s linear infinite;
+  animation: ticker-scroll 30s linear infinite;
 
   &:hover {
     animation-play-state: paused;
@@ -21,5 +21,10 @@
     font-weight: bold;
     display: inline-block;
     padding: 0 2em;
+
+    img {
+      height: 0.7em;
+      width: 0.7em;
+    }
   }
 }
