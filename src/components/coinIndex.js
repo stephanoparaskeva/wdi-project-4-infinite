@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 import Common from '../lib/common'
@@ -12,9 +11,10 @@ class CoinIndex extends React.Component {
   }
 
   getCurrencies() {
-    this.setState({tickerData: this.props.nomics.data.filter(coin => {
-      return coin.rank <= 1000
-    })
+    this.setState({
+      tickerData: this.props.nomics.filter(coin => {
+        return coin.rank <= 1000
+      })
     })
   }
 
@@ -36,6 +36,7 @@ class CoinIndex extends React.Component {
           </tr>
         </thead>
         {coins.map(coin =>
+
           <tbody key={coin.rank}>
             <tr>
               <td><Link to={{

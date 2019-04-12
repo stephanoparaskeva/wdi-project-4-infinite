@@ -11,7 +11,7 @@ class Ticker extends React.Component {
   }
 
   getCurrencies() {
-    this.setState({tickerData: this.props.nomics.data.filter(coin => {
+    this.setState({tickerData: this.props.nomics.filter(coin => {
       return coin.rank <= 20
     })
     })
