@@ -28,7 +28,7 @@ class App extends React.Component {
 
   componentDidMount() {
     axios.get('/api/nomics/tickers')
-      .then(res => this.setState({nomics: res.data}))
+      .then(res => this.setState({nomics: res}))
     axios.get('/api/coins')
       .then(res => this.setState({coinData: res.data}))
   }

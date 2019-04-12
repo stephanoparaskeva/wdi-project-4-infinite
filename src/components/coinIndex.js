@@ -12,7 +12,7 @@ class CoinIndex extends React.Component {
 
   getCurrencies() {
     this.setState({
-      tickerData: this.props.nomics.filter(coin => {
+      tickerData: this.props.nomics.data.filter(coin => {
         return coin.rank <= 1000
       })
     })
