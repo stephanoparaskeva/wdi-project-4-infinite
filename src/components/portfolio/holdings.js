@@ -1,10 +1,24 @@
 import React from 'react'
 
 const Holdings = ({ holdings }) => {
+  console.log(holdings)
   return(
-    <ul>
-      {holdings.map(coin => <li key={coin.currency}>{coin.currency} {coin.quantity}</li>)}
-    </ul>
+    <table className="u-full-width">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      {holdings.map(coin =>
+        <tbody key={coin.currency}>
+          <tr>
+            <td>{coin.currency}</td>
+            <td>{coin.quantity}</td>
+          </tr>
+        </tbody>
+      )}
+    </table>
   )
 }
 

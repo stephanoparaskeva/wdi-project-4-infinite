@@ -44,11 +44,6 @@ class App extends React.Component {
     }, {})
     const filtered = this.state.nomics.data.filter(nomic => Object.keys(coinLookup).includes(nomic.currency))
     return filtered.map(item => ({...item, image_url: coinLookup[item.currency] }))
-    // const coins = this.state.coinData.map(item => item.currency)
-    // const nomics = this.state.nomics.data.filter(item => coins.includes(item.currency))
-    // const positionInCoins = nomics.map(item => coins.indexOf(item.currency))
-    // const newArr = positionInCoins.map(item => )
-    // return positionInCoins
   }
 
 
