@@ -21,10 +21,10 @@ class CoinIndex extends React.Component {
     this.setState({ search: e.target.value })
   }
 
-  filteredBySearch() {
+  filteredBySearch(num) {
     const regex = new RegExp(this.state.search, 'i')
     const arr = this.props.nomics.filter(data => {
-      return regex.test(data.currency)
+      return regex.test(data.currency) && data.rank <= num
     })
     return arr
   }
@@ -54,7 +54,30 @@ class CoinIndex extends React.Component {
               <th>ATH</th>
             </tr>
           </thead>
-          {this.props.nomics && this.filteredBySearch().map(coin =>
+          {this.state.search !== '' && this.filteredBySearch(10000).map(coin =>
+            <tbody key={coin.rank}>
+              <tr>
+                <td><Link to={{
+                  pathname: '/coin',
+                  state: {coin}
+                }}><img className="imgimg" src={coin.image_url}></img>{coin.rank}. {coin.currency}</Link></td>
+                <td>
+                  <Link to={{
+                    pathname: '/coin',
+                    state: {coin}
+                  }}>${parseFloat(coin.price).toFixed(2) || 0}</Link></td>
+                <td className={Common.checkChange(coin)}><Link to={{
+                  pathname: '/coin',
+                  state: {coin}
+                }}>{coin['1d'].price_change_pct || 0}%</Link></td>
+                <td><Link to={{
+                  pathname: '/coin',
+                  state: {coin}
+                }}>${parseFloat(coin.high).toFixed(2) || 0}</Link></td>
+              </tr>
+            </tbody>
+          )}
+          {this.state.search === '' && this.filteredBySearch(50).map(coin =>
             <tbody key={coin.rank}>
               <tr>
                 <td><Link to={{

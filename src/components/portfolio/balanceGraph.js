@@ -63,7 +63,6 @@ class BalanceGraph extends React.Component{
   }
 
   render(){
-    console.log(this.state.dates)
     return(
       <div className="container">
         <div className="row">

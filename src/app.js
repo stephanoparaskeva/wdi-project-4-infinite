@@ -55,7 +55,7 @@ class App extends React.Component {
     console.log(this.state)
     return(
       <BrowserRouter>
-        {this.state.nomics && <Header nomics={this.state.nomics}/>}
+        {this.state.nomics2 && <Header nomics={this.state.nomics}/>}
         <div className="content container">
           {this.state.nomics2 &&
           <Switch>
