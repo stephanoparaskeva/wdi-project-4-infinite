@@ -28,7 +28,7 @@ class Ticker extends React.Component {
     const coins = this.state.tickerData
     if (!coins) return null
     return(
-      <div className="col-1">
+      <div className="ticker-wrapper">
         <div className="ticker">
           {coins.map(coin =>
             <div key={coin.currency} className="ticker-item">

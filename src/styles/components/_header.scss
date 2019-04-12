@@ -1,9 +1,19 @@
 .header{
-  color: white;
+  color: #afafaf;
   height: 10em;
   width: 100%;
   position: fixed;
   top: 0;
-  background: black;
+  background: #0d2434;
+  z-index: 1;
+}
+
+.footer {
+  color: #afafaf;
+  height: 4em;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background: #0d2434;
   z-index: 1;
 }
