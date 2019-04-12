@@ -44,7 +44,6 @@ class App extends React.Component {
             <Route path='/' component={ CoinIndex } />
           </Switch>
         </div>
-        <Footer />
       </BrowserRouter>
     )
   }

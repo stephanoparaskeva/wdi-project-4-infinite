@@ -18,7 +18,8 @@ class Candle extends React.Component {
       type: 'candlestick',
       xaxis: 'x',
       yaxis: 'y',
-      time: '30'
+      time: '30',
+      plotKey: 1
     }
 
     this.layout = {
@@ -58,15 +59,15 @@ class Candle extends React.Component {
   }
 
   handleTime(e) {
-    this.setState({time: e.target.value})
+    this.getCandleData(e.target.value)
   }
 
-  getCandleData() {
+  getCandleData(time) {
     axios
       .get('/api/nomics/candles', {
         params: {
           currency: this.props.coin,
-          start: moment().subtract(parseInt(this.state.time), 'days').format(),
+          start: moment().subtract(parseInt(time), 'days').format(),
           end: moment().format()
         }
       })
@@ -95,7 +96,7 @@ class Candle extends React.Component {
   }
 
   componentDidMount() {
-    this.getCandleData()
+    this.getCandleData('30')
   }
 
 
@@ -108,9 +109,10 @@ class Candle extends React.Component {
           <button className="three columns" onClick={this.handleTime} value="7">1w</button>
           <button className="three columns" onClick={this.handleTime} value="30">1m</button>
           <button className="three columns" onClick={this.handleTime} value="365">1y</button>
+          <button className="three columns" onClick={this.handleTime} value="1825">5y</button>
         </div>
         {this.state.x &&
-        <Plot
+        <Plot key={this.state.plotKey}
           data={this.state.data}
           layout={this.layout}
         />
