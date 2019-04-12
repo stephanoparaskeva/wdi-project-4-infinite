@@ -19,6 +19,7 @@ class Coin extends React.Component {
   render() {
     const coin = this.props.location.state.coin
     const time = this.state.time
+    console.log('rerendered show')
     return(
       <div>
         <h1>{coin.currency}</h1>

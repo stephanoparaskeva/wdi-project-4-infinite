@@ -52,9 +52,10 @@ class Candle extends React.Component {
         type: 'linear'
       }
     }
+    this.getCandleData = this.getCandleData.bind(this)
   }
 
-  componentDidMount() {
+  getCandleData() {
     axios
       .get('/api/nomics/candles', {
         params: {
@@ -64,23 +65,42 @@ class Candle extends React.Component {
         }
       })
       .then(res => res.data.map(day => {
-        this.setState({
-          x: [...this.state.x, day.timestamp.slice(0, 10)],
-          close: [...this.state.close, parseFloat(day.close)],
-          high: [...this.state.high, parseFloat(day.high)],
-          low: [...this.state.low, parseFloat(day.low)],
-          open: [...this.state.open, parseFloat(day.open)]
-        })
-      }))
+        let data = {
+          x: [],
+          close: [],
+          high: [],
+          low: [],
+          open: []
+        }
+        return data = {
+          x: [...data.x, day.timestamp.slice(0, 10)],
+          close: [...data.close, parseFloat(day.close)],
+          high: [...data.high, parseFloat(day.high)],
+          low: [...data.low, parseFloat(day.low)],
+          open: [...data.open, parseFloat(day.open)],
+          decreasing: {line: {color: 'red'}},
+          increasing: {line: {color: 'green'}},
+          type: 'candlestick',
+          xaxis: 'x',
+          yaxis: 'y'
+        }
+      })).then(data => this.setState({data}))
       .catch(err => console.log(err))
   }
 
+  componentDidMount() {
+    this.getCandleData()
+  }
+
+
+
   render() {
+    console.log('rerender')
     return (
       <div>
-        {this.state.x &&
+        {this.state.data &&
         <Plot
-          data={[this.state]}
+          data={this.state.data}
           layout={this.layout}
         />
         }
