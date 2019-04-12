@@ -78,11 +78,10 @@ class Portfolio extends React.Component{
   }
 
   render(){
-    console.log(this.state)
     return(
       <div>
         <h3>MAIN PORTFOLIO BALANCE</h3>
-        <p>${this.state.balance && this.state.balance.toFixed(2)}</p>
+        <p>${this.state.balance && this.state.balance}</p>
         <BalanceGraph />
         {this.state.holdings &&
           <Holdings holdings={this.state.holdings} />
