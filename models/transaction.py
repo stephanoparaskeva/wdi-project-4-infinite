@@ -16,7 +16,7 @@ class Transaction(db.Model, BaseModel):
     sell_quantity = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', backref='user_transaction')
-    coin_id = db.Column(db.Integer, db.ForeignKey('coins.id'))
+    coin_id = db.Column(db.String, db.ForeignKey('coins.id'))
     coin = db.relationship('Coin', backref='coin_transaction')
 
 class TransactionSchema(ma.ModelSchema, BaseSchema):
