@@ -37,30 +37,38 @@ class Login extends React.Component {
 
   render() {
     return(
-      <div>
+      <div className="container">
+        <h2>Login</h2>
         <form onSubmit={ this.handleSubmit }>
-          <h2>Login</h2>
-          <label>
-          Email
-            <input
-              onChange={ this.handleChange }
-              name="email"
-              type="email"
-              value={ this.state.data.email }
-            />
-          </label>
-          <label>
-          Password
-            <input
-              onChange={ this.handleChange }
-              type="password"
-              name="password"
-              value={ this.state.data.password }
-            />
-          </label>
-          <button className="button pad-top">Login</button>
+          <div className="row">
+            <div className="twelve columns">
+              <label htmlFor="email">Email</label>
+              <input
+                className="u-full-width"
+                onChange={ this.handleChange }
+                name="email"
+                type="text"
+                value={ this.state.data.email }
+                id="email"
+              />
+            </div>
+            <div className="twelve columns">
+              <label htmlFor="password">Password</label>
+              <input
+                className="u-full-width"
+                onChange={ this.handleChange }
+                type="password"
+                name="password"
+                value={ this.state.data.password }
+                id="password"
+              />
+            </div>
+            <div className="row">
+              <button className="six columns">Register</button>
+              <p className="six columns">Not a member? <Link to='/register'>Register Here</Link></p>
+            </div>
+          </div>
         </form>
-        <p>Not a member? <Link to='/register'>Register Here</Link></p>
       </div>
     )
   }

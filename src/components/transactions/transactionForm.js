@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import moment from 'moment'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 import Auth from '../../lib/auth'
 
@@ -124,7 +126,7 @@ class TransactionForm extends React.Component {
             <input
               onChange={ this.handleChange }
               name="timestamp"
-              type="number"
+              type="datetime"
               value={ this.state.data.timestamp }
             />
           </label>

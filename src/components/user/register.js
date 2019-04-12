@@ -40,46 +40,56 @@ class Register extends React.Component {
 
   render() {
     return(
-      <div>
+      <div className="container">
         <h2>Register</h2>
         <form onSubmit={ this.handleSubmit }>
-          <label>
-            <span>Username</span>
-            <input
-              onChange={ this.handleChange }
-              name="username"
-              value={ this.state.data.username }
-            />
-          </label>
-          <label>
-            <span>Email</span>
-            <input
-              onChange={ this.handleChange }
-              name="email"
-              value={ this.state.data.email }
-            />
-          </label>
-          <label>
-            <span>Password</span>
-            <input
-              onChange={ this.handleChange }
-              type="password"
-              name="password"
-              value={ this.state.data.password }
-            />
-          </label>
-          <label>
-            <span>Password Confirmation</span>
-            <input
-              onChange={ this.handleChange }
-              type="password"
-              name="password_confirmation"
-              value={ this.state.data.password_confirmation }
-            />
-          </label>
-          <button className="button pad-top">Register</button>
+          <div className="row">
+            <div className="six columns">
+              <label htmlFor="username">Username</label>
+              <input
+                className="u-full-width"
+                onChange={ this.handleChange }
+                name="username"
+                type="text"
+                value={ this.state.data.username }
+                id="username"
+              />
+              <label htmlFor="email">Email</label>
+              <input
+                className="u-full-width"
+                onChange={ this.handleChange }
+                name="email"
+                type="text"
+                value={ this.state.data.email }
+                id="email"
+              />
+            </div>
+            <div className="six columns">
+              <label htmlFor="password">Password</label>
+              <input
+                className="u-full-width"
+                onChange={ this.handleChange }
+                type="password"
+                name="password"
+                value={ this.state.data.password }
+                id="password"
+              />
+              <label htmlFor="passwordConfirmation">Password Confirmation</label>
+              <input
+                className="u-full-width"
+                onChange={ this.handleChange }
+                type="password"
+                name="password_confirmation"
+                value={ this.state.data.password_confirmation }
+                id="passwordConfirmation"
+              />
+            </div>
+            <div className="row">
+              <button className="six columns">Register</button>
+              <p className="six columns">Already Registered? <Link to='/login'>Login Here</Link></p>
+            </div>
+          </div>
         </form>
-        <p>Already Registered? <Link to='/login'>Login Here</Link></p>
       </div>
     )
   }
