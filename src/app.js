@@ -46,8 +46,6 @@ class App extends React.Component {
     return filtered.map(item => ({...item, image_url: coinLookup[item.currency] }))
   }
 
-
-
   render() {
     return(
       <BrowserRouter>

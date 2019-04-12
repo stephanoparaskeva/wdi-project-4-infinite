@@ -39,20 +39,6 @@ class CoinIndex extends React.Component {
     const coins = this.state.tickerData
     if (!coins) return null
     return(
-<<<<<<< HEAD
-      <table className="u-full-width">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Change</th>
-            <th>ATH</th>
-          </tr>
-        </thead>
-        {coins.map(coin =>
-
-          <tbody key={coin.rank}>
-=======
       <div>
         <form>
           <input
@@ -65,7 +51,6 @@ class CoinIndex extends React.Component {
         </form>
         <table className="u-full-width">
           <thead>
->>>>>>> development
             <tr>
               <th>Name</th>
               <th>Price</th>
@@ -80,6 +65,10 @@ class CoinIndex extends React.Component {
                   pathname: '/coin',
                   state: {coin}
                 }}>{coin.rank}. {coin.currency}</Link></td>
+                <td><Link to={{
+                  pathname: '/coin',
+                  state: {coin}
+                }}><img className="image" src={coin.image_url}/></Link></td>
                 <td><Link to={{
                   pathname: '/coin',
                   state: {coin}
