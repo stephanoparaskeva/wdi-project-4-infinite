@@ -12,12 +12,10 @@ class CoinIndex extends React.Component {
   }
 
   getCurrencies() {
-    axios.get('https://api.nomics.com/v1/currencies/ticker?key=cfa361e67a06d9209da08f36a340410b')
-      .then(res => {
-        this.setState({tickerData: res.data.filter(coin => {
-          return coin.rank <= 1000
-        })})
-      })
+    this.setState({tickerData: this.props.nomics.data.filter(coin => {
+      return coin.rank <= 1000
+    })
+    })
   }
 
   componentDidMount() {

@@ -18,7 +18,8 @@ class Candle extends React.Component {
       type: 'candlestick',
       xaxis: 'x',
       yaxis: 'y',
-      time: '30'
+      time: '30',
+      plotKey: 1
     }
 
     this.layout = {
@@ -54,44 +55,65 @@ class Candle extends React.Component {
       }
     }
     this.handleTime = this.handleTime.bind(this)
+    this.getCandleData = this.getCandleData.bind(this)
   }
 
   handleTime(e) {
-    this.setState({time: e.target.value})
+    this.getCandleData(e.target.value)
   }
 
-  componentDidMount() {
+  getCandleData(time) {
     axios
       .get('/api/nomics/candles', {
         params: {
           currency: this.props.coin,
-          start: moment().subtract(parseInt(this.state.time), 'days').format(),
+          start: moment().subtract(parseInt(time), 'days').format(),
           end: moment().format()
         }
       })
       .then(res => res.data.map(day => {
-        this.setState({
-          x: [...this.state.x, day.timestamp.slice(0, 10)],
-          close: [...this.state.close, parseFloat(day.close)],
-          high: [...this.state.high, parseFloat(day.high)],
-          low: [...this.state.low, parseFloat(day.low)],
-          open: [...this.state.open, parseFloat(day.open)]
-        })
-      }))
+        let data = {
+          x: [],
+          close: [],
+          high: [],
+          low: [],
+          open: []
+        }
+        return data = {
+          x: [...data.x, day.timestamp.slice(0, 10)],
+          close: [...data.close, parseFloat(day.close)],
+          high: [...data.high, parseFloat(day.high)],
+          low: [...data.low, parseFloat(day.low)],
+          open: [...data.open, parseFloat(day.open)],
+          decreasing: {line: {color: 'red'}},
+          increasing: {line: {color: 'green'}},
+          type: 'candlestick',
+          xaxis: 'x',
+          yaxis: 'y'
+        }
+      })).then(data => this.setState({data}))
       .catch(err => console.log(err))
   }
 
+  componentDidMount() {
+    this.getCandleData('30')
+  }
+
+
+
   render() {
+    console.log('rerender')
     return (
       <div>
         <div className="row">
           <button className="three columns" onClick={this.handleTime} value="7">1w</button>
           <button className="three columns" onClick={this.handleTime} value="30">1m</button>
           <button className="three columns" onClick={this.handleTime} value="365">1y</button>
+          <button className="three columns" onClick={this.handleTime} value="1825">5y</button>
         </div>
         {this.state.x &&
-        <Plot
-          data={[this.state]}
+        <Plot key={this.state.plotKey}
+          data={this.state.data}
           layout={this.layout}
         />
         }

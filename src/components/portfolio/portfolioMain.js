@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import Holdings from './holdings'
 import BalanceGraph from './balanceGraph'
-import Nomics from '../../lib/nomics'
 import Auth from '../../lib/auth'
 
 
@@ -16,7 +15,7 @@ class Portfolio extends React.Component{
   }
 
   getNomicsPrices() {
-    return axios.get('https://api.nomics.com/v1/currencies/ticker?key=cfa361e67a06d9209da08f36a340410b')
+    return this.props.nomics
   }
 
   currencyConversion(prices, usersCoins) {
