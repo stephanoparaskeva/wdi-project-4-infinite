@@ -7,41 +7,34 @@ class Coin extends React.Component {
     super()
 
     this.state = {
-      time: '30'
     }
-    this.handleTime = this.handleTime.bind(this)
-  }
-
-  handleTime(e) {
-    this.setState({time: e.target.value})
   }
 
   render() {
+    console.log('re-render')
     const coin = this.props.location.state.coin
-    const time = this.state.time
     return(
       <div>
-        <h1>{coin.currency}</h1>
-        <button onClick={this.handleTime} value="7">1w</button>
-        <button onClick={this.handleTime} value="30">1m</button>
-        <button onClick={this.handleTime} value="365">1y</button>
+        <div className="row">
+          <h1 className="">{coin.currency}</h1>
+          <Link to={
+            {
+              pathname: '/transactionform',
+              state: { coin }
+            }
+          }><button className="">Add Transaction</button></Link>
+        </div>
         <Candle
           coin={ coin.currency }
-          time={ time }
         />
-        <Link to={
-          {
-            pathname: '/transactionform',
-            state: { coin }
-          }
-        }><button>Add Transaction</button></Link>
-        <span>${parseFloat(coin.price).toFixed(2)}</span>
-        <p>Price Change</p>
-        <span>{coin['1d'].price_change_pct}%</span>
-        <p>Market Cap</p>
-        <span>${coin.market_cap}</span>
-        <p>Circulating Supply</p>
-        <p>{coin.circulating_supply} {coin.currency}</p>
+        <div className="row">
+        </div>
+        <div className="row">
+          <span>Price: ${parseFloat(coin.price).toFixed(2)}</span>
+          <span>Price Change: {coin['1d'].price_change_pct}%</span>
+          <span>Market Cap: ${coin.market_cap}</span>
+          <span>Circulating Supply: {coin.circulating_supply} {coin.currency}</span>
+        </div>
       </div>
     )
   }

@@ -17,7 +17,8 @@ class Candle extends React.Component {
       open: [],
       type: 'candlestick',
       xaxis: 'x',
-      yaxis: 'y'
+      yaxis: 'y',
+      time: '30'
     }
 
     this.layout = {
@@ -52,6 +53,11 @@ class Candle extends React.Component {
         type: 'linear'
       }
     }
+    this.handleTime = this.handleTime.bind(this)
+  }
+
+  handleTime(e) {
+    this.setState({time: e.target.value})
   }
 
   componentDidMount() {
@@ -59,7 +65,7 @@ class Candle extends React.Component {
       .get('/api/nomics/candles', {
         params: {
           currency: this.props.coin,
-          start: moment().subtract(parseInt(this.props.time), 'days').format(),
+          start: moment().subtract(parseInt(this.state.time), 'days').format(),
           end: moment().format()
         }
       })
@@ -78,6 +84,11 @@ class Candle extends React.Component {
   render() {
     return (
       <div>
+        <div className="row">
+          <button className="three columns" onClick={this.handleTime} value="7">1w</button>
+          <button className="three columns" onClick={this.handleTime} value="30">1m</button>
+          <button className="three columns" onClick={this.handleTime} value="365">1y</button>
+        </div>
         {this.state.x &&
         <Plot
           data={[this.state]}

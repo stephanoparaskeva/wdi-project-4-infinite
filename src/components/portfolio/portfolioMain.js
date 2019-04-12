@@ -58,7 +58,7 @@ class Portfolio extends React.Component{
       })
       .then(res => {
         let data = this.makeUserCoins(res)
-        var holdings = []
+        let holdings = []
         for (let key in data) {
           let temp = {quantity: data[key], currency: [key]}
           holdings.push(temp)
