@@ -83,7 +83,8 @@ class TransactionForm extends React.Component {
     console.log(this.state.data)
     if (this.state.isHidden || this.checkTransactions(this.state.data.sell_quantity)) {
       axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
-      this.props.history.push('/portfolio')
+        .then(() => this.props.history.push('/portfolio'))
+
     }
     console.log(this.state.data)
   }
