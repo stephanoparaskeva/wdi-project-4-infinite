@@ -1,16 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
-import Common from '../lib/common'
-
-class CoinIndex extends React.Component {
+class CoinList extends React.Component {
   constructor() {
     super()
 
     this.state = {
       search: ''
     }
-
     this.handleChange = this.handleChange.bind(this)
   }
 
@@ -26,12 +24,9 @@ class CoinIndex extends React.Component {
     return arr
   }
 
-
-
   render() {
     const coins = this.props.nomics
-    const filterByRank = this.state.search !== '' ? 10000 : 50
-    if (!coins) return null
+    const filterByRank = this.state.search !== '' ? 10000 : 10
     return(
       <div>
         <form>SEARCH
@@ -44,36 +39,24 @@ class CoinIndex extends React.Component {
           </input>
         </form>
         <table className="u-full-width">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Change</th>
-              <th>ATH</th>
-            </tr>
-          </thead>
-          {this.filteredBySearch(filterByRank).map(coin =>
+          {this.props.nomics && this.filteredBySearch(filterByRank).map(coin => (
             <tbody key={coin.rank}>
               <tr>
                 <td><Link to={{
-                  pathname: '/coin',
+                  pathname: '/transactionform',
                   state: {coin}
-                }}><img className="imgimg" src={coin.image_url}></img>   {coin.rank}. {coin.currency}</Link></td>
-                <td>
-                  <Link to={{
-                    pathname: '/coin',
-                    state: {coin}
-                  }}>${parseFloat(coin.price).toFixed(2) || 0}</Link></td>
-                <td className={Common.checkChange(coin)}><Link to={{
-                  pathname: '/coin',
-                  state: {coin}
-                }}>{coin['1d'].price_change_pct || 0}%</Link></td>
+                }}><img className="imgimg" src={coin.image_url}></img></Link></td>
                 <td><Link to={{
-                  pathname: '/coin',
+                  pathname: '/transactionform',
                   state: {coin}
-                }}>${parseFloat(coin.high).toFixed(2) || 0}</Link></td>
+                }}>{coin.currency}</Link></td>
+                <td><Link to={{
+                  pathname: '/transactionform',
+                  state: {coin}
+                }}>{coin.full_name}</Link></td>
               </tr>
             </tbody>
+          )
           )}
         </table>
       </div>
@@ -81,4 +64,4 @@ class CoinIndex extends React.Component {
   }
 }
 
-export default CoinIndex
+export default CoinList

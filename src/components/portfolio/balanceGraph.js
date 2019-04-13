@@ -9,13 +9,14 @@ class BalanceGraph extends React.Component{
     super()
     this.state = {
       type: 'scatter',
-      mode: 'lines'
+      mode: 'lines',
+      fill: 'tonexty'
     }
     this.sortTransactionTimestamps = this.sortTransactionTimestamps.bind(this)
 
     this.layout = {
       font: {
-        family: 'Courier New, monospace',
+        family: 'arial, monospace',
         size: 10,
         color: 'white'
       },
@@ -26,21 +27,23 @@ class BalanceGraph extends React.Component{
         r: 10,
         t: 15,
         b: 20,
-        l: 15
+        l: 25
       },
       showlegend: false,
       xaxis: {
         showgrid: false,
         autorange: true,
         domain: [0, 1],
-        type: 'date'
+        type: 'date',
+        zeroline: false
       },
       yaxis: {
         showlegend: false,
         showgrid: false,
         autorange: true,
         domain: [0, 1],
-        type: 'linear'
+        type: 'linear',
+        zeroline: false
       },
       autosize: true
     }

@@ -23,7 +23,7 @@ class Candle extends React.Component {
 
     this.layout = {
       font: {
-        family: 'Courier New, monospace',
+        family: 'arial, monospace',
         size: 10,
         color: 'white'
       },
@@ -33,7 +33,7 @@ class Candle extends React.Component {
       margin: {
         r: 10,
         t: 15,
-        b: 10,
+        b: 35,
         l: 35
       },
       showlegend: false,
@@ -41,14 +41,16 @@ class Candle extends React.Component {
         showgrid: false,
         autorange: true,
         domain: [0, 1],
-        type: 'date'
+        rangeslider: {visible: false},
+        zeroline: false
       },
       yaxis: {
         showlegend: false,
         showgrid: false,
         autorange: true,
         domain: [0, 1],
-        type: 'linear'
+        type: 'linear',
+        zeroline: false
       },
       autosize: true
     }

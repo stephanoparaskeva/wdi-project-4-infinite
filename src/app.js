@@ -11,6 +11,7 @@ import Candle from './candle'
 import CoinIndex from './components/coinIndex'
 import CoinShow from './components/coinShow'
 import Portfolio from './components/portfolio/portfolioMain'
+import PortfolioTransaction from './components/portfolio/portfolioTransaction'
 import TransactionForm from './components/transactions/transactionForm'
 import Register from './components/user/register'
 import Login from './components/user/login'
@@ -43,10 +44,12 @@ class App extends React.Component {
   attachCoinToNomics() {
     const coinLookup = this.state.coinData.reduce((obj, current) => {
       obj[current.currency] = current.url
+      obj[`${current.currency}2`] = current.full_name
       return obj
     }, {})
+    console.log(coinLookup)
     const filtered = this.state.nomics.data.filter(nomic => Object.keys(coinLookup).includes(nomic.currency))
-    return filtered.map(item => ({...item, image_url: coinLookup[item.currency] }))
+    return filtered.map(item => ({...item, image_url: coinLookup[item.currency], full_name: coinLookup[`${item.currency}2`]}))
   }
 
   render() {
@@ -58,6 +61,9 @@ class App extends React.Component {
           <Switch>
             <Route path="/portfolio" render={() => {
               return <Portfolio nomics={this.state.nomics2} coinData={this.state.coinData} />
+            }} />
+            <Route path='/coins' render={() => {
+              return <PortfolioTransaction nomics={this.state.nomics2} />
             }} />
             <Route path='/coin' component={ CoinShow } />
             <Route path='/transactionform' component={ TransactionForm } />

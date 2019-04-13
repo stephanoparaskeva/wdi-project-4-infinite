@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Holdings from './holdings'
+import { Link } from 'react-router-dom'
 import BalanceGraph from './balanceGraph'
 import Auth from '../../lib/auth'
 
@@ -83,6 +84,7 @@ class Portfolio extends React.Component{
       <div>
         <h3>MAIN PORTFOLIO BALANCE</h3>
         <p>${this.state.balance && this.state.balance.toFixed(2)}</p>
+        <Link to="/coins"><button className="">Add Transaction</button></Link>
         <BalanceGraph />
         {this.state.holdings &&
           <Holdings holdings={this.state.holdings} />
