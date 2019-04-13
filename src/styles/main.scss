@@ -1,11 +1,18 @@
 @import '/base/reset';
 @import '/base/animations';
+@import '/base/variables';
 
+@import '/components/loader';
 @import '/components/header';
 @import '/components/ticker';
 @import './components/transaction-form';
 
 @import '/vendor/skeleton';
+@import '/vendor/animate';
+
+body {
+  background: #274060;
+}
 
 .border {
   border-bottom: 1px solid black;
@@ -18,14 +25,6 @@
 
 .content {
   margin-top: 10em;
-}
-
-.up {
-  color: green;
-}
-
-.down {
-  color: red;
 }
 
 .imgimg {

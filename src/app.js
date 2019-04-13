@@ -15,7 +15,7 @@ import PortfolioTransaction from './components/portfolio/portfolioTransaction'
 import TransactionForm from './components/transactions/transactionForm'
 import Register from './components/user/register'
 import Login from './components/user/login'
-import Footer from './components/footer'
+import Loader from './components/loader'
 import About from './components/about'
 import Test from './components/portfolio/balanceGraph'
 
@@ -55,10 +55,11 @@ class App extends React.Component {
   }
 
   render() {
+    if(!this.state.nomics2) return <Loader />
     return(
       <BrowserRouter>
         {this.state.nomics2 && <Header nomics={this.state.nomics2}/>}
-        <div className="content container u-full-width">
+        <div className="content container u-full-width animated fadeIn">
           {this.state.nomics2 &&
           <Switch>
             <Route path="/portfolio" render={() => {
