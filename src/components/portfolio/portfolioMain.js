@@ -14,7 +14,6 @@ class Portfolio extends React.Component{
   }
 
   getNomicsPrices() {
-    console.log(this.props.nomics)
     return this.props.nomics
   }
 
@@ -57,10 +56,10 @@ class Portfolio extends React.Component{
         })
       })
       .then(res => {
-        let data = this.makeUserCoins(res)
-        let holdings = []
-        for (let key in data) {
-          let temp = {quantity: data[key], currency: [key]}
+        const data = this.makeUserCoins(res)
+        const holdings = []
+        for (const key in data) {
+          const temp = {quantity: data[key], currency: [key]}
           holdings.push(temp)
         }
         this.setState({holdings})

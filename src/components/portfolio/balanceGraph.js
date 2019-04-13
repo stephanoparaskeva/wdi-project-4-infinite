@@ -12,6 +12,38 @@ class BalanceGraph extends React.Component{
       mode: 'lines'
     }
     this.sortTransactionTimestamps = this.sortTransactionTimestamps.bind(this)
+
+    this.layout = {
+      font: {
+        family: 'Courier New, monospace',
+        size: 10,
+        color: 'white'
+      },
+      paper_bgcolor: 'black',
+      plot_bgcolor: 'black',
+      dragmode: 'zoom',
+      margin: {
+        r: 10,
+        t: 15,
+        b: 20,
+        l: 15
+      },
+      showlegend: false,
+      xaxis: {
+        showgrid: false,
+        autorange: true,
+        domain: [0, 1],
+        type: 'date'
+      },
+      yaxis: {
+        showlegend: false,
+        showgrid: false,
+        autorange: true,
+        domain: [0, 1],
+        type: 'linear'
+      },
+      autosize: true
+    }
   }
 
   sortTransactionTimestamps() {
@@ -63,12 +95,15 @@ class BalanceGraph extends React.Component{
   }
 
   render(){
+    console.log(this.layout, 'layout')
     return(
-      <div className="container">
-        <div className="row">
-          <div className="col-1 test">
+      <div>
+        <div>
+          <div>
             {this.state.x &&
           <Plot
+            useResizeHandler
+            style={{height: '100%', width: '100%'}}
             data={[this.state]}
             layout={this.layout}
           />

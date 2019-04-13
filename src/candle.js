@@ -18,8 +18,7 @@ class Candle extends React.Component {
       type: 'candlestick',
       xaxis: 'x',
       yaxis: 'y',
-      time: '30',
-      plotKey: 1
+      time: '30'
     }
 
     this.layout = {
@@ -42,7 +41,6 @@ class Candle extends React.Component {
         showgrid: false,
         autorange: true,
         domain: [0, 1],
-        range: ['2017-01-03 12:00', '2017-02-15 12:00'],
         type: 'date'
       },
       yaxis: {
@@ -50,9 +48,9 @@ class Candle extends React.Component {
         showgrid: false,
         autorange: true,
         domain: [0, 1],
-        range: [114.609999778, 137.410004222],
         type: 'linear'
-      }
+      },
+      autosize: true
     }
     this.handleTime = this.handleTime.bind(this)
     this.getCandleData = this.getCandleData.bind(this)
@@ -61,6 +59,7 @@ class Candle extends React.Component {
   handleTime(e) {
     this.getCandleData(e.target.value)
   }
+
 
   getCandleData(time) {
     axios
@@ -112,7 +111,9 @@ class Candle extends React.Component {
           <button className="three columns" onClick={this.handleTime} value="1825">5y</button>
         </div>
         {this.state.x &&
-        <Plot key={this.state.plotKey}
+        <Plot
+          useResizeHandler
+          style={{height: '100%', width: '100%'}}
           data={this.state.data}
           layout={this.layout}
         />

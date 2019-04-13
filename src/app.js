@@ -53,7 +53,7 @@ class App extends React.Component {
     return(
       <BrowserRouter>
         {this.state.nomics2 && <Header nomics={this.state.nomics2}/>}
-        <div className="content container">
+        <div className="content container u-full-width">
           {this.state.nomics2 &&
           <Switch>
             <Route path="/portfolio" render={() => {
