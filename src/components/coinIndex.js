@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import numeral from 'numeral'
 
 import Common from '../lib/common'
 
@@ -111,7 +112,7 @@ class CoinIndex extends React.Component {
                         pathname: '/coin',
                         state: {coin}
                       }}>
-                        ${parseFloat(coin.price).toFixed(2) || 0}
+                        {numeral(parseFloat(coin.price)).format('$0,0.00') || 0}
                       </Link>
                     </td>
                     <td className={Common.checkChange(coin, this.state.time)}>
@@ -127,7 +128,7 @@ class CoinIndex extends React.Component {
                         pathname: '/coin',
                         state: {coin}
                       }}>
-                        ${parseFloat(coin.high).toFixed(2) || 0}
+                        {numeral(parseFloat(coin.high)).format('$0,0.00') || 0}
                       </Link>
                     </td>
                     <td>
@@ -135,7 +136,7 @@ class CoinIndex extends React.Component {
                         pathname: '/coin',
                         state: {coin}
                       }}>
-                        ${parseFloat(coin.market_cap).toFixed(2) || 0}
+                        {numeral(parseFloat(coin.market_cap)).format('($ 0.00 a)') || 0}
                       </Link>
                     </td>
                     <td>
@@ -143,7 +144,7 @@ class CoinIndex extends React.Component {
                         pathname: '/coin',
                         state: {coin}
                       }}>
-                        {coin.circulating_supply}
+                        {coin.circulating_supply} {coin.currency}
                       </Link>
                     </td>
                     <td>
