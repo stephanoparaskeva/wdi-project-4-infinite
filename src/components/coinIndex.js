@@ -30,7 +30,7 @@ class CoinIndex extends React.Component {
 
   render() {
     const coins = this.props.nomics
-    const filterByRank = this.state.search !== '' ? 10000 : 50
+    const filterByRank = this.state.search !== '' ? 10000 : 49
     if (!coins) return null
     return(
       <div>

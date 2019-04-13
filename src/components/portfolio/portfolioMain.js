@@ -60,7 +60,7 @@ class Portfolio extends React.Component{
         const data = this.makeUserCoins(res)
         const holdings = []
         for (const key in data) {
-          const temp = {quantity: data[key], currency: [key]}
+          const temp = {quantity: data[key], currency: key}
           holdings.push(temp)
         }
         this.setState({holdings})
@@ -87,7 +87,7 @@ class Portfolio extends React.Component{
         <Link to="/coins"><button className="">Add Transaction</button></Link>
         <BalanceGraph />
         {this.state.holdings &&
-          <Holdings holdings={this.state.holdings} />
+          <Holdings nomics={this.props.nomics} holdings={this.state.holdings} />
         }
       </div>
     )

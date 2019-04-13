@@ -103,7 +103,6 @@ class Candle extends React.Component {
 
 
   render() {
-    console.log('rerender')
     return (
       <div>
         <div className="row">

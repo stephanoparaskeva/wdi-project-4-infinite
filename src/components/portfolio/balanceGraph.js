@@ -82,7 +82,6 @@ class BalanceGraph extends React.Component{
         })
       })
       .then(daysBalances => {
-        console.log(daysBalances)
         return daysBalances.map((balance, i) => {
           if (!i) return balance
           const newBalance =  balance = balance + daysBalances[i - 1]
@@ -98,7 +97,6 @@ class BalanceGraph extends React.Component{
   }
 
   render(){
-    console.log(this.layout, 'layout')
     return(
       <div>
         <div>

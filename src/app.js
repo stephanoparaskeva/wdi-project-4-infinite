@@ -25,7 +25,6 @@ class App extends React.Component {
     super()
 
     this.state = {}
-
     this.attachCoinToNomics = this.attachCoinToNomics.bind(this)
   }
 
@@ -47,7 +46,6 @@ class App extends React.Component {
       obj[`${current.currency}2`] = current.full_name
       return obj
     }, {})
-    console.log(coinLookup)
     const filtered = this.state.nomics.data.filter(nomic => Object.keys(coinLookup).includes(nomic.currency))
     return filtered.map(item => ({...item, image_url: coinLookup[item.currency], full_name: coinLookup[`${item.currency}2`]}))
   }
