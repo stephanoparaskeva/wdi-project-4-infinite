@@ -75,6 +75,7 @@ class BalanceGraph extends React.Component{
       })
       .then(reduced => Object.values(reduced))
       .then(arrayGroupedByTime => {
+        console.log(arrayGroupedByTime)
         return arrayGroupedByTime.map(transactions => {
           return transactions.reduce((acc, current) => {
             return acc += current.buy - current.sell
@@ -82,6 +83,7 @@ class BalanceGraph extends React.Component{
         })
       })
       .then(daysBalances => {
+        console.log(daysBalances)
         return daysBalances.map((balance, i) => {
           if (!i) return balance
           const newBalance =  balance = balance + daysBalances[i - 1]
