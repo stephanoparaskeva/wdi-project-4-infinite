@@ -55,7 +55,8 @@ class Portfolio extends React.Component{
 
   getUserBalanceBuySell(res) {
     return res.reduce((acc, current) => {
-      return acc += current.buy - current.sell
+      console.log(acc)
+      return acc += current.buy*current.buy_quantity - current.sell*current.sell_quantity
     }, 0)
   }
 
@@ -67,6 +68,7 @@ class Portfolio extends React.Component{
         })
       })
       .then(res => {
+        console.log(res)
         const original = this.getUserBalanceBuySell(res)
         this.setState({ original })
         const data = this.makeUserCoins(res)
