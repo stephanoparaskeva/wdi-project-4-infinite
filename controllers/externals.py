@@ -18,8 +18,9 @@ def get_candles():
 
 @api.route('/nomics/tickers', methods=['GET'])
 def get_tickers():
+    interval = '1d'
     url = 'https://api.nomics.com/v1/currencies/ticker'
     key = os.environ.get('NOMICS_API_KEY')
-    payload = {'key': key}
+    payload = {'key': key, 'interval': interval}
     r = requests.get(url, params=payload)
     return r.text

@@ -29,11 +29,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/nomics/tickers', {
-      params: {
-        interval: '1d'
-      }
-    })
+    axios.get('/api/nomics/tickers')
       .then(res => this.setState({nomics: res}))
       .then(() => {
         axios.get('/api/coins')

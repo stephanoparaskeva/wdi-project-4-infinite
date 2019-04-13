@@ -20,7 +20,6 @@ class Portfolio extends React.Component{
   }
 
   currencyConversion(prices, usersCoins) {
-
     return prices.reduce((arr, item) => {
       if (Object.keys(usersCoins).includes(item.currency)) {
         arr.push(usersCoins[item.currency] * item.price)

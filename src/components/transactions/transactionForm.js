@@ -28,6 +28,7 @@ class TransactionForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.toggleBuy = this.toggleBuy.bind(this)
     this.toggleSell = this.toggleSell.bind(this)
+    this.checkTransactions = this.checkTransactions.bind(this)
   }
 
   componentDidMount() {
@@ -60,16 +61,28 @@ class TransactionForm extends React.Component {
     this.setState({ data })
   }
 
+  checkTransactions() {
+    axios.get('/api/transactions')
+      .then(res => res.data)
+      .then(transactions => transactions.filter(transaction => transaction.coin.currency === this.props.location.state.coin.currency))
+      .then(coins => coins.reduce((acc, curr) => acc += curr.buy_quantity - curr.sell_quantity, 0))
+      .then(quan => quan > 0 ? true : false)
+  }
+
   handleSubmit(e) {
     e.preventDefault()
     const data = {...this.state.data}
-    axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
-    this.props.history.push('/portfolio')
-    console.log(this.state.data)
+    if (this.checkTransactions()) {
+      axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
+      this.props.history.push('/portfolio')
+    }
   }
 
   render() {
+    this.checkTransactions()
+    console.log(this.state.data)
     const coin = this.props.location.state.coin
+    console.log('coin', coin)
     return(
       <div>
         <p>{coin.currency}/USD</p>
