@@ -17,14 +17,15 @@ class TransactionForm extends React.Component {
         buy_quantity: '0',
         sell: '0',
         sell_quantity: '0',
-        timestamp: moment().format()
+        timestamp: ''
       },
+      date: new Date(),
       isHidden: true,
       errors: {}
     }
 
     this.handleChange = this.handleChange.bind(this)
-    this.handleTime = this.handleTime.bind(this)
+    this.handleDate = this.handleDate.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.toggleBuy = this.toggleBuy.bind(this)
     this.toggleSell = this.toggleSell.bind(this)
@@ -55,9 +56,11 @@ class TransactionForm extends React.Component {
     this.setState({ data, errors })
   }
 
-  handleTime(date) {
-    const data = {...this.state.data, timestamp: date}
-    this.setState({ data })
+  handleDate(date) {
+    const data = {...this.state.data, timestamp: moment(this.state.date).format('YYYY-MM-DD')}
+    this.setState({
+      date, data
+    })
   }
 
   handleSubmit(e) {
@@ -69,6 +72,8 @@ class TransactionForm extends React.Component {
   }
 
   render() {
+    console.log('this.state.date - ', moment(this.state.date).format('YYYY-MM-DD'))
+    console.log('data object - ',this.state.data)
     const coin = this.props.location.state.coin
     return(
       <div>
@@ -98,8 +103,8 @@ class TransactionForm extends React.Component {
           <label>
             Date
             <DatePicker
-              selected={this.state.data.timestamp}
-              onChange={this.handleTime}
+              selected={this.state.date}
+              onChange={this.handleDate}
             />
           </label>
           <button>Add Transaction</button>
@@ -128,8 +133,8 @@ class TransactionForm extends React.Component {
           <label>
             Date
             <DatePicker
-              selected={this.state.data.timestamp}
-              onChange={this.handleTime}
+              selected={this.state.date}
+              onChange={this.handleDate}
             />
           </label>
           <button>Add Transaction</button>
