@@ -1,5 +1,5 @@
 class Common {
-  static checkChange(coin) {
+  static checkChange(coin, time) {
     if(coin['1d'].price_change_pct >= 0) {
       return 'up'
     }
