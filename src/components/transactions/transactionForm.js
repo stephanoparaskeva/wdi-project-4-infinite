@@ -24,6 +24,7 @@ class TransactionForm extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
+    this.handleTime = this.handleTime.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.toggleBuy = this.toggleBuy.bind(this)
     this.toggleSell = this.toggleSell.bind(this)
@@ -52,6 +53,11 @@ class TransactionForm extends React.Component {
     const data = {...this.state.data, [name]: parseFloat(value) || ''}
     const errors = {...this.state.errors, [name]: ''}
     this.setState({ data, errors })
+  }
+
+  handleTime(date) {
+    const data = {...this.state.data, timestamp: date}
+    this.setState({ data })
   }
 
   handleSubmit(e) {
@@ -90,12 +96,10 @@ class TransactionForm extends React.Component {
             />
           </label>
           <label>
-            Time and Date
-            <input
-              onChange={ this.handleChange }
-              name="timestamp"
-              type="datetime"
-              value={ this.state.data.timestamp }
+            Date
+            <DatePicker
+              selected={this.state.data.timestamp}
+              onChange={this.handleTime}
             />
           </label>
           <button>Add Transaction</button>
@@ -122,12 +126,10 @@ class TransactionForm extends React.Component {
             />
           </label>
           <label>
-            Time and Date
-            <input
-              onChange={ this.handleChange }
-              name="timestamp"
-              type="datetime"
-              value={ this.state.data.timestamp }
+            Date
+            <DatePicker
+              selected={this.state.data.timestamp}
+              onChange={this.handleTime}
             />
           </label>
           <button>Add Transaction</button>
