@@ -12,6 +12,7 @@ class Portfolio extends React.Component{
     this.state = {}
     this.getNomicsPrices = this.getNomicsPrices.bind(this)
     this.getTransactionQuantities = this.getTransactionQuantities.bind(this)
+    this.getUserBalanceBuySell = this.getUserBalanceBuySell.bind(this)
   }
 
   getNomicsPrices() {
@@ -49,6 +50,12 @@ class Portfolio extends React.Component{
     }, {})
   }
 
+  getUserBalanceBuySell(res) {
+    return res.reduce((acc, current) => {
+      return acc += current.buy - current.sell
+    }, 0)
+  }
+
   getTransactionQuantities() {
     axios.get('/api/transactions')
       .then(res => {
@@ -57,6 +64,8 @@ class Portfolio extends React.Component{
         })
       })
       .then(res => {
+        const original = this.getUserBalanceBuySell(res)
+        this.setState({ original })
         const data = this.makeUserCoins(res)
         const holdings = []
         for (const key in data) {
@@ -73,6 +82,9 @@ class Portfolio extends React.Component{
         const [ userCoins, prices ] = res
         const balance = this.currencyConversion(prices, userCoins)
         this.setState({ userCoins, balance})
+        return balance
+      }).then(balance => {
+        this.setState({change: balance - this.state.original})
       })
   }
   componentDidMount() {
@@ -84,6 +96,10 @@ class Portfolio extends React.Component{
       <div>
         <h3>MAIN PORTFOLIO BALANCE</h3>
         <p>${this.state.balance && this.state.balance.toFixed(2)}</p>
+        <div>{
+          this.state.change && this.state.change > 0 && <div className="positive">+{this.state.change.toFixed(2)}</div> ||
+          this.state.change && this.state.change < 0 && <div className="negative">{this.state.change.toFixed(2)}</div>
+        }</div>
         <Link to="/coins"><button className="">Add Transaction</button></Link>
         <BalanceGraph />
         {this.state.holdings &&
