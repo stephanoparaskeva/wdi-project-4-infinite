@@ -47,17 +47,18 @@ class TransactionForm extends React.Component {
 
   toggleBuy(e) {
     e.preventDefault()
-    const data = {...this.state.data}
+    const data = {coin_id: '', buy: '0', buy_quantity: '0', sell: '0', sell_quantity: '0', timestamp: moment().format()}
     this.setState({isHidden: true, data})
   }
 
   toggleSell(e) {
     e.preventDefault()
-    const data = {...this.state.data}
+    const data = {coin_id: '', buy: '0', buy_quantity: '0', sell: '0', sell_quantity: '0', timestamp: moment().format()}
     this.setState({isHidden: false, data})
   }
 
   handleChange({ target: {name, value}}) {
+    console.log(this.state.data)
     const data = {...this.state.data, [name]: parseFloat(value) || ''}
     const errors = {...this.state.errors, [name]: ''}
     this.setState({ data, errors })
@@ -72,9 +73,8 @@ class TransactionForm extends React.Component {
 
   checkTransactions(sellQuantity) {
     const filtered = this.state.transactions.filter(transaction => transaction.coin.currency === this.props.location.state.coin.currency)
-    const quan = filtered.reduce((acc, curr) => acc += curr.buy_quantity - curr.sell_quantity, 0)
-    console.log(quan)
-    return quan >= sellQuantity ? true : false
+    const quantity = filtered.reduce((acc, curr) => acc += curr.buy_quantity - curr.sell_quantity, 0)
+    return quantity >= sellQuantity ? true : false
   }
 
   handleSubmit(e) {
