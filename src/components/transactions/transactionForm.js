@@ -17,15 +17,14 @@ class TransactionForm extends React.Component {
         buy_quantity: '0',
         sell: '0',
         sell_quantity: '0',
-        timestamp: moment().format('YYYY-MM-DD')
+        timestamp: moment().format()
       },
-      date: new Date(),
       isHidden: true,
       errors: {}
     }
 
     this.handleChange = this.handleChange.bind(this)
-    this.handleDate = this.handleDate.bind(this)
+    this.handleTime = this.handleTime.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.toggleBuy = this.toggleBuy.bind(this)
     this.toggleSell = this.toggleSell.bind(this)
@@ -33,6 +32,12 @@ class TransactionForm extends React.Component {
   }
 
   componentDidMount() {
+    axios.get('/api/transactions')
+      .then(res => {
+        return res.data.filter(transaction => {
+          return transaction.user.id === Auth.getPayload().sub
+        })
+      }).then(transactions => this.setState({ transactions }))
     const coin = this.props.location.state.coin.currency
     const data = {...this.state.data}
     data.coin_id = coin
@@ -57,36 +62,30 @@ class TransactionForm extends React.Component {
     this.setState({ data, errors })
   }
 
-  handleDate(date) {
-    const data = {...this.state.data, timestamp: moment(date).format('YYYY-MM-DD')}
-    this.setState({
-      data, date
-    })
+  handleTime(date) {
+    const data = {...this.state.data, timestamp: date}
+    this.setState({ data })
   }
 
-  checkTransactions() {
-    axios.get('/api/transactions')
-      .then(res => res.data)
-      .then(transactions => transactions.filter(transaction => transaction.coin.currency === this.props.location.state.coin.currency))
-      .then(coins => coins.reduce((acc, curr) => acc += curr.buy_quantity - curr.sell_quantity, 0))
-      .then(quan => quan > 0 ? true : false)
+  checkTransactions(sellQuantity) {
+    const filtered = this.state.transactions.filter(transaction => transaction.coin.currency === this.props.location.state.coin.currency)
+    const quan = filtered.reduce((acc, curr) => acc += curr.buy_quantity - curr.sell_quantity, 0)
+    console.log(quan)
+    return quan >= sellQuantity ? true : false
   }
 
   handleSubmit(e) {
     e.preventDefault()
     const data = {...this.state.data}
-    if (this.checkTransactions()) {
+    if (this.state.isHidden || this.checkTransactions(this.state.data.sell_quantity)) {
       axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
       this.props.history.push('/portfolio')
     }
+    console.log(this.state.data)
   }
 
   render() {
-    console.log('state - ', this.state)
-    console.log('this.state.date - ', moment(this.state.date).format('YYYY-MM-DD'))
-    console.log('data object - ',this.state.data)
     const coin = this.props.location.state.coin
-    console.log('coin', coin)
     return(
       <div>
         <p>{coin.currency}/USD</p>
@@ -115,9 +114,8 @@ class TransactionForm extends React.Component {
           <label>
             Date
             <DatePicker
-              selected={this.state.date}
-              onChange={this.handleDate}
-              placeholderText="Date..."
+              selected={this.state.data.timestamp}
+              onChange={this.handleTime}
             />
           </label>
           <button>Add Transaction</button>
@@ -146,9 +144,8 @@ class TransactionForm extends React.Component {
           <label>
             Date
             <DatePicker
-              selected={this.state.date}
-              onChange={this.handleDate}
-              placeholderText="Date..."
+              selected={this.state.data.timestamp}
+              onChange={this.handleTime}
             />
           </label>
           <button>Add Transaction</button>
