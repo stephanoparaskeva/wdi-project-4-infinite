@@ -61,7 +61,7 @@ class CoinIndex extends React.Component {
                 </tr>
               </thead>
               {this.filteredBySearch(filterByRank).map(coin =>
-                <tbody key={coin.rank}>
+                <tbody key={coin.rank} className="table-head">
                   <tr>
                     <td>
                       <Link to={{
@@ -92,7 +92,7 @@ class CoinIndex extends React.Component {
               )}
             </table>
           </div>
-          <div className="nine columns flow">
+          <div className="nine columns flow marg">
             <table className="u-full-width">
               <thead className="table-head">
                 <tr>
@@ -105,7 +105,7 @@ class CoinIndex extends React.Component {
                 </tr>
               </thead>
               {this.filteredBySearch(filterByRank).map(coin =>
-                <tbody key={coin.rank}>
+                <tbody key={coin.rank} className="table-head">
                   <tr>
                     <td>
                       <Link to={{
@@ -128,7 +128,7 @@ class CoinIndex extends React.Component {
                         pathname: '/coin',
                         state: {coin}
                       }}>
-                        {numeral(parseFloat(coin.high)).format('$0,0.00') || 0}
+                        {numeral(coin.high).format('$0,0.00') || 0}
                       </Link>
                     </td>
                     <td>
@@ -136,7 +136,7 @@ class CoinIndex extends React.Component {
                         pathname: '/coin',
                         state: {coin}
                       }}>
-                        {numeral(parseFloat(coin.market_cap)).format('($ 0.00 a)') || 0}
+                        {numeral(coin.market_cap).format('($ 0.00 a)') || 0}
                       </Link>
                     </td>
                     <td>
@@ -144,7 +144,7 @@ class CoinIndex extends React.Component {
                         pathname: '/coin',
                         state: {coin}
                       }}>
-                        {coin.circulating_supply} {coin.currency}
+                        {numeral(coin.circulating_supply).format('(0.00 a)') || 0}
                       </Link>
                     </td>
                     <td>
@@ -152,7 +152,7 @@ class CoinIndex extends React.Component {
                         pathname: '/coin',
                         state: {coin}
                       }}>
-                        {coin.max_supply || '-'}
+                        {numeral(coin.max_supply).format('(0.00 a)') || '-'}
                       </Link>
                     </td>
                   </tr>
