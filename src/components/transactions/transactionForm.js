@@ -17,7 +17,7 @@ class TransactionForm extends React.Component {
         buy_quantity: '0',
         sell: '0',
         sell_quantity: '0',
-        timestamp: ''
+        timestamp: moment().format('YYYY-MM-DD')
       },
       date: new Date(),
       isHidden: true,
@@ -57,9 +57,9 @@ class TransactionForm extends React.Component {
   }
 
   handleDate(date) {
-    const data = {...this.state.data, timestamp: moment(this.state.date).format('YYYY-MM-DD')}
+    const data = {...this.state.data, timestamp: moment(date).format('YYYY-MM-DD')}
     this.setState({
-      date, data
+      data, date
     })
   }
 
@@ -72,6 +72,7 @@ class TransactionForm extends React.Component {
   }
 
   render() {
+    console.log('state - ', this.state)
     console.log('this.state.date - ', moment(this.state.date).format('YYYY-MM-DD'))
     console.log('data object - ',this.state.data)
     const coin = this.props.location.state.coin
@@ -105,6 +106,7 @@ class TransactionForm extends React.Component {
             <DatePicker
               selected={this.state.date}
               onChange={this.handleDate}
+              placeholderText="Date..."
             />
           </label>
           <button>Add Transaction</button>
@@ -135,6 +137,7 @@ class TransactionForm extends React.Component {
             <DatePicker
               selected={this.state.date}
               onChange={this.handleDate}
+              placeholderText="Date..."
             />
           </label>
           <button>Add Transaction</button>
