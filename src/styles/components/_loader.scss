@@ -1,6 +1,8 @@
 .loading {
-  background: #7981B2;
+  display: flex;
+  justify-content: center;
 }
+
 $len: 242.776657104492px;
 $time: 1.6s;
 #outline {
@@ -9,6 +11,7 @@ $time: 1.6s;
   animation: anim $time linear infinite;
 }
 @keyframes anim {
+
   12.5% {
     stroke-dasharray: $len*0.14, $len;
     stroke-dashoffset: -$len*0.11;
@@ -21,13 +24,4 @@ $time: 1.6s;
     stroke-dasharray: $len*0.01, $len;
     stroke-dashoffset: -$len*0.99;
   }
-}
-
-.check-out {
-  position: absolute;
-  bottom: 0.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2rem;
-  color: #fff;
 }

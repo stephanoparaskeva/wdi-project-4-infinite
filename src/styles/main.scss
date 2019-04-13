@@ -1,6 +1,7 @@
 @import '/base/reset';
 @import '/base/animations';
 @import '/base/variables';
+@import '/base/typography';
 
 @import '/components/loader';
 @import '/components/header';
@@ -17,7 +18,7 @@
 
 .wrapper {
   margin: 0 auto;
-  width: 960px;
+  max-width: 960px;
 }
 
 .content {
@@ -25,8 +26,8 @@
 }
 
 .imgimg {
-  width: 1.7em;
-  height: 1.7em;
+  width: 1em;
+  height: 1em;
 }
 
 .modebar {
@@ -34,9 +35,29 @@ display: none !important;
 }
 
 .positive {
-  color: green;
+  color: $color-green;
 }
 
 .negative {
-  color: red;
+  color: $color-red;
+}
+
+body {
+  background: black;
+}
+
+.flex {
+  display: flex;
+}
+.flow {
+  overflow-x: scroll;
+  margin: 0;
+}
+
+.table-head {
+  white-space: nowrap;
+}
+
+.table-data {
+  overflow: scroll;
 }
