@@ -100,7 +100,7 @@ class CoinIndex extends React.Component {
                     pathname: '/coin',
                     state: {coin}
                   }}>
-                    {coin[`${this.state.time}`].price_change_pct || 0}%
+                    {coin['1d'].price_change_pct || 0}%
                   </Link>
                 </td>
                 <td>

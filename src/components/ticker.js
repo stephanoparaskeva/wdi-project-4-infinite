@@ -7,9 +7,7 @@ class Ticker extends React.Component {
   constructor() {
     super()
 
-    this.state = {
-      time: '1d'
-    }
+    this.state = {}
   }
 
   getCurrencies() {
@@ -30,7 +28,7 @@ class Ticker extends React.Component {
           {coins.map(coin =>
             <div key={coin.currency} className="ticker-item">
               <span>  {coin.currency}</span>
-              <span className={Common.checkChange(coin, this.state.time)}> {coin[`${this.state.time}`].price_change_pct}%</span>
+              <span className={Common.checkChange(coin)}> {coin['1d'].price_change_pct}%</span>
             </div>
           )}
         </div>
