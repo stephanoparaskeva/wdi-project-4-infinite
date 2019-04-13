@@ -27,7 +27,6 @@ class Ticker extends React.Component {
         <div className="ticker">
           {coins.map(coin =>
             <div key={coin.currency} className="ticker-item">
-              <span><img src={coin.image_url} className="ticker-img"/></span>
               <span>  {coin.currency}</span>
               <span className={Common.checkChange(coin)}> {coin['1d'].price_change_pct}%</span>
             </div>

@@ -46,6 +46,7 @@ class CoinIndex extends React.Component {
         <table className="u-full-width">
           <thead>
             <tr>
+              <th></th>
               <th>Name</th>
               <th>Price</th>
               <th>Change</th>
@@ -55,23 +56,45 @@ class CoinIndex extends React.Component {
           {this.filteredBySearch(filterByRank).map(coin =>
             <tbody key={coin.rank}>
               <tr>
-                <td><Link to={{
-                  pathname: '/coin',
-                  state: {coin}
-                }}><img className="imgimg" src={coin.image_url}></img>   {coin.rank}. {coin.currency}</Link></td>
                 <td>
                   <Link to={{
                     pathname: '/coin',
                     state: {coin}
-                  }}>${parseFloat(coin.price).toFixed(2) || 0}</Link></td>
-                <td className={Common.checkChange(coin)}><Link to={{
-                  pathname: '/coin',
-                  state: {coin}
-                }}>{coin['1d'].price_change_pct || 0}%</Link></td>
-                <td><Link to={{
-                  pathname: '/coin',
-                  state: {coin}
-                }}>${parseFloat(coin.high).toFixed(2) || 0}</Link></td>
+                  }}><img className="imgimg" src={coin.image_url}></img>
+                  </Link>
+                </td>
+                <td>
+                  <Link to={{
+                    pathname: '/coin',
+                    state: {coin}
+                  }}>
+                    {coin.rank}. {coin.currency}
+                  </Link>
+                </td>
+                <td>
+                  <Link to={{
+                    pathname: '/coin',
+                    state: {coin}
+                  }}>
+                    ${parseFloat(coin.price).toFixed(2) || 0}
+                  </Link>
+                </td>
+                <td className={Common.checkChange(coin)}>
+                  <Link to={{
+                    pathname: '/coin',
+                    state: {coin}
+                  }}>
+                    {coin['1d'].price_change_pct || 0}%
+                  </Link>
+                </td>
+                <td>
+                  <Link to={{
+                    pathname: '/coin',
+                    state: {coin}
+                  }}>
+                    ${parseFloat(coin.high).toFixed(2) || 0}
+                  </Link>
+                </td>
               </tr>
             </tbody>
           )}

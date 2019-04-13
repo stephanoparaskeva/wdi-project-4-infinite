@@ -26,7 +26,7 @@ class Holdings extends React.Component {
         <thead>
           <tr>
             <th></th>
-            <th>Symbol</th>
+            <th>Name</th>
             <th>Holdings</th>
             <th>Price</th>
           </tr>
