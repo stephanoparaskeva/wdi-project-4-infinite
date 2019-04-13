@@ -81,7 +81,6 @@ class BalanceGraph extends React.Component{
   }
 
   render(){
-    console.log('rendered graph')
     return(
       <div>
         <div>

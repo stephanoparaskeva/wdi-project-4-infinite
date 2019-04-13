@@ -58,7 +58,6 @@ class TransactionForm extends React.Component {
   }
 
   handleChange({ target: {name, value}}) {
-    console.log(this.state.data)
     const data = {...this.state.data, [name]: parseFloat(value) || ''}
     const errors = {...this.state.errors, [name]: ''}
     this.setState({ data, errors })
@@ -80,19 +79,15 @@ class TransactionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     const data = {...this.state.data}
-    console.log(this.state.data)
     if (this.state.isHidden || this.checkTransactions(this.state.data.sell_quantity)) {
       axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
         .then(() => this.props.history.push('/portfolio'))
 
     }
-    console.log(this.state.data)
   }
 
   render() {
-    console.log(this.state)
     const coin = this.props.location.state.coin
-    console.log(coin)
     return(
       <div>
         <p>{coin.currency}/USD</p>

@@ -25,7 +25,6 @@ class CoinList extends React.Component {
   }
 
   render() {
-    const coins = this.props.nomics
     const filterByRank = this.state.search !== '' ? 10000 : 10
     return(
       <div>
