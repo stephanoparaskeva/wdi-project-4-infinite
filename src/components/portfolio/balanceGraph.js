@@ -24,9 +24,9 @@ class BalanceGraph extends React.Component{
       plot_bgcolor: '#274060',
       dragmode: 'zoom',
       margin: {
-        r: 10,
+        r: 15,
         t: 15,
-        b: 20,
+        b: 35,
         l: 25
       },
       showlegend: false,
