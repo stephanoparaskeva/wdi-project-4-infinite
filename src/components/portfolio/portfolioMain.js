@@ -29,20 +29,24 @@ class Portfolio extends React.Component{
   }
 
   makeUserCoins(res) {
-    const buyQuantites = res.map(data => ({
+    const filtered = res.filter(coin => coin.coin !== null)
+    const buyQuantites = filtered.map(data => ({
       buyQuantity: data.buy_quantity,
       currency: data.coin.currency
     }))
-    const sellQuantities = res.map(data => ({
+    const sellQuantities = filtered.map(data => ({
       sellQuantity: data.sell_quantity,
       currency: data.coin.currency
     }))
+
     const totalsArr = buyQuantites.map((transaction, i) => {
+
       return {
         total: transaction.buyQuantity - sellQuantities[i].sellQuantity,
         currency: transaction.currency
       }
     })
+
     return totalsArr.reduce((obj, item) => {
       obj[item.currency] = item.total + (obj[item.currency] || 0)
       return obj

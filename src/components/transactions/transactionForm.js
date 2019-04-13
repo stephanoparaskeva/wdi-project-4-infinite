@@ -47,13 +47,13 @@ class TransactionForm extends React.Component {
 
   toggleBuy(e) {
     e.preventDefault()
-    const data = {coin_id: '', buy: '0', buy_quantity: '0', sell: '0', sell_quantity: '0', timestamp: moment().format()}
+    const data = {coin_id: this.props.location.state.coin.currency, buy: '0', buy_quantity: '0', sell: '0', sell_quantity: '0', timestamp: moment().format()}
     this.setState({isHidden: true, data})
   }
 
   toggleSell(e) {
     e.preventDefault()
-    const data = {coin_id: '', buy: '0', buy_quantity: '0', sell: '0', sell_quantity: '0', timestamp: moment().format()}
+    const data = {coin_id: this.props.location.state.coin.currency, buy: '0', buy_quantity: '0', sell: '0', sell_quantity: '0', timestamp: moment().format()}
     this.setState({isHidden: false, data})
   }
 
@@ -72,7 +72,7 @@ class TransactionForm extends React.Component {
   }
 
   checkTransactions(sellQuantity) {
-    const filtered = this.state.transactions.filter(transaction => transaction.coin.currency === this.props.location.state.coin.currency)
+    const filtered = this.state.transactions.filter(transaction => transaction.coin !== null && transaction.coin.currency === this.props.location.state.coin.currency)
     const quantity = filtered.reduce((acc, curr) => acc += curr.buy_quantity - curr.sell_quantity, 0)
     return quantity >= sellQuantity ? true : false
   }
@@ -80,6 +80,7 @@ class TransactionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     const data = {...this.state.data}
+    console.log(this.state.data)
     if (this.state.isHidden || this.checkTransactions(this.state.data.sell_quantity)) {
       axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
       this.props.history.push('/portfolio')
@@ -88,7 +89,9 @@ class TransactionForm extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     const coin = this.props.location.state.coin
+    console.log(coin)
     return(
       <div>
         <p>{coin.currency}/USD</p>
