@@ -4,31 +4,13 @@ const Loader = () => {
 
   return(
     <div className="loading">
-      <svg
-        className="loader"
-        width="100%"
-        height="100%"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="xMidYMid"
-      >
-        <path
-          fill="none"
-          d="M24.3,30C11.4,30,5,43.3,5,50s6.4,20,19.3,20c19.3,0,32.1-40,51.4-40 C88.6,30,95,43.3,95,50s-6.4,20-19.3,20C56.4,70,43.6,30,24.3,30z"
-          stroke="#afafaf"
-          strokeWidth="3"
-          strokeDasharray="251.45714965820312 5.131778564453128">
-          <animate
-            attributeName="stroke-dashoffset"
-            calcMode="linear"
-            values="0;256.58892822265625"
-            keyTimes="0;1"
-            dur="1"
-            begin="0s"
-            repeatCount="indefinite">
-          </animate>
-        </path>
-      </svg>
+    <svg width="500px" height="500px" viewBox="0 0 187.3 93.7" preserveAspectRatio="xMidYMid meet" style={{left: 0.5, top: 0.5, position: 'absolute', transform: 'translate(-0.5, -0.5)', matrix: 'matrix(1, 0, 0, 1, 0, 0)'}}>
+  <path stroke="#ededed" id="outline" fill="none" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10"
+        d="M93.9,46.4c9.3,9.5,13.8,17.9,23.5,17.9s17.5-7.8,17.5-17.5s-7.8-17.6-17.5-17.5c-9.7,0.1-13.3,7.2-22.1,17.1 				c-8.9,8.8-15.7,17.9-25.4,17.9s-17.5-7.8-17.5-17.5s7.8-17.5,17.5-17.5S86.2,38.6,93.9,46.4z" />
+  <path id="outline-bg" opacity="0.05" fill="none" stroke="#ededed" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10"
+        d="				M93.9,46.4c9.3,9.5,13.8,17.9,23.5,17.9s17.5-7.8,17.5-17.5s-7.8-17.6-17.5-17.5c-9.7,0.1-13.3,7.2-22.1,17.1 				c-8.9,8.8-15.7,17.9-25.4,17.9s-17.5-7.8-17.5-17.5s7.8-17.5,17.5-17.5S86.2,38.6,93.9,46.4z" />
+				</svg>
+<a href="https://codepen.io/suez/pen/ogmMOM" target="_blank" className="check-out">Jump loader</a>
     </div>
   )
 }

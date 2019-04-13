@@ -27,8 +27,8 @@ class Candle extends React.Component {
         size: 10,
         color: 'white'
       },
-      paper_bgcolor: 'black',
-      plot_bgcolor: 'black',
+      paper_bgcolor: '#274060',
+      plot_bgcolor: '#274060',
       dragmode: 'zoom',
       margin: {
         r: 10,
