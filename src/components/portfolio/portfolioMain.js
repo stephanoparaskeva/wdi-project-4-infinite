@@ -67,6 +67,10 @@ class Portfolio extends React.Component{
         })
       })
       .then(res => {
+        this.setState({ transactionRequest: res })
+        return res
+      })
+      .then(res => {
         const original = this.getUserBalanceBuySell(res)
         this.setState({ original })
         const data = this.makeUserCoins(res)
@@ -104,7 +108,7 @@ class Portfolio extends React.Component{
           this.state.change && this.state.change < 0 && <div className="negative">{this.state.change.toFixed(2)}</div>
         }</div>
         <Link to="/coins"><button className="">Add Transaction</button></Link>
-        <BalanceGraph />
+        {this.state.transactionRequest && <BalanceGraph transactionRequest={this.state.transactionRequest} /> }
         {this.state.holdings &&
           <Holdings nomics={this.props.nomics} holdings={this.state.holdings} />
         }
