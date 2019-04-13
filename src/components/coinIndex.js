@@ -47,6 +47,7 @@ class CoinIndex extends React.Component {
           <thead>
             <tr>
               <th></th>
+              <th></th>
               <th>Name</th>
               <th>Price</th>
               <th>Change</th>
@@ -56,6 +57,13 @@ class CoinIndex extends React.Component {
           {this.filteredBySearch(filterByRank).map(coin =>
             <tbody key={coin.rank}>
               <tr>
+                <td>
+                  <Link to={{
+                    pathname: '/coin',
+                    state: {coin}
+                  }}><span>        </span>
+                  </Link>
+                </td>
                 <td>
                   <Link to={{
                     pathname: '/coin',
