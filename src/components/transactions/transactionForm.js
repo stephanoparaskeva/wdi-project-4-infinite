@@ -17,14 +17,15 @@ class TransactionForm extends React.Component {
         buy_quantity: '0',
         sell: '0',
         sell_quantity: '0',
-        timestamp: moment().format()
+        timestamp: moment().format('YYYY-MM-DD')
       },
+      date: new Date(),
       isHidden: true,
       errors: {}
     }
 
     this.handleChange = this.handleChange.bind(this)
-    this.handleTime = this.handleTime.bind(this)
+    this.handleDate = this.handleDate.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.toggleBuy = this.toggleBuy.bind(this)
     this.toggleSell = this.toggleSell.bind(this)
@@ -46,32 +47,34 @@ class TransactionForm extends React.Component {
 
   toggleBuy(e) {
     e.preventDefault()
-    const data = {...this.state.data}
+    const data = {coin_id: '', buy: '0', buy_quantity: '0', sell: '0', sell_quantity: '0', timestamp: moment().format()}
     this.setState({isHidden: true, data})
   }
 
   toggleSell(e) {
     e.preventDefault()
-    const data = {...this.state.data}
+    const data = {coin_id: '', buy: '0', buy_quantity: '0', sell: '0', sell_quantity: '0', timestamp: moment().format()}
     this.setState({isHidden: false, data})
   }
 
   handleChange({ target: {name, value}}) {
+    console.log(this.state.data)
     const data = {...this.state.data, [name]: parseFloat(value) || ''}
     const errors = {...this.state.errors, [name]: ''}
     this.setState({ data, errors })
   }
 
-  handleTime(date) {
-    const data = {...this.state.data, timestamp: date}
-    this.setState({ data })
+  handleDate(date) {
+    const data = {...this.state.data, timestamp: moment(date).format('YYYY-MM-DD')}
+    this.setState({
+      data, date
+    })
   }
 
   checkTransactions(sellQuantity) {
     const filtered = this.state.transactions.filter(transaction => transaction.coin.currency === this.props.location.state.coin.currency)
-    const quan = filtered.reduce((acc, curr) => acc += curr.buy_quantity - curr.sell_quantity, 0)
-    console.log(quan)
-    return quan >= sellQuantity ? true : false
+    const quantity = filtered.reduce((acc, curr) => acc += curr.buy_quantity - curr.sell_quantity, 0)
+    return quantity >= sellQuantity ? true : false
   }
 
   handleSubmit(e) {
@@ -114,8 +117,9 @@ class TransactionForm extends React.Component {
           <label>
             Date
             <DatePicker
-              selected={this.state.data.timestamp}
-              onChange={this.handleTime}
+              selected={this.state.date}
+              onChange={this.handleDate}
+              placeholderText="Date..."
             />
           </label>
           <button>Add Transaction</button>
@@ -144,8 +148,9 @@ class TransactionForm extends React.Component {
           <label>
             Date
             <DatePicker
-              selected={this.state.data.timestamp}
-              onChange={this.handleTime}
+              selected={this.state.date}
+              onChange={this.handleDate}
+              placeholderText="Date..."
             />
           </label>
           <button>Add Transaction</button>
