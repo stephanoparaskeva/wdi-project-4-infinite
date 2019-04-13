@@ -51,70 +51,117 @@ class CoinIndex extends React.Component {
         <button className="three columns" onClick={this.handleTime} value="7d">1w</button>
         <button className="three columns" onClick={this.handleTime} value="30d">1m</button>
         <button className="three columns" onClick={this.handleTime} value="365d">1y</button>
-        <table className="u-full-width">
-          <thead>
-            <tr>
-              <th></th>
-              <th></th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Change</th>
-              <th>ATH</th>
-            </tr>
-          </thead>
-          {this.filteredBySearch(filterByRank).map(coin =>
-            <tbody key={coin.rank}>
-              <tr>
-                <td>
-                  <Link to={{
-                    pathname: '/coin',
-                    state: {coin}
-                  }}><span>        </span>
-                  </Link>
-                </td>
-                <td>
-                  <Link to={{
-                    pathname: '/coin',
-                    state: {coin}
-                  }}><img className="imgimg" src={coin.image_url}></img>
-                  </Link>
-                </td>
-                <td>
-                  <Link to={{
-                    pathname: '/coin',
-                    state: {coin}
-                  }}>
-                    {coin.rank}. {coin.currency}
-                  </Link>
-                </td>
-                <td>
-                  <Link to={{
-                    pathname: '/coin',
-                    state: {coin}
-                  }}>
-                    ${parseFloat(coin.price).toFixed(2) || 0}
-                  </Link>
-                </td>
-                <td className={Common.checkChange(coin, this.state.time)}>
-                  <Link to={{
-                    pathname: '/coin',
-                    state: {coin}
-                  }}>
-                    {coin['1d'].price_change_pct || 0}%
-                  </Link>
-                </td>
-                <td>
-                  <Link to={{
-                    pathname: '/coin',
-                    state: {coin}
-                  }}>
-                    ${parseFloat(coin.high).toFixed(2) || 0}
-                  </Link>
-                </td>
-              </tr>
-            </tbody>
-          )}
-        </table>
+        <div className="flex twelve columns">
+          <div className="three columns">
+            <table className="u-full-width">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th></th>
+                  <th>Asset</th>
+                </tr>
+              </thead>
+              {this.filteredBySearch(filterByRank).map(coin =>
+                <tbody key={coin.rank}>
+                  <tr>
+                    <td>
+                      <Link to={{
+                        pathname: '/coin',
+                        state: {coin}
+                      }}>
+                        {coin.rank}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={{
+                        pathname: '/coin',
+                        state: {coin}
+                      }}>
+                        <img className="imgimg" src={coin.image_url}></img>
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={{
+                        pathname: '/coin',
+                        state: {coin}
+                      }}>
+                        {coin.currency}
+                      </Link>
+                    </td>
+                  </tr>
+                </tbody>
+              )}
+            </table>
+          </div>
+          <div className="nine columns flow">
+            <table className="u-full-width">
+              <thead className="table-head">
+                <tr>
+                  <th>Price</th>
+                  <th>Change</th>
+                  <th>ATH</th>
+                  <th>Market Cap</th>
+                  <th>Circulating Supply</th>
+                  <th>Max Supply</th>
+                </tr>
+              </thead>
+              {this.filteredBySearch(filterByRank).map(coin =>
+                <tbody key={coin.rank}>
+                  <tr>
+                    <td>
+                      <Link to={{
+                        pathname: '/coin',
+                        state: {coin}
+                      }}>
+                        ${parseFloat(coin.price).toFixed(2) || 0}
+                      </Link>
+                    </td>
+                    <td className={Common.checkChange(coin, this.state.time)}>
+                      <Link to={{
+                        pathname: '/coin',
+                        state: {coin}
+                      }}>
+                        {coin['1d'].price_change_pct || 0}%
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={{
+                        pathname: '/coin',
+                        state: {coin}
+                      }}>
+                        ${parseFloat(coin.high).toFixed(2) || 0}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={{
+                        pathname: '/coin',
+                        state: {coin}
+                      }}>
+                        ${parseFloat(coin.market_cap).toFixed(2) || 0}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={{
+                        pathname: '/coin',
+                        state: {coin}
+                      }}>
+                        {coin.circulating_supply}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={{
+                        pathname: '/coin',
+                        state: {coin}
+                      }}>
+                        {coin.max_supply || '-'}
+                      </Link>
+                    </td>
+                  </tr>
+                </tbody>
+              )}
+            </table>
+          </div>
+        </div>
       </div>
     )
   }
