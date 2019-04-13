@@ -10,8 +10,8 @@ class Candle extends React.Component {
     this.state = {
       x: [],
       close: [],
-      decreasing: {line: {color: 'red'}},
-      increasing: {line: {color: 'green'}},
+      decreasing: {line: {color: '#e81631'}},
+      increasing: {line: {color: '#00b86c'}},
       high: [],
       low: [],
       open: [],

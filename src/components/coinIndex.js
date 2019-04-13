@@ -38,15 +38,13 @@ class CoinIndex extends React.Component {
     if (!coins) return null
     return(
       <div>
-        <form>SEARCH
-          <input
-            className="input"
-            onChange={this.handleChange}
-            value={this.state.search}
-            name="search"
-          >
-          </input>
-        </form>
+        <input
+          className="input"
+          onChange={this.handleChange}
+          value={this.state.search}
+          name="search"
+        >
+        </input>
         <button className="three columns" onClick={this.handleTime} value="1d">1d</button>
         <button className="three columns" onClick={this.handleTime} value="7d">1w</button>
         <button className="three columns" onClick={this.handleTime} value="30d">1m</button>

@@ -1,6 +1,7 @@
 @import '/base/reset';
 @import '/base/animations';
 @import '/base/variables';
+@import '/base/typography';
 
 @import '/components/loader';
 @import '/components/header';
@@ -34,11 +35,15 @@ display: none !important;
 }
 
 .positive {
-  color: green;
+  color: $color-green;
 }
 
 .negative {
-  color: red;
+  color: $color-red;
+}
+
+body {
+  background: black;
 }
 
 .flex {
@@ -46,6 +51,7 @@ display: none !important;
 }
 .flow {
   overflow-x: scroll;
+  margin: 0;
 }
 
 .table-head {
