@@ -22,10 +22,9 @@ class Header extends React.Component {
         <li><Link to='/'><i className="fas fa-globe"></i></Link></li>
         {Auth.isAuthenticated() && <li><Link to='/portfolio'><i className="fas fa-chart-line"></i></Link></li>}
         <li className="logo"><Link to='/'><i className="fas fa-infinity"></i></Link></li>
-        {Auth.isAuthenticated() && <li><Link to='/'><p>Logout</p></Link></li>}
         {!Auth.isAuthenticated() && <li><Link to='/register'><p>Register</p></Link></li>}
         {!Auth.isAuthenticated() && <li><Link to='/login'><p>Login</p></Link></li>}
-        {Auth.isAuthenticated() && <li><Link to='/'><p>Logout</p></Link></li>}
+        {Auth.isAuthenticated() && <Link to='/' onClick={this.logout}><p>Logout</p></Link>}
       </ul>
     )
   }

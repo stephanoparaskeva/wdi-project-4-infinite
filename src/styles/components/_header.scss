@@ -29,6 +29,7 @@
   }
 
   li {
+    padding: 0 .2em;
     &:not(:last-child)
       &:not(.logo) {
          margin-right: 10px;
