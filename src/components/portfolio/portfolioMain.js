@@ -2,7 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import Holdings from './holdings'
 import { Link } from 'react-router-dom'
+
 import BalanceGraph from './balanceGraph'
+import Pie from './pie'
 import Auth from '../../lib/auth'
 
 class Portfolio extends React.Component{
@@ -113,6 +115,7 @@ class Portfolio extends React.Component{
           <Holdings nomics={this.props.nomics} holdings={this.state.holdings} />
         }
         <Link to={'transactions'}><button className="">My Transactions</button></Link>
+        <Pie holdings={this.state.holdings}/>
       </div>
     )
   }

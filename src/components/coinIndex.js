@@ -153,7 +153,7 @@ class CoinIndex extends React.Component {
                         pathname: '/coin',
                         state: {coin}
                       }}>
-                        {numeral(coin.max_supply).format('(0.00 a)') || '-'}
+                        {coin.max_supply ? numeral(coin.max_supply).format('(0.00 a)') : '∞'}
                       </Link>
                     </td>
                   </tr>
