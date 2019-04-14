@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 
 
 class Transactions extends React.Component{
@@ -26,6 +25,8 @@ class Transactions extends React.Component{
         <table className="u-full-width">
           <thead>
             <tr>
+              <th></th>
+              <th></th>
               <th>Symbol</th>
               <th>Coin</th>
               <th>Time</th>
@@ -37,36 +38,40 @@ class Transactions extends React.Component{
           </thead>
           {transactionRequest && transactionRequest.map(transaction => {
             {
-              const route = transaction.buy > 0 ? '/transaction/edit/buy' : '/transaction/edit/sell'
+              const changeBuy = transaction.buy > 0 ? true : false
               return <tbody key={transaction.id}>
                 <tr>
                   <td><Link to={{
-                    pathname: route,
-                    state: {transaction}
+                    pathname: '/transaction',
+                    state: {transaction, changeBuy, coin: transaction.coin}
+                  }}>{changeBuy && <p className="positive">BUY</p> || <p className="negative">SELL</p> }</Link></td>
+                  <td><Link to={{
+                    pathname: '/transaction',
+                    state: {transaction, changeBuy, coin: transaction.coin}
                   }}>{transaction.coin.currency}</Link></td>
                   <td><Link to={{
-                    pathname: route,
-                    state: {transaction}
+                    pathname: '/transaction',
+                    state: {transaction, changeBuy, coin: transaction.coin}
                   }}>{transaction.coin.full_name}</Link></td>
                   <td><Link to={{
-                    pathname: route,
-                    state: {transaction}
+                    pathname: '/transaction',
+                    state: {transaction, changeBuy, coin: transaction.coin}
                   }}>{transaction.timestamp}</Link></td>
                   <td><Link to={{
-                    pathname: route,
-                    state: {transaction}
+                    pathname: '/transaction',
+                    state: {transaction, changeBuy, coin: transaction.coin}
                   }}>{transaction.buy || '-'}</Link></td>
                   <td><Link to={{
-                    pathname: route,
-                    state: {transaction}
+                    pathname: '/transaction',
+                    state: {transaction, changeBuy, coin: transaction.coin}
                   }}>{transaction.buy_quantity || '-'}</Link></td>
                   <td><Link to={{
-                    pathname: route,
-                    state: {transaction}
+                    pathname: '/transaction',
+                    state: {transaction, changeBuy, coin: transaction.coin}
                   }}>{transaction.sell || '-'}</Link></td>
                   <td><Link to={{
-                    pathname: route,
-                    state: {transaction}
+                    pathname: '/transaction',
+                    state: {transaction, changeBuy, coin: transaction.coin}
                   }}>{transaction.sell_quantity || '-'}</Link></td>
                 </tr>
               </tbody>

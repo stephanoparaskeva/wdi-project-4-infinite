@@ -17,7 +17,7 @@ class SellForm extends React.Component {
             onChange={ this.props.handleChange }
             name="sell"
             type="number"
-            value={ this.props.data.sell }
+            value={ this.props.data.sell || 0}
           />
         </label>
         <label>
@@ -26,7 +26,7 @@ class SellForm extends React.Component {
             onChange={ this.props.handleChange }
             name="sell_quantity"
             type="number"
-            value={ this.props.data.sell_quantity }
+            value={ this.props.data.sell_quantity || 0}
           />
         </label>
         <label>

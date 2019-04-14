@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import moment from 'moment'
-import numeral from 'numeral'
 import 'react-datepicker/dist/react-datepicker.css'
 
 import Auth from '../../lib/auth'
@@ -32,7 +31,6 @@ class TransactionForm extends React.Component {
     this.toggleBuy = this.toggleBuy.bind(this)
     this.toggleSell = this.toggleSell.bind(this)
     this.checkTransactions = this.checkTransactions.bind(this)
-    this.getPriceOnDay = this.getPriceOnDay.bind(this)
   }
 
   componentDidMount() {
@@ -43,6 +41,10 @@ class TransactionForm extends React.Component {
         })
       }).then(transactions => this.setState({ transactions }))
     const coin = this.props.location.state.coin
+    const changeBuy = this.props.location.state.changeBuy
+    if (!changeBuy) {
+      this.setState({isHidden: false})
+    }
     const data = {...this.state.data, buy: coin.price}
     data.coin_id = coin.currency
     this.setState({data})
@@ -51,14 +53,14 @@ class TransactionForm extends React.Component {
   toggleBuy(e) {
     e.preventDefault()
     const coin = this.props.location.state.coin
-    const data = {coin_id: coin.currency, buy: coin.price, buy_quantity: 0, sell: 0, sell_quantity: 0, timestamp: moment().format()}
+    const data = {coin_id: coin.currency, buy: coin.price || 0, buy_quantity: 0, sell: 0, sell_quantity: 0, timestamp: moment().format()}
     this.setState({isHidden: true, data})
   }
 
   toggleSell(e) {
     e.preventDefault()
     const coin = this.props.location.state.coin
-    const data = {coin_id: coin.currency, buy: 0, buy_quantity: 0, sell: coin.price, sell_quantity: 0, timestamp: moment().format()}
+    const data = {coin_id: coin.currency, buy: 0, buy_quantity: 0, sell: coin.price || 0, sell_quantity: 0, timestamp: moment().format()}
     this.setState({isHidden: false, data})
   }
 
@@ -75,31 +77,6 @@ class TransactionForm extends React.Component {
     })
   }
 
-  getPriceOnDay(day) {
-    axios
-      .get('/api/nomics/candles', {
-        params: {
-          currency: this.props.location.state.coin.currency,
-          start: day,
-          end: day
-        }
-      })
-      .then(res => res.data)
-      .then(coinCandle => {
-        const data = {...this.state.data}
-        if (this.state.isHidden) {
-          data.buy = parseFloat(coinCandle[0].close)
-        } else if (!this.state.isHidden) {
-          data.sell = parseFloat(coinCandle[0].close)
-        }
-        // if (this.state.isHidden || this.checkTransactions(this.state.data.sell_quantity)) {
-        //   axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
-        //     .then(() => this.props.history.push('/portfolio'))
-        //
-        // }
-      })
-  }
-
   checkTransactions(sellQuantity) {
     const filtered = this.state.transactions.filter(transaction => transaction.coin !== null && transaction.coin.currency === this.props.location.state.coin.currency)
     const quantity = filtered.reduce((acc, curr) => acc += curr.buy_quantity - curr.sell_quantity, 0)
@@ -108,7 +85,6 @@ class TransactionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    // this.getPriceOnDay(moment(this.state.data.timestamp).format())
     const data = {...this.state.data}
     if (this.state.isHidden || this.checkTransactions(this.state.data.sell_quantity)) {
       axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
