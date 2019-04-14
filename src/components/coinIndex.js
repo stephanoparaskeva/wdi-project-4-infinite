@@ -39,6 +39,7 @@ class CoinIndex extends React.Component {
     if (!coins) return null
     return(
       <div>
+        <h2>Markets</h2>
         <input
           className="input"
           onChange={this.handleChange}
