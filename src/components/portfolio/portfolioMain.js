@@ -110,11 +110,11 @@ class Portfolio extends React.Component{
           this.state.change && this.state.change < 0 && <div className="negative">{this.state.change.toFixed(2)}</div>
         }</div>
         <Link to="/coins"><button className="">Add Transaction</button></Link>
+        <Link to={'transactions'}><button className="">My Transactions</button></Link>
         {this.state.transactionRequest && <BalanceGraph transactionRequest={this.state.transactionRequest} /> }
         {this.state.holdings &&
           <Holdings nomics={this.props.nomics} holdings={this.state.holdings} />
         }
-        <Link to={'transactions'}><button className="">My Transactions</button></Link>
         <Pie holdings={this.state.holdings}/>
       </div>
     )

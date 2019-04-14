@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import moment from 'moment'
-import DatePicker from 'react-datepicker'
+import numeral from 'numeral'
 import 'react-datepicker/dist/react-datepicker.css'
 
 import Auth from '../../lib/auth'
@@ -41,21 +41,23 @@ class TransactionForm extends React.Component {
           return transaction.user.id === Auth.getPayload().sub
         })
       }).then(transactions => this.setState({ transactions }))
-    const coin = this.props.location.state.coin.currency
-    const data = {...this.state.data}
-    data.coin_id = coin
+    const coin = this.props.location.state.coin
+    const data = {...this.state.data, buy: coin.price}
+    data.coin_id = coin.currency
     this.setState({data})
   }
 
   toggleBuy(e) {
     e.preventDefault()
-    const data = {coin_id: this.props.location.state.coin.currency, buy: '0', buy_quantity: '0', sell: '0', sell_quantity: '0', timestamp: moment().format()}
+    const coin = this.props.location.state.coin
+    const data = {coin_id: coin.currency, buy: coin.price, buy_quantity: '0', sell: '0', sell_quantity: '0', timestamp: moment().format()}
     this.setState({isHidden: true, data})
   }
 
   toggleSell(e) {
     e.preventDefault()
-    const data = {coin_id: this.props.location.state.coin.currency, buy: '0', buy_quantity: '0', sell: '0', sell_quantity: '0', timestamp: moment().format()}
+    const coin = this.props.location.state.coin
+    const data = {coin_id: coin.currency, buy: '0', buy_quantity: '0', sell: coin.price, sell_quantity: '0', timestamp: moment().format()}
     this.setState({isHidden: false, data})
   }
 
