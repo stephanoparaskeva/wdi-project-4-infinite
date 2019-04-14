@@ -98,8 +98,6 @@ class Candle extends React.Component {
     this.getCandleData('30')
   }
 
-
-
   render() {
     return (
       <div>

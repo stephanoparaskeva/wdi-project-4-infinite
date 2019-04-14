@@ -2,7 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import Holdings from './holdings'
 import { Link } from 'react-router-dom'
+
 import BalanceGraph from './balanceGraph'
+import Pie from './pie'
 import Auth from '../../lib/auth'
 import numeral from 'numeral'
 
@@ -110,10 +112,12 @@ class Portfolio extends React.Component{
           this.state.change && this.state.change < 0 && <div className="negative">{numeral(parseFloat(this.state.change)).format('- $0,0.00') || 0}</div>
         }</div>
         <Link to="/coins"><button className="">Add Transaction</button></Link>
+        <Link to={'transactions'}><button className="">My Transactions</button></Link>
         {this.state.transactionRequest && <BalanceGraph transactionRequest={this.state.transactionRequest} /> }
         {this.state.holdings &&
           <Holdings nomics={this.props.nomics} holdings={this.state.holdings} />
         }
+        <Pie holdings={this.state.holdings}/>
       </div>
     )
   }

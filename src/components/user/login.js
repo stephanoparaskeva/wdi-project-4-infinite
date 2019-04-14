@@ -64,7 +64,7 @@ class Login extends React.Component {
               />
             </div>
             <div className="row">
-              <button className="six columns">Register</button>
+              <button className="six columns">Login</button>
               <p className="six columns">Not a member? <Link to='/register'>Register Here</Link></p>
             </div>
           </div>

@@ -1,10 +1,12 @@
 import React from 'react'
 import axios from 'axios'
 import moment from 'moment'
-import DatePicker from 'react-datepicker'
+import numeral from 'numeral'
 import 'react-datepicker/dist/react-datepicker.css'
 
 import Auth from '../../lib/auth'
+import BuyForm from './buyForm'
+import SellForm from './sellForm'
 
 class TransactionForm extends React.Component {
   constructor() {
@@ -40,21 +42,23 @@ class TransactionForm extends React.Component {
           return transaction.user.id === Auth.getPayload().sub
         })
       }).then(transactions => this.setState({ transactions }))
-    const coin = this.props.location.state.coin.currency
-    const data = {...this.state.data}
-    data.coin_id = coin
+    const coin = this.props.location.state.coin
+    const data = {...this.state.data, buy: coin.price}
+    data.coin_id = coin.currency
     this.setState({data})
   }
 
   toggleBuy(e) {
     e.preventDefault()
-    const data = {coin_id: this.props.location.state.coin.currency, buy: 0, buy_quantity: 0, sell: 0, sell_quantity: 0, timestamp: moment().format()}
+    const coin = this.props.location.state.coin
+    const data = {coin_id: coin.currency, buy: coin.price, buy_quantity: 0, sell: 0, sell_quantity: 0, timestamp: moment().format()}
     this.setState({isHidden: true, data})
   }
 
   toggleSell(e) {
     e.preventDefault()
-    const data = {coin_id: this.props.location.state.coin.currency, buy: 0, buy_quantity: 0, sell: 0, sell_quantity: 0, timestamp: moment().format()}
+    const coin = this.props.location.state.coin
+    const data = {coin_id: coin.currency, buy: 0, buy_quantity: 0, sell: coin.price, sell_quantity: 0, timestamp: moment().format()}
     this.setState({isHidden: false, data})
   }
 
@@ -88,11 +92,11 @@ class TransactionForm extends React.Component {
         } else if (!this.state.isHidden) {
           data.sell = parseFloat(coinCandle[0].close)
         }
-        if (this.state.isHidden || this.checkTransactions(this.state.data.sell_quantity)) {
-          axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
-            .then(() => this.props.history.push('/portfolio'))
-
-        }
+        // if (this.state.isHidden || this.checkTransactions(this.state.data.sell_quantity)) {
+        //   axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
+        //     .then(() => this.props.history.push('/portfolio'))
+        //
+        // }
       })
   }
 
@@ -104,81 +108,42 @@ class TransactionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    this.getPriceOnDay(moment(this.state.data.timestamp).format())
+    // this.getPriceOnDay(moment(this.state.data.timestamp).format())
+    const data = {...this.state.data}
+    if (this.state.isHidden || this.checkTransactions(this.state.data.sell_quantity)) {
+      axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
+        .then(() => this.props.history.push('/portfolio'))
+
+    }
   }
 
   render() {
     const coin = this.props.location.state.coin
+    const date = this.state.date
     return(
       <div>
         <p>{coin.currency}/USD</p>
         <button onClick={ this.toggleBuy }>BUY</button>
         <button onClick={ this.toggleSell }>SELL</button>
         {this.state.isHidden &&
-        <form onSubmit={ this.handleSubmit } className="buy-form">
-          <label>
-            Buy Price in USD
-            <input
-              onChange={ this.handleChange }
-              name="buy"
-              type="number"
-              step="any"
-              value={ this.state.data.buy }
-            />
-          </label>
-          <label>
-            Amount Bought
-            <input
-              onChange={ this.handleChange }
-              name="buy_quantity"
-              type="number"
-              step="any"
-              value={ this.state.data.buy_quantity }
-            />
-          </label>
-          <label>
-            Date
-            <DatePicker
-              selected={this.state.date}
-              onChange={this.handleDate}
-              placeholderText="Date..."
-            />
-          </label>
-          <button>Add Transaction</button>
-        </form>
+          <BuyForm
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            handleDate={this.handleDate}
+            data={this.state.data}
+            coin={coin}
+            date={date}
+          />
         }
         {!this.state.isHidden &&
-        <form onSubmit={ this.handleSubmit } className="sell-form">
-          <label>
-            Sell Price in USD
-            <input
-              onChange={ this.handleChange }
-              name="sell"
-              type="number"
-              step="any"
-              value={ this.state.data.sell }
-            />
-          </label>
-          <label>
-            Amount Sold
-            <input
-              onChange={ this.handleChange }
-              name="sell_quantity"
-              type="number"
-              step="any"
-              value={ this.state.data.sell_quantity }
-            />
-          </label>
-          <label>
-            Date
-            <DatePicker
-              selected={this.state.date}
-              onChange={this.handleDate}
-              placeholderText="Date..."
-            />
-          </label>
-          <button>Add Transaction</button>
-        </form>
+        <SellForm
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          handleDate={this.handleDate}
+          data={this.state.data}
+          coin={coin}
+          date={date}
+        />
         }
       </div>
     )
