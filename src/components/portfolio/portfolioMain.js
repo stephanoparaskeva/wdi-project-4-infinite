@@ -3,6 +3,7 @@ import axios from 'axios'
 import Holdings from './holdings'
 import { Link } from 'react-router-dom'
 
+import Transactions from '../transactions/transactions'
 import BalanceGraph from './balanceGraph'
 import Pie from './pie'
 import Auth from '../../lib/auth'
@@ -12,10 +13,14 @@ class Portfolio extends React.Component{
   constructor(){
     super()
 
-    this.state = {}
+    this.state = {
+      holdingsToggle: true
+    }
     this.getNomicsPrices = this.getNomicsPrices.bind(this)
     this.getTransactionQuantities = this.getTransactionQuantities.bind(this)
     this.getUserBalanceBuySell = this.getUserBalanceBuySell.bind(this)
+    this.holdingsTransactionsToggle = this.holdingsTransactionsToggle.bind(this)
+
   }
 
   getNomicsPrices() {
@@ -98,9 +103,16 @@ class Portfolio extends React.Component{
         this.setState({change: balance - this.state.original})
       })
   }
+
+  holdingsTransactionsToggle() {
+    this.setState({holdingsToggle: !this.state.holdingsToggle})
+  }
+
   componentDidMount() {
     this.getTransactionQuantities()
   }
+
+
 
   render(){
     return(
@@ -111,13 +123,19 @@ class Portfolio extends React.Component{
           this.state.change && this.state.change > 0 && <div className="positive">{numeral(parseFloat(this.state.change)).format('+ $0,0.00') || 0}</div> ||
           this.state.change && this.state.change < 0 && <div className="negative">{numeral(parseFloat(this.state.change)).format('- $0,0.00') || 0}</div>
         }</div>
+        <button onClick={this.holdingsTransactionsToggle} className="">My Transactions</button>
         <Link to="/coins"><button className="">Add Transaction</button></Link>
-        <Link to={'transactions'}><button className="">My Transactions</button></Link>
         {this.state.transactionRequest && <BalanceGraph transactionRequest={this.state.transactionRequest} /> }
-        {this.state.holdings &&
-          <Holdings nomics={this.props.nomics} holdings={this.state.holdings} />
+        {this.state.holdings && this.state.holdingsToggle &&
+          <div>
+            <Holdings nomics={this.props.nomics} holdings={this.state.holdings} />
+            <Pie holdings={this.state.holdings}/>
+          </div>
         }
-        <Pie holdings={this.state.holdings}/>
+        {this.state.transactionRequest && !this.state.holdingsToggle &&
+          <Transactions nomics={this.props.nomics} transactionRequest={this.state.transactionRequest} />
+        }
+
       </div>
     )
   }
