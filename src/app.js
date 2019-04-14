@@ -10,7 +10,6 @@ import CoinIndex from './components/coinIndex'
 import CoinShow from './components/coinShow'
 import Portfolio from './components/portfolio/portfolioMain'
 import PortfolioTransaction from './components/portfolio/portfolioTransaction'
-import Transactions from './components/transactions/transactionsShow'
 import TransactionForm from './components/transactions/transactionForm'
 import Register from './components/user/register'
 import Login from './components/user/login'
@@ -63,7 +62,6 @@ class App extends React.Component {
               return <PortfolioTransaction nomics={this.state.nomics2} />
             }} />
             <Route path='/coin' component={ CoinShow } />
-            <Route path='/transactions' component={ Transactions } />
             <Route path='/transaction' component={ TransactionForm } />
             <Route path='/register' component={ Register } />
             <Route path='/login' component={ Login } />
