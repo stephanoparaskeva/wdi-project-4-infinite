@@ -18,14 +18,15 @@ class Header extends React.Component {
 
   render(){
     return(
-      <div className="header">
-        <Ticker nomics={this.props.nomics}/>
-        <h1><Link to='/'>INFINITY</Link></h1>
-        {!Auth.isAuthenticated() && <Link to='/register'><h5>Register</h5></Link>}
-        {!Auth.isAuthenticated() && <Link to='/login'><h5>Login</h5></Link>}
-        {Auth.isAuthenticated() &&  <Link to='/portfolio'><h5>Portfolio</h5></Link>}
-        {Auth.isAuthenticated() && <Link to='/' onClick={this.logout}><h5>Logout</h5></Link>}
-      </div>
+      <ul className="header">
+        <li><Link to='/'><i className="fas fa-globe"></i></Link></li>
+        {Auth.isAuthenticated() && <li><Link to='/portfolio'><i className="fas fa-chart-line"></i></Link></li>}
+        <li className="logo"><Link to='/'><i className="fas fa-infinity"></i></Link></li>
+        {Auth.isAuthenticated() && <li><Link to='/'><p>Logout</p></Link></li>}
+        {!Auth.isAuthenticated() && <li><Link to='/register'><p>Register</p></Link></li>}
+        {!Auth.isAuthenticated() && <li><Link to='/login'><p>Login</p></Link></li>}
+        {Auth.isAuthenticated() && <li><Link to='/'><p>Logout</p></Link></li>}
+      </ul>
     )
   }
 }
