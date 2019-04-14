@@ -101,7 +101,7 @@ class Portfolio extends React.Component{
   render(){
     return(
       <div>
-        <h3>MAIN PORTFOLIO BALANCE</h3>
+        <h2>PORTFOLIO BALANCE</h2>
         <p>${this.state.balance && this.state.balance.toFixed(2)}</p>
         <div>{
           this.state.change && this.state.change > 0 && <div className="positive">+{this.state.change.toFixed(2)}</div> ||
@@ -112,6 +112,7 @@ class Portfolio extends React.Component{
         {this.state.holdings &&
           <Holdings nomics={this.props.nomics} holdings={this.state.holdings} />
         }
+        <Link to={'transactions'}><button className="">My Transactions</button></Link>
       </div>
     )
   }

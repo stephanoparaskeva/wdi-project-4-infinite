@@ -12,6 +12,7 @@ import CoinIndex from './components/coinIndex'
 import CoinShow from './components/coinShow'
 import Portfolio from './components/portfolio/portfolioMain'
 import PortfolioTransaction from './components/portfolio/portfolioTransaction'
+import Transactions from './components/transactions/transactionsShow'
 import TransactionForm from './components/transactions/transactionForm'
 import Register from './components/user/register'
 import Login from './components/user/login'
@@ -66,6 +67,7 @@ class App extends React.Component {
             }} />
             <Route path='/coin' component={ CoinShow } />
             <Route path='/transactionform' component={ TransactionForm } />
+            <Route path='/transactions' component={ Transactions } />
             <Route path='/register' component={ Register } />
             <Route path='/login' component={ Login } />
             <Route path='/about' component={ About } />
