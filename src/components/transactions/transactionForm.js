@@ -97,15 +97,19 @@ class TransactionForm extends React.Component {
     return quantity >= sellQuantity ? true : false
   }
 
+  quantityCheck() {
+    return this.state.data.buy_quantity > 0 || this.state.data.sell_quantity > 0
+  }
+
   handleSubmit(e) {
     e.preventDefault()
     const edit = this.props.location.state.edit
     const transaction = this.props.location.state.transaction
     const data = {...this.state.data}
-    if (edit && this.state.isHidden || edit && this.checkTransactions(this.state.data.sell_quantity)) {
+    if (this.quantityCheck() && edit && this.state.isHidden || this.quantityCheck() && edit && this.checkTransactions(this.state.data.sell_quantity)) {
       axios.put(`/api/transactions/${transaction.id}`, data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
         .then(() => this.props.history.push('/portfolio'))
-    } else if (!edit && this.state.isHidden || !edit && this.checkTransactions(this.state.data.sell_quantity)) {
+    } else if (this.quantityCheck() && !edit && this.state.isHidden || this.quantityCheck() && !edit && this.checkTransactions(this.state.data.sell_quantity)) {
       axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
         .then(() => this.props.history.push('/portfolio'))
 

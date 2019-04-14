@@ -123,7 +123,7 @@ class Portfolio extends React.Component{
         }</div>
         <button onClick={this.holdingsTransactionsToggle} className="">My Transactions</button>
         <Link to="/coins"><button className="">Add Transaction</button></Link>
-        {this.state.transactionRequest && <BalanceGraph transactionRequest={this.state.transactionRequest} /> }
+        {this.state.transactionRequest && this.state.transactionRequest.length >= 2 && <BalanceGraph transactionRequest={this.state.transactionRequest} /> }
         {this.state.holdings && this.state.holdingsToggle &&
           <div>
             <Holdings nomics={this.props.nomics} holdings={this.state.holdings} />

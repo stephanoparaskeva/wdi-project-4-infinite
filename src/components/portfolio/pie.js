@@ -44,7 +44,7 @@ class Pie extends React.Component {
             height: 500,
             title: 'Holdings',
             font: {color: 'white'},
-            paper_bgcolor: 'black' }
+            paper_bgcolor: '#1e2125' }
         }
       />
     )
