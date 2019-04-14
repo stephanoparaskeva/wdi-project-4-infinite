@@ -6,7 +6,6 @@
 @import '/components/loader';
 @import '/components/header';
 @import '/components/ticker';
-@import './components/transaction-form';
 
 @import '/vendor/skeleton';
 @import '/vendor/animate';
@@ -45,7 +44,7 @@
 }
 
 .tr-style {
-  background: rgb(53, 66, 84);
+  background: #354254;
 
 }
 

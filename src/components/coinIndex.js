@@ -38,7 +38,7 @@ class CoinIndex extends React.Component {
     const filterByRank = this.state.search !== '' ? 10000 : 50
     if (!coins) return null
     return(
-      <div>
+      <div className="row">
         <h2>Markets</h2>
         <input
           className="input"

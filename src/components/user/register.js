@@ -44,7 +44,7 @@ class Register extends React.Component {
         <h2>Register</h2>
         <form onSubmit={ this.handleSubmit }>
           <div className="row">
-            <div className="six columns">
+            <div className="twelve columns">
               <label htmlFor="username">Username</label>
               <input
                 className="u-full-width"
@@ -64,7 +64,7 @@ class Register extends React.Component {
                 id="email"
               />
             </div>
-            <div className="six columns">
+            <div className="twelve columns">
               <label htmlFor="password">Password</label>
               <input
                 className="u-full-width"

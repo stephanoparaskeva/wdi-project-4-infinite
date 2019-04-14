@@ -51,8 +51,8 @@ class App extends React.Component {
     if(!this.state.nomics2) return <Loader />
     return(
       <BrowserRouter>
-        {this.state.nomics2 && <Header nomics={this.state.nomics2}/>}
-        <div className="content container u-full-width animated fadeIn">
+        <div className="container u-full-width animated fadeIn">
+          {this.state.nomics2 && <Header nomics={this.state.nomics2}/>}
           {this.state.nomics2 &&
           <Switch>
             <Route path="/portfolio" render={() => {
