@@ -31,6 +31,18 @@ class Pie extends React.Component {
         data={[
           {
             values: this.getQuantity(),
+            marker: {
+              colors: [
+                '#1f4c6c',
+                '#929292',
+                '#6f6666bf',
+                '#212933',
+                '#4e516fbf',
+                '#929292',
+                'rgb(0, 0, 0)',
+                'rgb(0, 0, 0)'
+              ]
+            },
             labels: this.getCurrency(),
             type: 'pie',
             domain: {column: 0},
@@ -42,7 +54,6 @@ class Pie extends React.Component {
           {
             width: 500,
             height: 500,
-            title: 'Holdings',
             font: {color: 'white'},
             paper_bgcolor: '#1e2125' }
         }

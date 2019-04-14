@@ -18,6 +18,7 @@ class Transactions extends React.Component{
     this.sortByDate()
   }
 
+
   sortByDate() {
     const sorted = this.props.transactionRequest.sort((a, b) => {
       if (moment(a.timestamp) > moment(b.timestamp)) return -1
@@ -27,11 +28,15 @@ class Transactions extends React.Component{
   }
 
   handleDelete(e, id) {
+    console.log(this.props)
     e.preventDefault()
     axios.delete(`/api/transactions/${id}`, {
       headers: {Authorization: `Bearer ${Auth.getToken()}`}
     })
-      .then(() => console.log('deleted'))
+      .then(() => {
+        const filterDeleted = this.state.transactionRequest.filter(transaction => transaction.id !== id)
+        this.setState({transactionRequest: filterDeleted})
+      }).then(() => this.props.getTransactionQuantities())
       .catch(err => console.log(err.message))
   }
 
