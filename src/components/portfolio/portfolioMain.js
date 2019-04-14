@@ -112,8 +112,6 @@ class Portfolio extends React.Component{
     this.getTransactionQuantities()
   }
 
-
-
   render(){
     return(
       <div>

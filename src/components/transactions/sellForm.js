@@ -17,7 +17,7 @@ class SellForm extends React.Component {
             onChange={ this.props.handleChange }
             name="sell"
             type="number"
-            value={ this.props.data.sell || 0}
+            value={ this.props.data.sell || ''}
           />
         </label>
         <label>
@@ -26,7 +26,7 @@ class SellForm extends React.Component {
             onChange={ this.props.handleChange }
             name="sell_quantity"
             type="number"
-            value={ this.props.data.sell_quantity || 0}
+            value={ this.props.data.sell_quantity || ''}
           />
         </label>
         <label>
@@ -35,6 +35,7 @@ class SellForm extends React.Component {
             selected={this.props.date}
             onChange={this.props.handleDate}
             placeholderText="Date..."
+            value={ this.props.data.timestamp || '' }
           />
         </label>
         <button>Add Transaction</button>
