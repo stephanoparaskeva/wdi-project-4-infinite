@@ -10,30 +10,30 @@ class BuyForm extends React.Component {
 
   render() {
     return(
-      <form onSubmit={ this.handleSubmit } className="buy-form">
+      <form onSubmit={ this.props.handleSubmit } className="buy-form">
         <label>
           Buy Price in USD
           <input
-            onChange={ this.handleChange }
+            onChange={ this.props.handleChange }
             name="buy"
             type="number"
-            value={ this.state.data.buy }
+            value={ this.props.data.buy }
           />
         </label>
         <label>
           Amount Bought
           <input
-            onChange={ this.handleChange }
+            onChange={ this.props.handleChange }
             name="buy_quantity"
             type="number"
-            value={ this.state.data.buy_quantity }
+            value={ this.props.data.buy_quantity }
           />
         </label>
         <label>
           Date
           <DatePicker
-            selected={this.state.date}
-            onChange={this.handleDate}
+            selected={this.props.date}
+            onChange={this.props.handleDate}
             placeholderText="Date..."
           />
         </label>

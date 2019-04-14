@@ -5,6 +5,8 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 import Auth from '../../lib/auth'
+import BuyForm from './buyForm'
+import SellForm from './sellForm'
 
 class TransactionForm extends React.Component {
   constructor() {
@@ -88,72 +90,31 @@ class TransactionForm extends React.Component {
 
   render() {
     const coin = this.props.location.state.coin
+    const date = this.state.date
     return(
       <div>
         <p>{coin.currency}/USD</p>
         <button onClick={ this.toggleBuy }>BUY</button>
         <button onClick={ this.toggleSell }>SELL</button>
         {this.state.isHidden &&
-        <form onSubmit={ this.handleSubmit } className="buy-form">
-          <label>
-            Buy Price in USD
-            <input
-              onChange={ this.handleChange }
-              name="buy"
-              type="number"
-              value={ this.state.data.buy }
-            />
-          </label>
-          <label>
-            Amount Bought
-            <input
-              onChange={ this.handleChange }
-              name="buy_quantity"
-              type="number"
-              value={ this.state.data.buy_quantity }
-            />
-          </label>
-          <label>
-            Date
-            <DatePicker
-              selected={this.state.date}
-              onChange={this.handleDate}
-              placeholderText="Date..."
-            />
-          </label>
-          <button>Add Transaction</button>
-        </form>
+          <BuyForm
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            handleDate={this.handleDate}
+            data={this.state.data}
+            coin={coin}
+            date={date}
+          />
         }
         {!this.state.isHidden &&
-        <form onSubmit={ this.handleSubmit } className="sell-form">
-          <label>
-            Sell Price in USD
-            <input
-              onChange={ this.handleChange }
-              name="sell"
-              type="number"
-              value={ this.state.data.sell }
-            />
-          </label>
-          <label>
-            Amount Sold
-            <input
-              onChange={ this.handleChange }
-              name="sell_quantity"
-              type="number"
-              value={ this.state.data.sell_quantity }
-            />
-          </label>
-          <label>
-            Date
-            <DatePicker
-              selected={this.state.date}
-              onChange={this.handleDate}
-              placeholderText="Date..."
-            />
-          </label>
-          <button>Add Transaction</button>
-        </form>
+        <SellForm
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          handleDate={this.handleDate}
+          data={this.state.data}
+          coin={coin}
+          date={date}
+        />
         }
       </div>
     )

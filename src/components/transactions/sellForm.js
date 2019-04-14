@@ -10,30 +10,30 @@ class SellForm extends React.Component {
 
   render() {
     return(
-      <form onSubmit={ this.handleSubmit } className="sell-form">
+      <form onSubmit={ this.props.handleSubmit } className="sell-form">
         <label>
-          Buy Price in USD
+          Sell Price in USD
           <input
-            onChange={ this.handleChange }
+            onChange={ this.props.handleChange }
             name="sell"
             type="number"
-            value={ this.state.data.sell }
+            value={ this.props.data.sell }
           />
         </label>
         <label>
           Amount Sold
           <input
-            onChange={ this.handleChange }
+            onChange={ this.props.handleChange }
             name="sell_quantity"
             type="number"
-            value={ this.state.data.sell_quantity }
+            value={ this.props.data.sell_quantity }
           />
         </label>
         <label>
           Date
           <DatePicker
-            selected={this.state.date}
-            onChange={this.handleDate}
+            selected={this.props.date}
+            onChange={this.props.handleDate}
             placeholderText="Date..."
           />
         </label>
