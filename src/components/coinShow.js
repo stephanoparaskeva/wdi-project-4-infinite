@@ -19,7 +19,7 @@ class Coin extends React.Component {
           <h1 className="">{coin.currency}</h1>
           <Link to={
             {
-              pathname: '/transactionform',
+              pathname: '/transaction',
               state: { coin }
             }
           }><button className="">Add Transaction</button></Link>

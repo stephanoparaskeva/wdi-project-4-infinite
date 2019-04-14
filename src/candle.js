@@ -10,8 +10,6 @@ class Candle extends React.Component {
     this.state = {
       x: [],
       close: [],
-      decreasing: {line: {color: '#e81631'}},
-      increasing: {line: {color: '#00b86c'}},
       high: [],
       low: [],
       open: [],
@@ -27,8 +25,8 @@ class Candle extends React.Component {
         size: 10,
         color: 'white'
       },
-      paper_bgcolor: '#274060',
-      plot_bgcolor: '#274060',
+      paper_bgcolor: '#111',
+      plot_bgcolor: '#111',
       dragmode: 'zoom',
       margin: {
         r: 10,
@@ -86,8 +84,8 @@ class Candle extends React.Component {
           high: [...data.high, parseFloat(day.high)],
           low: [...data.low, parseFloat(day.low)],
           open: [...data.open, parseFloat(day.open)],
-          decreasing: {line: {color: 'red'}},
-          increasing: {line: {color: 'green'}},
+          decreasing: {line: {color: '#e81631'}},
+          increasing: {line: {color: '#00b86c'}},
           type: 'candlestick',
           xaxis: 'x',
           yaxis: 'y'

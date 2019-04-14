@@ -4,6 +4,7 @@ import Holdings from './holdings'
 import { Link } from 'react-router-dom'
 import BalanceGraph from './balanceGraph'
 import Auth from '../../lib/auth'
+import numeral from 'numeral'
 
 class Portfolio extends React.Component{
   constructor(){
@@ -67,6 +68,7 @@ class Portfolio extends React.Component{
         })
       })
       .then(res => {
+        console.log(res)
         this.setState({ transactionRequest: res })
         return res
       })
@@ -102,10 +104,10 @@ class Portfolio extends React.Component{
     return(
       <div>
         <h3>MAIN PORTFOLIO BALANCE</h3>
-        <p>${this.state.balance && this.state.balance.toFixed(2)}</p>
+        <p>{this.state.balance && numeral(parseFloat(this.state.balance)).format('$0,0.00') || 0}</p>
         <div>{
-          this.state.change && this.state.change > 0 && <div className="positive">+{this.state.change.toFixed(2)}</div> ||
-          this.state.change && this.state.change < 0 && <div className="negative">{this.state.change.toFixed(2)}</div>
+          this.state.change && this.state.change > 0 && <div className="positive">{numeral(parseFloat(this.state.change)).format('+ $0,0.00') || 0}</div> ||
+          this.state.change && this.state.change < 0 && <div className="negative">{numeral(parseFloat(this.state.change)).format('- $0,0.00') || 0}</div>
         }</div>
         <Link to="/coins"><button className="">Add Transaction</button></Link>
         {this.state.transactionRequest && <BalanceGraph transactionRequest={this.state.transactionRequest} /> }

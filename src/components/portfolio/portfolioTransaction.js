@@ -19,17 +19,16 @@ class CoinList extends React.Component {
   filteredBySearch(filterByRank) {
     const regex = new RegExp(this.state.search, 'i')
     const arr = this.props.nomics.filter(data => {
-      return regex.test(data.currency) && data.rank <= filterByRank
+      return regex.test(data.full_name) && data.rank <= filterByRank
     })
     return arr
   }
 
   render() {
-    const coins = this.props.nomics
-    const filterByRank = this.state.search !== '' ? 10000 : 10
+    const filterByRank = this.state.search !== '' ? 10000 : 0
     return(
       <div>
-        <form>SEARCH
+        <div>SEARCH
           <input
             className="input"
             onChange={this.handleChange}
@@ -37,21 +36,21 @@ class CoinList extends React.Component {
             name="search"
           >
           </input>
-        </form>
+        </div>
         <table className="u-full-width">
           {this.props.nomics && this.filteredBySearch(filterByRank).map(coin => (
             <tbody key={coin.rank}>
               <tr>
                 <td><Link to={{
-                  pathname: '/transactionform',
+                  pathname: '/transaction',
                   state: {coin}
                 }}><img className="imgimg" src={coin.image_url}></img></Link></td>
                 <td><Link to={{
-                  pathname: '/transactionform',
+                  pathname: '/transaction',
                   state: {coin}
                 }}>{coin.currency}</Link></td>
                 <td><Link to={{
-                  pathname: '/transactionform',
+                  pathname: '/transaction',
                   state: {coin}
                 }}>{coin.full_name}</Link></td>
               </tr>

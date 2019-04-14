@@ -21,10 +21,6 @@ def post_transactions():
 
     data = request.get_json()
     print(data)
-    # data['buy'] = float(data['buy'])
-    # data['buy_quantity'] = float(data['buy_quantity'])
-    # data['sell'] = float(data['sell'])
-    # data['sell_quantity'] = float(data['sell_quantity'])
     transaction, errors = transaction_schema.load(data)
     coin = Coin.query.get(data['coin_id'])
     if errors:

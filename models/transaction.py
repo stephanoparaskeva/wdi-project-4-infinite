@@ -10,10 +10,10 @@ class Transaction(db.Model, BaseModel):
     __tablename__ = 'transactions'
 
     timestamp = db.Column(db.Date)
-    buy = db.Column(db.Integer)
-    sell = db.Column(db.Integer)
-    buy_quantity = db.Column(db.Integer)
-    sell_quantity = db.Column(db.Integer)
+    buy = db.Column(db.Float)
+    sell = db.Column(db.Float)
+    buy_quantity = db.Column(db.Float)
+    sell_quantity = db.Column(db.Float)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', backref='user_transaction')
     coin_id = db.Column(db.String, db.ForeignKey('coins.id'))

@@ -2,12 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import axios from 'axios'
-import Nomics from './lib/nomics'
 
 import './styles/main.scss'
 
 import Header from './components/header'
-import Candle from './candle'
 import CoinIndex from './components/coinIndex'
 import CoinShow from './components/coinShow'
 import Portfolio from './components/portfolio/portfolioMain'
@@ -17,7 +15,6 @@ import Register from './components/user/register'
 import Login from './components/user/login'
 import Loader from './components/loader'
 import About from './components/about'
-import Test from './components/portfolio/balanceGraph'
 
 
 class App extends React.Component {
@@ -65,7 +62,7 @@ class App extends React.Component {
               return <PortfolioTransaction nomics={this.state.nomics2} />
             }} />
             <Route path='/coin' component={ CoinShow } />
-            <Route path='/transactionform' component={ TransactionForm } />
+            <Route path='/transaction' component={ TransactionForm } />
             <Route path='/register' component={ Register } />
             <Route path='/login' component={ Login } />
             <Route path='/about' component={ About } />

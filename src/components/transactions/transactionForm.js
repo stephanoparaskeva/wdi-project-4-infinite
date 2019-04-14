@@ -13,10 +13,10 @@ class TransactionForm extends React.Component {
     this.state = {
       data: {
         coin_id: '',
-        buy: '0',
-        buy_quantity: '0',
-        sell: '0',
-        sell_quantity: '0',
+        buy: 0,
+        buy_quantity: 0,
+        sell: 0,
+        sell_quantity: 0,
         timestamp: moment().format('YYYY-MM-DD')
       },
       date: new Date(),
@@ -30,6 +30,7 @@ class TransactionForm extends React.Component {
     this.toggleBuy = this.toggleBuy.bind(this)
     this.toggleSell = this.toggleSell.bind(this)
     this.checkTransactions = this.checkTransactions.bind(this)
+    this.getPriceOnDay = this.getPriceOnDay.bind(this)
   }
 
   componentDidMount() {
@@ -47,13 +48,13 @@ class TransactionForm extends React.Component {
 
   toggleBuy(e) {
     e.preventDefault()
-    const data = {coin_id: this.props.location.state.coin.currency, buy: '0', buy_quantity: '0', sell: '0', sell_quantity: '0', timestamp: moment().format()}
+    const data = {coin_id: this.props.location.state.coin.currency, buy: 0, buy_quantity: 0, sell: 0, sell_quantity: 0, timestamp: moment().format()}
     this.setState({isHidden: true, data})
   }
 
   toggleSell(e) {
     e.preventDefault()
-    const data = {coin_id: this.props.location.state.coin.currency, buy: '0', buy_quantity: '0', sell: '0', sell_quantity: '0', timestamp: moment().format()}
+    const data = {coin_id: this.props.location.state.coin.currency, buy: 0, buy_quantity: 0, sell: 0, sell_quantity: 0, timestamp: moment().format()}
     this.setState({isHidden: false, data})
   }
 
@@ -70,6 +71,31 @@ class TransactionForm extends React.Component {
     })
   }
 
+  getPriceOnDay(day) {
+    axios
+      .get('/api/nomics/candles', {
+        params: {
+          currency: this.props.location.state.coin.currency,
+          start: day,
+          end: day
+        }
+      })
+      .then(res => res.data)
+      .then(coinCandle => {
+        const data = {...this.state.data}
+        if (this.state.isHidden) {
+          data.buy = parseFloat(coinCandle[0].close)
+        } else if (!this.state.isHidden) {
+          data.sell = parseFloat(coinCandle[0].close)
+        }
+        if (this.state.isHidden || this.checkTransactions(this.state.data.sell_quantity)) {
+          axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
+            .then(() => this.props.history.push('/portfolio'))
+
+        }
+      })
+  }
+
   checkTransactions(sellQuantity) {
     const filtered = this.state.transactions.filter(transaction => transaction.coin !== null && transaction.coin.currency === this.props.location.state.coin.currency)
     const quantity = filtered.reduce((acc, curr) => acc += curr.buy_quantity - curr.sell_quantity, 0)
@@ -78,12 +104,7 @@ class TransactionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const data = {...this.state.data}
-    if (this.state.isHidden || this.checkTransactions(this.state.data.sell_quantity)) {
-      axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
-        .then(() => this.props.history.push('/portfolio'))
-
-    }
+    this.getPriceOnDay(moment(this.state.data.timestamp).format())
   }
 
   render() {
@@ -101,6 +122,7 @@ class TransactionForm extends React.Component {
               onChange={ this.handleChange }
               name="buy"
               type="number"
+              step="any"
               value={ this.state.data.buy }
             />
           </label>
@@ -110,6 +132,7 @@ class TransactionForm extends React.Component {
               onChange={ this.handleChange }
               name="buy_quantity"
               type="number"
+              step="any"
               value={ this.state.data.buy_quantity }
             />
           </label>
@@ -132,6 +155,7 @@ class TransactionForm extends React.Component {
               onChange={ this.handleChange }
               name="sell"
               type="number"
+              step="any"
               value={ this.state.data.sell }
             />
           </label>
@@ -141,6 +165,7 @@ class TransactionForm extends React.Component {
               onChange={ this.handleChange }
               name="sell_quantity"
               type="number"
+              step="any"
               value={ this.state.data.sell_quantity }
             />
           </label>
