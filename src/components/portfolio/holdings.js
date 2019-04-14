@@ -31,29 +31,29 @@ class Holdings extends React.Component {
             <th>Price</th>
           </tr>
         </thead>
-        {this.attachHoldingsToNomics(holdings, nomics).map(coin =>
-        { if (coin.quantity > 0) {
-          return  <tbody key={coin.rank}>
-            <tr>
-              <td><Link to={{
-                pathname: '/coin',
-                state: {coin}
-              }}><img className="imgimg" src={coin.image_url}></img></Link></td>
-              <td><Link to={{
-                pathname: '/coin',
-                state: {coin}
-              }}>{coin.currency}</Link></td>
-              <td><Link to={{
-                pathname: '/coin',
-                state: {coin}
-              }}>{coin.quantity}</Link></td>
-              <td><Link to={{
-                pathname: '/coin',
-                state: {coin}
-              }}>{coin.price}</Link></td>
-            </tr>
-          </tbody>
-        }
+        {this.attachHoldingsToNomics(holdings, nomics).map(coin => {
+          if (coin.quantity > 0) {
+            return  <tbody key={coin.rank}>
+              <tr>
+                <td><Link to={{
+                  pathname: '/coin',
+                  state: {coin}
+                }}><img className="imgimg" src={coin.image_url}></img></Link></td>
+                <td><Link to={{
+                  pathname: '/coin',
+                  state: {coin}
+                }}>{coin.currency}</Link></td>
+                <td><Link to={{
+                  pathname: '/coin',
+                  state: {coin}
+                }}>{coin.quantity}</Link></td>
+                <td><Link to={{
+                  pathname: '/coin',
+                  state: {coin}
+                }}>{coin.price}</Link></td>
+              </tr>
+            </tbody>
+          }
         }
         )}
       </table>

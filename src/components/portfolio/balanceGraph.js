@@ -1,7 +1,5 @@
 import React from 'react'
 import Plot from 'react-plotly.js'
-import Auth from '../../lib/auth'
-import axios from 'axios'
 import moment from 'moment'
 
 class BalanceGraph extends React.Component{
@@ -50,48 +48,32 @@ class BalanceGraph extends React.Component{
   }
 
   sortTransactionTimestamps() {
-    axios.get('/api/transactions')
-      .then(res => {
-        return res.data.filter(transaction => {
-          return transaction.user.id === Auth.getPayload().sub
-        })
-      })
-      .then(res => {
-        return res.sort((a, b) => {
-          if (moment(a.timestamp) > moment(b.timestamp)) return 1
-          return - 1
-        })
-      })
-      .then(sorted => {
-        this.setState({x: [...new Set(sorted.map(item => item.timestamp))]})
-        return sorted.reduce((acc, obj) => {
-          const key = obj['timestamp']
-          if (!acc[key]) {
-            acc[key] = []
-          }
-          acc[key].push(obj)
-          return acc
-        }, {})
-      })
-      .then(reduced => Object.values(reduced))
-      .then(arrayGroupedByTime => {
-        console.log(arrayGroupedByTime)
-        return arrayGroupedByTime.map(transactions => {
-          return transactions.reduce((acc, current) => {
-            return acc += current.buy - current.sell
-          }, 0)
-        })
-      })
-      .then(daysBalances => {
-        console.log(daysBalances)
-        return daysBalances.map((balance, i) => {
-          if (!i) return balance
-          const newBalance =  balance = balance + daysBalances[i - 1]
-          daysBalances[i] = newBalance
-          return newBalance
-        })
-      })
-      .then(res => this.setState({y: res}))
+    const sorted = this.props.transactionRequest.sort((a, b) => {
+      if (moment(a.timestamp) > moment(b.timestamp)) return 1
+      return - 1
+    })
+    this.setState({x: [...new Set(sorted.map(item => item.timestamp))]})
+    const reduced = sorted.reduce((acc, obj) => {
+      const key = obj['timestamp']
+      if (!acc[key]) {
+        acc[key] = []
+      }
+      acc[key].push(obj)
+      return acc
+    }, {})
+    const values = Object.values(reduced)
+    const totalBalancePerDay = values.map(transactions => {
+      return transactions.reduce((acc, current) => {
+        return acc += current.buy*current.buy_quantity - current.sell*current.sell_quantity
+      }, 0)
+    })
+    const y = totalBalancePerDay.map((balance, i) => {
+      if (!i) return balance
+      const newBalance =  balance = balance + totalBalancePerDay[i - 1]
+      totalBalancePerDay[i] = newBalance
+      return newBalance
+    })
+    this.setState({y})
   }
 
   componentDidMount() {

@@ -112,7 +112,7 @@ class CoinIndex extends React.Component {
                         pathname: '/coin',
                         state: {coin}
                       }}>
-                        {numeral(parseFloat(coin.price)).format('$0,0.00') || 0}
+                        {numeral(parseFloat(coin.price)).format('$ 0,0.00') || 0}
                       </Link>
                     </td>
                     <td className={Common.checkChange(coin, this.state.time)}>
@@ -128,7 +128,7 @@ class CoinIndex extends React.Component {
                         pathname: '/coin',
                         state: {coin}
                       }}>
-                        {numeral(coin.high).format('$0,0.00') || 0}
+                        {numeral(coin.high).format('$ 0,0.00') || 0}
                       </Link>
                     </td>
                     <td>
