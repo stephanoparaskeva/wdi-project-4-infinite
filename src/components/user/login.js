@@ -53,7 +53,7 @@ class Login extends React.Component {
                 onChange={ this.handleChange }
                 name="email"
                 type="text"
-                value={ this.state.data.email }
+                value={ this.state.data.email || ''}
                 id="email"
               />
             </div>
@@ -64,7 +64,7 @@ class Login extends React.Component {
                 onChange={ this.handleChange }
                 type="password"
                 name="password"
-                value={ this.state.data.password }
+                value={ this.state.data.password || ''}
                 id="password"
               />
             </div>

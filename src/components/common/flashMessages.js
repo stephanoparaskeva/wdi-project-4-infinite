@@ -13,13 +13,14 @@ class FlashMessages extends React.Component {
     if (!messages) return false
 
     this.setState({ messages })
-    Flash.clearMessages()
-    setTimeout(() => this.setState({ messages: null}), 4000)
+
+    setTimeout(() => this.setState({ messages: null}), 400)
   }
 
   render() {
-
+console.log('render')
     return (
+
       <div>
         {this.state.messages &&
           Object.keys(this.state.messages).map(type => (

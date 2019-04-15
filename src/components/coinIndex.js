@@ -32,7 +32,7 @@ class CoinIndex extends React.Component {
   filteredBySearch(filterByRank) {
     const regex = new RegExp(this.state.search, 'i')
     const arr = this.props.nomics.filter(data => {
-      return regex.test(data.full_name) && data.rank <= filterByRank
+      return regex.test(data.currency) && data.rank <= filterByRank
     })
     return arr
   }

@@ -51,7 +51,7 @@ class Register extends React.Component {
                 onChange={ this.handleChange }
                 name="username"
                 type="text"
-                value={ this.state.data.username }
+                value={ this.state.data.username || '' }
                 id="username"
               />
               <label htmlFor="email">Email</label>
@@ -60,7 +60,7 @@ class Register extends React.Component {
                 onChange={ this.handleChange }
                 name="email"
                 type="text"
-                value={ this.state.data.email }
+                value={ this.state.data.email || '' }
                 id="email"
               />
             </div>
@@ -71,7 +71,7 @@ class Register extends React.Component {
                 onChange={ this.handleChange }
                 type="password"
                 name="password"
-                value={ this.state.data.password }
+                value={ this.state.data.password || ''}
                 id="password"
               />
               <label htmlFor="passwordConfirmation">Password Confirmation</label>
@@ -80,7 +80,7 @@ class Register extends React.Component {
                 onChange={ this.handleChange }
                 type="password"
                 name="password_confirmation"
-                value={ this.state.data.password_confirmation }
+                value={ this.state.data.password_confirmation || ''}
                 id="passwordConfirmation"
               />
             </div>
