@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import Ticker from './ticker'
 import Auth from '../lib/auth'
 
 class Header extends React.Component {
