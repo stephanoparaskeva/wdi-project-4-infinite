@@ -22,13 +22,11 @@ class TransactionForm extends React.Component {
       },
       date: new Date(),
       isHidden: true,
-      calenderOpen: false,
       errors: {}
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleDate = this.handleDate.bind(this)
-    this.toggleCalendar = this.toggleCalendar.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.toggleBuy = this.toggleBuy.bind(this)
     this.toggleSell = this.toggleSell.bind(this)
@@ -66,6 +64,44 @@ class TransactionForm extends React.Component {
     }
   }
 
+  getTransactionQuantities() {
+    axios.get('/api/transactions')
+      .then(res => {
+        return res.data.filter(transaction => {
+          return transaction.user.id === Auth.getPayload().sub
+        })
+      })
+      .then(res => {
+        this.setState({ transactionRequest: res })
+        return res
+      })
+      .then(res => {
+        const original = this.getUserBalanceBuySell(res)
+        this.setState({ original })
+        const data = this.makeUserCoins(res)
+        const holdings = []
+        for (const key in data) {
+          const temp = {quantity: data[key], currency: key}
+          holdings.push(temp)
+        }
+        this.setState({holdings})
+        return this.makeUserCoins(res)
+      })
+      .then((userCoins) => {
+        return Promise.all([userCoins, this.getNomicsPrices()])
+      })
+      .then(res => {
+        const [ userCoins, prices ] = res
+        const balance = this.currencyConversion(prices, userCoins)
+        this.setState({ userCoins, balance})
+        console.log(balance, 'bal')
+        console.log(this.state.original, 'org')
+        return balance
+      }).then(balance => {
+        this.setState({change: balance - this.state.original})
+      })
+  }
+
   toggleBuy(e) {
     e.preventDefault()
     const coin = this.props.location.state.coin
@@ -91,14 +127,7 @@ class TransactionForm extends React.Component {
     this.setState({
       data, date
     })
-    this.toggleCalendar()
   }
-
-  toggleCalendar (e) {
-    e && e.preventDefault()
-    this.setState({calenderOpen: !this.state.calenderOpen})
-  }
-
 
   checkTransactions(sellQuantity) {
     const filtered = this.state.transactions.filter(transaction => transaction.coin !== null && transaction.coin.currency === this.props.location.state.coin.currency)
@@ -125,6 +154,8 @@ class TransactionForm extends React.Component {
     e.preventDefault()
     const edit = this.props.location.state.edit
     const transaction = this.props.location.state.transaction
+    this.getTransactionQuantities()
+    console.log(this.state.state.change)
     const data = {...this.state.data}
     if (this.stopBuyToSell(data) === 0 && this.quantityCheck() && edit && this.state.isHidden || this.stopBuyToSell(data) === 0 && this.quantityCheck() && edit && this.checkTransactions(this.state.data.sell_quantity)) {
       axios.put(`/api/transactions/${transaction.id}`, data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
@@ -137,39 +168,31 @@ class TransactionForm extends React.Component {
   }
 
   render() {
-    console.log(this.state.data, 'data')
     const coin = this.props.location.state.coin
     const date = this.state.date
     return(
-      <div className="container">
-        <h4>{coin.currency}</h4>
-        <div className="row container">
-          <button onClick={ this.toggleBuy } className="six columns">BUY</button>
-          <button onClick={ this.toggleSell } className="six columns">SELL</button>
-        </div>
+      <div>
+        <p>{coin.currency}/USD</p>
+        <button onClick={ this.toggleBuy }>BUY</button>
+        <button onClick={ this.toggleSell }>SELL</button>
         {this.state.isHidden &&
           <BuyForm
-            className="twelve columns"
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
-            toggleCalendar={this.toggleCalendar}
             handleDate={this.handleDate}
             data={this.state.data}
             coin={coin}
             date={date}
-            calenderOpen={this.state.calenderOpen}
           />
         }
         {!this.state.isHidden &&
         <SellForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-          toggleCalendar={this.toggleCalendar}
           handleDate={this.handleDate}
           data={this.state.data}
           coin={coin}
           date={date}
-          calenderOpen={this.state.calenderOpen}
         />
         }
       </div>
