@@ -8,6 +8,7 @@ import BalanceGraph from './balanceGraph'
 import Pie from './pie'
 import Auth from '../../lib/auth'
 import numeral from 'numeral'
+import moment from 'moment'
 
 class Portfolio extends React.Component{
   constructor(){
@@ -108,32 +109,40 @@ class Portfolio extends React.Component{
     this.setState({holdingsToggle: !this.state.holdingsToggle})
   }
 
+  isDataOnSameDay() {
+    const data = this.state.transactionRequest
+    if (data.length === 2) {
+      return moment(data[0].timestam).isSame(moment(data[1].timestamp), 'day')
+    } else {
+      return false
+    }
+  }
+
   componentDidMount() {
     this.getTransactionQuantities()
   }
 
-
-
   render(){
+    console.log(this.state.balance)
     return(
       <div>
         <h3>MAIN PORTFOLIO BALANCE</h3>
         <p>{this.state.balance && numeral(parseFloat(this.state.balance)).format('$0,0.00') || 0}</p>
         <div>{
-          this.state.change && this.state.change > 0 && <div className="positive">{numeral(parseFloat(this.state.change)).format('+ $0,0.00') || 0}</div> ||
-          this.state.change && this.state.change < 0 && <div className="negative">{numeral(parseFloat(this.state.change)).format('- $0,0.00') || 0}</div>
+          this.state.change !== 0 && this.state.change && this.state.change > 0 && <div className="positive">{numeral(parseFloat(this.state.change)).format('+ $0,0.00') || 0}</div> ||
+          this.state.change !== 0 && this.state.change && this.state.change < 0 && <div className="negative">{numeral(parseFloat(this.state.change)).format('- $0,0.00') || 0}</div>
         }</div>
         <button onClick={this.holdingsTransactionsToggle} className="">My Transactions</button>
         <Link to="/coins"><button className="">Add Transaction</button></Link>
-        {this.state.transactionRequest && <BalanceGraph transactionRequest={this.state.transactionRequest} /> }
-        {this.state.holdings && this.state.holdingsToggle &&
+        {this.state.transactionRequest && this.state.transactionRequest.length >= 2 && !this.isDataOnSameDay() && <BalanceGraph transactionRequest={this.state.transactionRequest} /> }
+        {this.state.holdings && this.state.holdings.length > 0 && this.state.holdingsToggle &&
           <div>
             <Holdings nomics={this.props.nomics} holdings={this.state.holdings} />
             <Pie holdings={this.state.holdings}/>
           </div>
         }
         {this.state.transactionRequest && !this.state.holdingsToggle &&
-          <Transactions nomics={this.props.nomics} transactionRequest={this.state.transactionRequest} />
+          <Transactions nomics={this.props.nomics} transactionRequest={this.state.transactionRequest} getTransactionQuantities={this.getTransactionQuantities} />
         }
 
       </div>

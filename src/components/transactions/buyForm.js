@@ -9,6 +9,7 @@ class BuyForm extends React.Component {
   }
 
   render() {
+    console.log(this.props.data, 'buy')
     return(
       <div className="transaction">
         <form onSubmit={ this.props.handleSubmit }>
@@ -19,7 +20,7 @@ class BuyForm extends React.Component {
                 onChange={ this.props.handleChange }
                 name="buy"
                 type="number"
-                value={ this.props.data.buy || 0}
+                value={ this.props.data.buy || ''}
               />
               <div className="six columns">
                 <label htmlFor="number">Number of Coins</label>
@@ -27,7 +28,7 @@ class BuyForm extends React.Component {
                   onChange={ this.props.handleChange }
                   name="buy_quantity"
                   type="number"
-                  value={ this.props.data.buy_quantity || 0 }
+                  value={ this.props.data.buy_quantity || '' }
                 />
               </div>
             </div>
@@ -37,6 +38,7 @@ class BuyForm extends React.Component {
                 selected={this.props.date}
                 onChange={this.props.handleDate}
                 placeholderText="Date..."
+                value={ this.props.data.timestamp || '' }
               />
             </label>
             <button>Add Transaction</button>
