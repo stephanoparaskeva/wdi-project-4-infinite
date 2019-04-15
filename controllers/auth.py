@@ -1,4 +1,6 @@
 from flask import Blueprint, jsonify, request
+from validate_email import validate_email
+import re
 from models.user import User, UserSchema
 from lib.helpers import is_unique
 
@@ -15,6 +17,12 @@ def register():
 
     if not is_unique(model=User, key='email', value=data['email']):
         errors['email'] = errors.get('email', []) + ['Email already taken']
+
+    if not validate_email(data['email']):
+        errors['email'] = errors.get('email', []) + ['Email invalid']
+
+    if not re.match(r"^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])[\w\d@#$]{6,12}$", data['password']):
+        errors['email'] = errors.get('email', []) + ['Password must contain at least one uppercase character, one lowercase and one number']
 
     if errors:
         return jsonify(errors), 422
