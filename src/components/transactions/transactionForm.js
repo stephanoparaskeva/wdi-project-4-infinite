@@ -36,6 +36,8 @@ class TransactionForm extends React.Component {
   }
 
   componentDidMount() {
+    this.testForGraph()
+
     axios.get('/api/transactions')
       .then(res => {
         return res.data.filter(transaction => {
@@ -43,6 +45,7 @@ class TransactionForm extends React.Component {
         })
       }).then(transactions => this.setState({ transactions }))
     const coin = this.props.location.state.coin
+    this.setState({coin1: coin})
     const changeBuy = this.props.location.state.changeBuy
     const edit = this.props.location.state.edit
     if (!changeBuy && edit) {
@@ -121,22 +124,60 @@ class TransactionForm extends React.Component {
     return num
   }
 
+
+
   handleSubmit(e) {
     e.preventDefault()
     const edit = this.props.location.state.edit
     const transaction = this.props.location.state.transaction
     const data = {...this.state.data}
-    if (this.stopBuyToSell(data) === 0 && this.quantityCheck() && edit && this.state.isHidden || this.stopBuyToSell(data) === 0 && this.quantityCheck() && edit && this.checkTransactions(this.state.data.sell_quantity)) {
-      axios.put(`/api/transactions/${transaction.id}`, data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
-        .then(() => this.props.history.push('/portfolio'))
-    } else if (this.quantityCheck() && !edit && this.state.isHidden || this.quantityCheck() && !edit && this.checkTransactions(this.state.data.sell_quantity)) {
-      axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
-        .then(() => this.props.history.push('/portfolio'))
-    }
+    axios.get(`https://api.nomics.com/v1/currencies/sparkline?key=cfa361e67a06d9209da08f36a340410b&start=${this.state.data.timestamp}T00%3A00%3A00Z&end=${this.state.data.timestamp}T00%3A00%3A00Z`)
+      .then(res => {
+        const lookupTable = res.data.reduce((obj, curr) => {
+          obj[curr.currency] = curr.prices[0]
+          return obj
+        }, {})
+        return this.setState({ lookupTable })
+      }).then(() => {
+        axios.get('/api/transactions')
+          .then(res => {
+            return res.data.filter(transaction => {
+              return transaction.user.id === Auth.getPayload().sub
+            })
+          }).then(transactions => {
+            return transactions.reduce((obj, curr) => {
+              obj[curr.coin.currency] = (obj[curr.coin.currency] || 0) + curr.buy_quantity - curr.sell_quantity
+              return obj
+            }, {})
+          }).then(holdings => {
+            holdings[this.state.coin1.currency] = (holdings[this.state.coin1.currency] || 0) + this.state.data.buy_quantity - this.state.data.sell_quantity
+            return holdings
+          }).then(newHoldings => {
+            return Object.keys(newHoldings).map(holdingCurrency => {
+              return parseFloat(this.state.lookupTable[holdingCurrency]) * newHoldings[holdingCurrency]
+            })
+          }).then(map => map.reduce((acc, curr) => {
+            return acc += curr
+          }, 0)).then(finalTransactionBalance => {
+            data.end_of_day_balance = finalTransactionBalance
+            if (this.stopBuyToSell(data) === 0 && this.quantityCheck() && edit && this.state.isHidden || this.stopBuyToSell(data) === 0 && this.quantityCheck() && edit && this.checkTransactions(this.state.data.sell_quantity)) {
+              axios.put(`/api/transactions/${transaction.id}`, data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
+                .then(() => this.props.history.push('/portfolio'))
+            } else if (this.quantityCheck() && !edit && this.state.isHidden || this.quantityCheck() && !edit && this.checkTransactions(this.state.data.sell_quantity)) {
+              axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
+                // .then(() => this.props.history.push('/portfolio'))
+                .then(() => console.log('new'))
+            }
+          })
+      })
+  }
+
+  testForGraph() {
+
+
   }
 
   render() {
-    console.log(this.state.data, 'data')
     const coin = this.props.location.state.coin
     const date = this.state.date
     return(
