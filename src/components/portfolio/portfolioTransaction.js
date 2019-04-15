@@ -27,15 +27,18 @@ class CoinList extends React.Component {
   render() {
     const filterByRank = this.state.search !== '' ? 10000 : 0
     return(
-      <div>
-        <div>SEARCH
-          <input
-            className="input"
-            onChange={this.handleChange}
-            value={this.state.search}
-            name="search"
-          >
-          </input>
+      <div className="search">
+        <div className="index-search">
+          <form>
+            <input
+              type="search"
+              onChange={this.handleChange}
+              value={this.state.search}
+              name="search"
+            >
+            </input>
+            <i className="fa fa-search"></i>
+          </form>
         </div>
         <table className="u-full-width">
           {this.props.nomics && this.filteredBySearch(filterByRank).map(coin => (

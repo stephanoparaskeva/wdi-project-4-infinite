@@ -40,7 +40,7 @@ class Register extends React.Component {
 
   render() {
     return(
-      <div className="container">
+      <div className="container register">
         <h2>Register</h2>
         <form onSubmit={ this.handleSubmit }>
           <div className="row">

@@ -97,12 +97,15 @@ class TransactionForm extends React.Component {
     const coin = this.props.location.state.coin
     const date = this.state.date
     return(
-      <div>
-        <p>{coin.currency}/USD</p>
+      <div className="container u-full-width">
+        <div className="row">
+          <p>{coin.currency}/USD</p>
+        </div>
         <button onClick={ this.toggleBuy }>BUY</button>
         <button onClick={ this.toggleSell }>SELL</button>
         {this.state.isHidden &&
           <BuyForm
+            className="twelve columns"
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             handleDate={this.handleDate}

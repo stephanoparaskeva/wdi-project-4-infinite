@@ -89,12 +89,14 @@ class CoinIndex extends React.Component {
                         </Link>
                       </td>
                       <td>
-                        <Link to={{
-                          pathname: '/coin',
-                          state: {coin}
-                        }}>
-                          {coin.currency}
-                        </Link>
+                        <div>
+                          <Link to={{
+                            pathname: '/coin',
+                            state: {coin}
+                          }}>
+                            {coin.currency}
+                          </Link>
+                        </div>
                       </td>
                     </tr>
                   </tbody>
