@@ -22,7 +22,7 @@ def register():
         errors['email'] = errors.get('email', []) + ['Email invalid']
 
     if not re.match(r"^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])[\w\d@#$]{6,12}$", data['password']):
-        errors['email'] = errors.get('email', []) + ['Password must contain at least one uppercase character, one lowercase and one number']
+        errors['password'] = errors.get('password', []) + ['Password must contain at least one uppercase character, one lowercase and one number']
 
     if errors:
         return jsonify(errors), 422
