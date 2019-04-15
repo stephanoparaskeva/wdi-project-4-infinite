@@ -18,6 +18,7 @@ class Transaction(db.Model, BaseModel):
     user = db.relationship('User', backref='user_transaction')
     coin_id = db.Column(db.String, db.ForeignKey('coins.id'))
     coin = db.relationship('Coin', backref='coin_transaction')
+    
 
 class TransactionSchema(ma.ModelSchema, BaseSchema):
     user = fields.Nested('UserSchema', only=('id', 'username'))

@@ -62,9 +62,10 @@ class BalanceGraph extends React.Component{
       return acc
     }, {})
     const values = Object.values(reduced)
+    console.log(values)
     const totalBalancePerDay = values.map(transactions => {
       return transactions.reduce((acc, current) => {
-        return acc += current.buy*current.buy_quantity - current.sell*current.sell_quantity
+        return acc += current.sell*current.sell_quantity - current.buy*current.buy_quantity
       }, 0)
     })
     const y = totalBalancePerDay.map((balance, i) => {

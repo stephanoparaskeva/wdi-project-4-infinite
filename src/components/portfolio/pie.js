@@ -28,6 +28,8 @@ class Pie extends React.Component {
     if(!this.props.holdings) return null
     return (
       <Plot
+        useResizeHandler
+        style={{height: '100%', width: '100%'}}
         data={[
           {
             values: this.getQuantity(),

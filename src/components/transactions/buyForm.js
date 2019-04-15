@@ -9,7 +9,6 @@ class BuyForm extends React.Component {
   }
 
   render() {
-    console.log(this.props.data, 'buy')
     return(
       <form onSubmit={ this.props.handleSubmit } className="buy-form">
         <label>

@@ -76,7 +76,6 @@ class Portfolio extends React.Component{
         })
       })
       .then(res => {
-        console.log(res)
         this.setState({ transactionRequest: res })
         return res
       })
@@ -99,6 +98,8 @@ class Portfolio extends React.Component{
         const [ userCoins, prices ] = res
         const balance = this.currencyConversion(prices, userCoins)
         this.setState({ userCoins, balance})
+        console.log(balance, 'bal')
+        console.log(this.state.original, 'org')
         return balance
       }).then(balance => {
         this.setState({change: balance - this.state.original})
