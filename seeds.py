@@ -3700,34 +3700,9 @@ with app.app_context():
     VIG = Coin(currency='VIG', full_name='TheVig', id='VIG', url='https://www.cryptocompare.com/media/33957398/vig.jpg')
     BTG = Coin(currency='BTG', full_name='Bitcoin Gold', id='BTG', url='https://www.cryptocompare.com/media/27011062/btg.png')
 
-    transaction3 = Transaction(user=stephano, buy=1000, buy_quantity=5, coin=ETH, timestamp='2015-03-18')
-    transaction2 = Transaction(user=stephano, sell=500, sell_quantity=2, coin=LTC, timestamp='2015-02-18')
-    transaction13 = Transaction(user=stephano, sell=500, sell_quantity=2, coin=BTC, timestamp='2015-02-18')
-    transaction14 = Transaction(user=stephano, sell=500, sell_quantity=2, coin=BTC, timestamp='2015-02-18')
-    transaction1 = Transaction(user=stephano, buy=1000, buy_quantity=13, coin=BTC, timestamp='2015-01-18')
-    transaction5 = Transaction(user=stephano, buy=1000, buy_quantity=6, coin=LTC, timestamp='2015-05-18')
-    transaction6 = Transaction(user=stephano, sell=500, sell_quantity=2, coin=LTC, timestamp='2015-06-18')
-    transaction15 = Transaction(user=stephano, sell=500, sell_quantity=2, coin=ETH, timestamp='2015-06-18')
-    transaction16 = Transaction(user=stephano, sell=500, sell_quantity=2, coin=BTC, timestamp='2015-06-18')
-    transaction17 = Transaction(user=stephano, sell=500, sell_quantity=2, coin=XRP, timestamp='2015-06-18')
-    transaction8 = Transaction(user=stephano, sell=500, sell_quantity=1, coin=XRP, timestamp='2015-08-18')
-    transaction4 = Transaction(user=stephano, sell=500, sell_quantity=3, coin=ETH, timestamp='2015-04-18')
-    transaction9 = Transaction(user=stephano, sell=500, buy_quantity=3, coin=LTC, timestamp='2015-09-18')
-    transaction7 = Transaction(user=stephano, buy=1000, buy_quantity=8, coin=XRP, timestamp='2015-07-18')
-    transaction10 = Transaction(user=stephano, sell=500, coin=LTC, timestamp='2015-10-18')
-    transaction11 = Transaction(user=stephano, sell=500, coin=BTC, timestamp='2015-11-18')
-    transaction12 = Transaction(user=stephano, sell=500, sell_quantity=6, coin=BTC, timestamp='2015-12-18')
 
-    transaction20 = Transaction(user=sabo, buy=200, buy_quantity=6, coin=BTC, timestamp='2016-12-18')
-    transaction21 = Transaction(user=sabo, buy=2, buy_quantity=6, coin=LTC, timestamp='2015-12-18')
-    transaction22 = Transaction(user=sabo, sell=10, sell_quantity=6, coin=ETH, timestamp='2013-12-18')
-    transaction23 = Transaction(user=sabo, sell=2, sell_quantity=3, coin=LTC, timestamp='2015-2-18')
-    transaction24 = Transaction(user=sabo, buy=10, buy_quantity=6, coin=XRP, timestamp='2015-9-18')
 
-    db.session.add_all([transaction1,
-     transaction2, transaction3, transaction4, transaction5, transaction6, transaction7,
-     transaction8, transaction9, transaction10, transaction11, transaction12, transaction13, transaction14,
-     transaction15, transaction16, transaction17, transaction20, transaction21, transaction22, transaction23, transaction24,
+    db.session.add_all([
 
 
 BTC,

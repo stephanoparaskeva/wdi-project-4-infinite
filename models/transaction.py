@@ -14,11 +14,12 @@ class Transaction(db.Model, BaseModel):
     sell = db.Column(db.Float)
     buy_quantity = db.Column(db.Float)
     sell_quantity = db.Column(db.Float)
+    end_of_day_balance = db.Column(db.Float)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', backref='user_transaction')
     coin_id = db.Column(db.String, db.ForeignKey('coins.id'))
     coin = db.relationship('Coin', backref='coin_transaction')
-    
+
 
 class TransactionSchema(ma.ModelSchema, BaseSchema):
     user = fields.Nested('UserSchema', only=('id', 'username'))

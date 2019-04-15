@@ -53,29 +53,10 @@ class BalanceGraph extends React.Component{
       if (moment(a.timestamp) > moment(b.timestamp)) return 1
       return - 1
     })
-    this.setState({x: [...new Set(sorted.map(item => item.timestamp))]})
-    const reduced = sorted.reduce((acc, obj) => {
-      const key = obj['timestamp']
-      if (!acc[key]) {
-        acc[key] = []
-      }
-      acc[key].push(obj)
-      return acc
-    }, {})
-    const values = Object.values(reduced)
-    console.log(values)
-    const totalBalancePerDay = values.map(transactions => {
-      return transactions.reduce((acc, current) => {
-        return acc += current.sell*current.sell_quantity - current.buy*current.buy_quantity
-      }, 0)
-    })
-    const y = totalBalancePerDay.map((balance, i) => {
-      if (!i) return balance
-      const newBalance =  balance = balance + totalBalancePerDay[i - 1]
-      totalBalancePerDay[i] = newBalance
-      return newBalance
-    })
-    this.setState({y})
+    const y = sorted.map(transaction => transaction.end_of_day_balance)
+    const x = sorted.map(transaction => transaction.timestamp)
+    this.setState({y, x})
+    console.log(y)
   }
 
   componentDidMount() {
