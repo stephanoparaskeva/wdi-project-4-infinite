@@ -164,10 +164,12 @@ class TransactionForm extends React.Component {
         <SellForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
+          toggleCalendar={this.toggleCalendar}
           handleDate={this.handleDate}
           data={this.state.data}
           coin={coin}
           date={date}
+          calenderOpen={this.state.calenderOpen}
         />
         }
       </div>

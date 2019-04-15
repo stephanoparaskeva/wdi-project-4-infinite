@@ -48,7 +48,7 @@ class App extends React.Component {
   }
 
   render() {
-    if(!this.state.nomics2) return <Loader />
+    if(!this.state.nomics2) return <Loader className="container u-full-width"/>
     return(
       <BrowserRouter>
         <div className="container u-full-width animated fadeIn">
