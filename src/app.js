@@ -15,6 +15,7 @@ import Register from './components/user/register'
 import Login from './components/user/login'
 import Loader from './components/loader'
 import About from './components/about'
+import Ticker from './components/ticker'
 
 
 class App extends React.Component {
@@ -48,10 +49,11 @@ class App extends React.Component {
   }
 
   render() {
-    if(!this.state.nomics2) return <Loader />
+    if(!this.state.nomics2) return <Loader className="container u-full-width"/>
     return(
       <BrowserRouter>
-        <div className="container u-full-width animated fadeIn">
+        <Ticker nomics={this.state.nomics2}/>
+        <div className="wrapper container u-full-width animated fadeIn">
           {this.state.nomics2 && <Header nomics={this.state.nomics2}/>}
           {this.state.nomics2 &&
           <Switch>

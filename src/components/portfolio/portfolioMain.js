@@ -1,27 +1,34 @@
 import React from 'react'
 import axios from 'axios'
-import Holdings from './holdings'
 import { Link } from 'react-router-dom'
+import numeral from 'numeral'
+import moment from 'moment'
 
+import Holdings from './holdings'
 import Transactions from '../transactions/transactions'
 import BalanceGraph from './balanceGraph'
 import Pie from './pie'
 import Auth from '../../lib/auth'
-import numeral from 'numeral'
-import moment from 'moment'
+import Common from'../../lib/common'
+
 
 class Portfolio extends React.Component{
   constructor(){
     super()
 
     this.state = {
-      holdingsToggle: true
+      holdingsToggle: true,
+      graphToggle: true,
+      pieToggle: true
     }
+
     this.getNomicsPrices = this.getNomicsPrices.bind(this)
     this.getTransactionQuantities = this.getTransactionQuantities.bind(this)
     this.getUserBalanceBuySell = this.getUserBalanceBuySell.bind(this)
-    this.holdingsTransactionsToggle = this.holdingsTransactionsToggle.bind(this)
-
+    this.holdingsToggle = this.holdingsToggle.bind(this)
+    this.pieToggle = this.pieToggle.bind(this)
+    this.checkPie = this.checkPie.bind(this)
+    this.checkGraph = this.checkGraph.bind(this)
   }
 
   getNomicsPrices() {
@@ -106,8 +113,23 @@ class Portfolio extends React.Component{
       })
   }
 
-  holdingsTransactionsToggle() {
+  holdingsToggle() {
     this.setState({holdingsToggle: !this.state.holdingsToggle})
+  }
+
+  pieToggle() {
+    this.setState({pieToggle: !this.state.pieToggle})
+  }
+
+  checkPie() {
+    if(this.state.pieToggle) return 'fas fa-chart-pie'
+    return 'fas fa-list-ul'
+  }
+
+  checkGraph() {
+    const transactionRequest = this.state.transactionRequest
+    if(transactionRequest.length >= 2 && !this.isDataOnSameDay())
+      return true
   }
 
   isDataOnSameDay() {
@@ -124,28 +146,40 @@ class Portfolio extends React.Component{
   }
 
   render(){
-    console.log(this.state.balance)
+    const transactionRequest = this.state.transactionRequest
+    const holdings = this.state.holdings
     return(
-      <div>
-        <h3>MAIN PORTFOLIO BALANCE</h3>
-        <p>{this.state.balance && numeral(parseFloat(this.state.balance)).format('$0,0.00') || 0}</p>
-        <div>{
-          this.state.change !== 0 && this.state.change && this.state.change > 0 && <div className="positive">{numeral(parseFloat(this.state.change)).format('+ $0,0.00') || 0}</div> ||
-          this.state.change !== 0 && this.state.change && this.state.change < 0 && <div className="negative">{numeral(parseFloat(this.state.change)).format('- $0,0.00') || 0}</div>
-        }</div>
-        <button onClick={this.holdingsTransactionsToggle} className="">My Transactions</button>
-        <Link to="/coins"><button className="">Add Transaction</button></Link>
-        {this.state.transactionRequest && this.state.transactionRequest.length >= 2 && !this.isDataOnSameDay() && <BalanceGraph transactionRequest={this.state.transactionRequest} /> }
-        {this.state.holdings && this.state.holdings.length > 0 && this.state.holdingsToggle &&
+      <div className="container portfolio">
+        <div className="row balance">
+          <h4>Balance</h4>
+          <h3>{this.state.balance && numeral(this.state.balance).format('($ 0.00 a)') || 0}</h3>
+          <p className={Common.checkBalanceChange(this.state.change)}>
+            {this.state.change ? numeral(this.state.change).format('$ 0,0.00') : '∞'}
+          </p>
+          <button onClick={this.holdingsToggle}>{this.state.holdingsToggle ? 'Transactions' : 'Holdings'}</button>
+          <Link to="/coins"><i className="fas fa-plus-circle"></i></Link>
+        </div>
+        <div className="row">
+          {transactionRequest && this.checkGraph() ? <BalanceGraph transactionRequest={transactionRequest}/> : null}
+        </div>
+        <div className="row">
+          {holdings && holdings.length > 0 && this.state.holdingsToggle &&
+            <div>
+              <i onClick={this.pieToggle} className={`${this.checkPie()} pieToggle`}></i>
+              {this.state.pieToggle &&
+              <Holdings nomics={this.props.nomics} holdings={holdings}/>
+              }
+              {!this.state.pieToggle &&
+                <Pie holdings={holdings}/>
+              }
+            </div>
+          }
+          {transactionRequest && !this.state.holdingsToggle &&
           <div>
-            <Holdings nomics={this.props.nomics} holdings={this.state.holdings} />
-            <Pie holdings={this.state.holdings}/>
+            <Transactions nomics={this.props.nomics} transactionRequest={transactionRequest} getTransactionQuantities={this.getTransactionQuantities} />
           </div>
-        }
-        {this.state.transactionRequest && !this.state.holdingsToggle &&
-          <Transactions nomics={this.props.nomics} transactionRequest={this.state.transactionRequest} getTransactionQuantities={this.getTransactionQuantities} />
-        }
-
+          }
+        </div>
       </div>
     )
   }

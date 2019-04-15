@@ -20,6 +20,10 @@
     margin-right: auto;
   }
 
+  .hide {
+    color: #1e2125;
+  }
+
   i {
     font-size: 2em;
   }
@@ -29,7 +33,7 @@
   }
 
   li {
-    padding: 0 .2em;
+    padding: 0.2em;
     &:not(:last-child)
       &:not(.logo) {
          margin-right: 10px;

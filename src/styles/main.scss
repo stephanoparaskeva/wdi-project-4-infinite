@@ -7,7 +7,9 @@
 @import '/components/loader';
 @import '/components/header';
 @import '/components/ticker';
+@import './components/portfolio';
 @import './components/search-bar';
+@import './components/register-forms';
 
 @import '/vendor/skeleton';
 @import '/vendor/animate';
@@ -18,8 +20,7 @@
 }
 
 .wrapper {
-  margin: 0 auto;
-  max-width: 960px;
+  top: 2em;
 }
 
 .content {
@@ -29,6 +30,7 @@
 .imgimg {
   width: 1em;
   height: 1em;
+  border-radius: 100%;
 }
 
 .positive {
@@ -65,4 +67,9 @@ body {
 
 .table-data {
   overflow: scroll;
+}
+
+.asset {
+  display: flex;
+  flex-direction: column;
 }
