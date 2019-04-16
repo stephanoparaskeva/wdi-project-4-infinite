@@ -57,6 +57,7 @@ class Candle extends React.Component {
   }
 
   handleTime(e) {
+    console.log(e.target)
     this.getCandleData(e.target.value)
   }
 
@@ -100,15 +101,16 @@ class Candle extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="row">
-          <button className="three columns" onClick={this.handleTime} value="7">1w</button>
-          <button className="three columns" onClick={this.handleTime} value="30">1m</button>
-          <button className="three columns" onClick={this.handleTime} value="365">1y</button>
-          <button className="three columns" onClick={this.handleTime} value="1825">5y</button>
+      <div className="candle-wrapper">
+        <div className="row time-button-wrapper">
+          <button className="time-button" onClick={this.handleTime} value="7">1w</button>
+          <button className="time-button" onClick={this.handleTime} value="30">1m</button>
+          <button className="time-button" onClick={this.handleTime} value="365">1y</button>
+          <button className="time-button" onClick={this.handleTime} value="1825">5y</button>
         </div>
         {this.state.x &&
         <Plot
+          className="candle"
           useResizeHandler
           style={{height: '100%', width: '100%'}}
           data={this.state.data}

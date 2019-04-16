@@ -1,24 +1,53 @@
 .coin-show {
 
-  .candle-graph {
-    padding-bottom: 1em;
+  .fas {
+    font-size: 3em;
+    color: #808080;
+    padding-right: .5em;
+    padding-bottom: .5em;
+
+    &:hover {
+      color: white;
+    }
   }
 
-  .coin-add {
+  .candle-graph {
+    padding-bottom: 1em;
+    }
 
+  .coin-add {
     display: flex;
     justify-content: center;
 
-    .fas {
-      font-size: 4em;
+  }
+
+  .coin-info {
+    font-weight: bold;
+  }
+}
+
+.time-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+      padding: 0;
+      line-height: -2;
+      // box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+      background: #111;
       color: #808080;
-      padding-right: .5em;
-      padding-bottom: .5em;
+      height: 3em;
+      width: 3em;
+      border: 1px solid #111;
+      border-radius: 30%;
+      margin-left: .8em;
+      margin-bottom: 0;
+      // text-align: center;
+      cursor: pointer;
+      outline: none;
 
       &:hover {
         color: white;
       }
     }
-  }
-
 }
