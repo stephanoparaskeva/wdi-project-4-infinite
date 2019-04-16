@@ -120,7 +120,7 @@ class Portfolio extends React.Component{
 
   checkGraph() {
     const transactionRequest = this.state.transactionRequest
-    if(transactionRequest.length >= 2 && !this.isDataOnSameDay())
+    if(transactionRequest.length >= 2 && !this.isDataOnSameDay() && this.state.holdings && this.state.holdings.length >= 2)
       return true
   }
 
@@ -140,6 +140,7 @@ class Portfolio extends React.Component{
   render(){
     const transactionRequest = this.state.transactionRequest
     const holdings = this.state.holdings
+    console.log(holdings)
     return(
       <div className="portfolio">
         <div className="row balance">
