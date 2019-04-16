@@ -88,11 +88,11 @@ class TransactionForm extends React.Component {
   }
 
   handleDate(date) {
-    const data = {...this.state.data, timestamp: moment(date).format('YYYY-MM-DD')}
+    const data = {...this.state.data, timestamp: moment(date).format()}
+    console.log(data)
     this.setState({
       data, date
     })
-    this.toggleCalendar()
   }
 
   toggleCalendar (e) {
@@ -124,7 +124,9 @@ class TransactionForm extends React.Component {
 
 
   handleSubmit(e) {
+    console.log('state', this.state.data.timestamp)
     const timestamp = moment(this.state.data.timestamp).format()
+    console.log(timestamp)
     e.preventDefault()
     const edit = this.props.location.state.edit
     const transaction = this.props.location.state.transaction
@@ -136,7 +138,6 @@ class TransactionForm extends React.Component {
       }
     })
       .then(res => {
-        console.log(res)
         const lookupTable = res.data.reduce((obj, curr) => {
           obj[curr.currency] = curr.prices[0]
           return obj
@@ -149,6 +150,7 @@ class TransactionForm extends React.Component {
               return transaction.user.id === Auth.getPayload().sub
             })
           }).then(filteredByUser => {
+            if (!edit) return filteredByUser
             return filteredByUser.sort((a, b) => {
               if (moment(a.timestamp) > moment(b.timestamp)) return 1
               return - 1
@@ -163,9 +165,11 @@ class TransactionForm extends React.Component {
               return obj
             }, {})
           }).then(holdings => {
+            console.log(holdings)
             holdings[this.state.coin1.currency] = (holdings[this.state.coin1.currency] || 0) + parseFloat(this.state.data.buy_quantity) - parseFloat(this.state.data.sell_quantity)
             return holdings
           }).then(newHoldings => {
+            console.log(newHoldings)
             return Object.keys(newHoldings).map(holdingCurrency => {
               return parseFloat(this.state.lookupTable[holdingCurrency]) * newHoldings[holdingCurrency]
             })
