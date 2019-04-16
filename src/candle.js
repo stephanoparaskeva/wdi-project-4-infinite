@@ -58,7 +58,6 @@ class Candle extends React.Component {
   }
 
   handleTime(e) {
-    console.log(e.target)
     this.getCandleData(e.target.value)
   }
 

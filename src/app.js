@@ -14,7 +14,6 @@ import TransactionForm from './components/transactions/transactionForm'
 import Register from './components/user/register'
 import Login from './components/user/login'
 import Loader from './components/loader'
-import About from './components/about'
 import Ticker from './components/ticker'
 
 
@@ -68,7 +67,6 @@ class App extends React.Component {
             <Route path='/transaction' component={ TransactionForm } />
             <Route path='/register' component={ Register } />
             <Route path='/login' component={ Login } />
-            <Route path='/about' component={ About } />
             <Route path="/" render={() => {
               return <CoinIndex nomics={this.state.nomics2} />
             }} />

@@ -58,7 +58,6 @@ class BalanceGraph extends React.Component{
     const y = sorted.map(transaction => transaction.end_of_day_balance)
     const x = sorted.map(transaction => transaction.timestamp)
     this.setState({y, x})
-    console.log(y, x)
   }
 
   componentDidMount() {

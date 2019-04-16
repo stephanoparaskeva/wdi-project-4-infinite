@@ -1,7 +1,6 @@
 import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
-import numeral from 'numeral'
 
 class SellForm extends React.Component {
   constructor() {
@@ -11,7 +10,6 @@ class SellForm extends React.Component {
   }
 
   render() {
-    console.log(this.props.data, 'sell')
     return(
       <div className="container transactions">
         <form onSubmit={ this.props.handleSubmit }>
