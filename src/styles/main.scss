@@ -10,6 +10,7 @@
 @import './components/portfolio';
 @import './components/search-bar';
 @import './components/register-forms';
+@import './components/coin-show';
 
 @import '/vendor/skeleton';
 @import '/vendor/animate';
@@ -41,10 +42,6 @@
   color: $color-red;
 }
 
-.delete {
-  vertical-align: middle;
-  background: red;
-}
 
 body {
   background: #1e2125;

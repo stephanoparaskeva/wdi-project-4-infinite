@@ -23,39 +23,50 @@ class Holdings extends React.Component {
     const holdings = this.props.holdings
     const nomics = this.props.nomics
     return(
-      <table className="u-full-width">
+      <table className="u-full-width holdings">
         <thead>
           <tr>
-            <th className="th"></th>
-            <th className="th"></th>
-            <th className="th middle">Holdings</th>
-            <th className="th far-right">Price</th>
+            <th></th>
+            <th>Asseet</th>
+            <th>Current Holdings</th>
+            <th>Price</th>
+            <th>% Change 24h</th>
           </tr>
         </thead>
         {this.attachHoldingsToNomics(holdings, nomics).map(coin => {
           if (coin.quantity > 0) {
             return  <tbody key={coin.rank}>
-              <tr className="tr-style">
-                <td className="img-holdings-td td"><Link to={{
-                  pathname: '/coin',
-                  state: {coin}
-                }}><img className="img-holdings" src={coin.image_url}></img></Link></td>
-                <td className="inner-td td"><ul><li className="inner-li">{coin.full_name}</li><li>{coin.currency}</li></ul><Link to={{
-                  pathname: '/coin',
-                  state: {coin}
-                }}></Link>
+              <tr>
+                <td>
+                  <Link to={{
+                    pathname: '/coin',
+                    state: {coin}
+                  }}>
+                    <img className="imgimg" src={coin.image_url} />
+                  </Link>
                 </td>
-                <td className="middle td"><Link to={{
+                <td>
+                  <Link to={{
+                    pathname: '/coin',
+                    state: {coin}
+                  }}>{coin.currency}</Link>
+                </td>
+                <td><Link to={{
                   pathname: '/coin',
                   state: {coin}
-                }}>{coin.quantity}</Link></td>
-                <td className="inner-td td">
+                }}>{coin.quantity}</Link>
+                </td>
+                <td><Link to={{
+                  pathname: '/coin',
+                  state: {coin}
+                }}>{numeral(parseFloat(coin.price)).format('$ 0,0.00') || 0}</Link></td>
+                <td>
                   {coin['1d'].price_change_pct > 0 && <p className="positive inner-p">+{coin['1d'].price_change_pct}%</p>}
                   {coin['1d'].price_change_pct < 0 && <p className="negative inner-p">{coin['1d'].price_change_pct}%</p>}
                   <Link to={{
                     pathname: '/coin',
                     state: {coin}
-                  }}>{numeral(parseFloat(coin.price)).format('$ 0,0.00') || 0}</Link></td>
+                  }}></Link></td>
               </tr>
             </tbody>
           }

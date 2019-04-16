@@ -27,39 +27,41 @@ class Pie extends React.Component {
   render() {
     if(!this.props.holdings) return null
     return (
-      <Plot
-        useResizeHandler
-        style={{height: '100%', width: '100%'}}
-        data={[
-          {
-            values: this.getQuantity(),
-            marker: {
-              colors: [
-                '#1f4c6c',
-                '#929292',
-                '#6f6666bf',
-                '#212933',
-                '#4e516fbf',
-                '#929292',
-                'rgb(0, 0, 0)',
-                'rgb(0, 0, 0)'
-              ]
-            },
-            labels: this.getCurrency(),
-            type: 'pie',
-            domain: {column: 0},
-            name: 'Holdings',
-            hoverinfo: 'label+value'
+      <div className="pie-chart u-max-full-width">
+        <Plot
+          useResizeHandler
+          style={{height: '100%', width: '100%'}}
+          data={[
+            {
+              values: this.getQuantity(),
+              marker: {
+                colors: [
+                  '#1f4c6c',
+                  '#929292',
+                  '#6f6666bf',
+                  '#212933',
+                  '#4e516fbf',
+                  '#929292',
+                  'rgb(0, 0, 0)',
+                  'rgb(0, 0, 0)'
+                ]
+              },
+              labels: this.getCurrency(),
+              type: 'pie',
+              domain: {column: 0},
+              name: 'Holdings',
+              hoverinfo: 'label+value'
+            }
+          ]}
+          layout={
+            {
+              width: 500,
+              height: 500,
+              font: {color: 'white'},
+              paper_bgcolor: '#1e2125' }
           }
-        ]}
-        layout={
-          {
-            width: 500,
-            height: 500,
-            font: {color: 'white'},
-            paper_bgcolor: '#1e2125' }
-        }
-      />
+        />
+      </div>
     )
   }
 }

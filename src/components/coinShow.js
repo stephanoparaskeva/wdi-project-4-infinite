@@ -11,29 +11,30 @@ class Coin extends React.Component {
   }
 
   render() {
-    console.log('re-render')
     const coin = this.props.location.state.coin
     return(
-      <div>
+      <div className="coin-show">
         <div className="row">
-          <h1 className="">{coin.currency}</h1>
+          <h1>{coin.currency}</h1>
+        </div>
+        <div className="row candle-graph">
+          <Candle
+            coin={ coin.currency }
+          />
+        </div>
+        <div className="row coin-add">
           <Link to={
             {
               pathname: '/transaction',
               state: { coin }
             }
-          }><button className="">Add Transaction</button></Link>
-        </div>
-        <Candle
-          coin={ coin.currency }
-        />
-        <div className="row">
-        </div>
-        <div className="row">
-          <span>Price: ${parseFloat(coin.price).toFixed(2)}</span>
-          <span>Price Change: {coin['1d'].price_change_pct}%</span>
-          <span>Market Cap: ${coin.market_cap}</span>
-          <span>Circulating Supply: {coin.circulating_supply} {coin.currency}</span>
+          }><i className="fas fa-plus-circle"></i></Link>
+          <div className="row coin-info">
+            <span>Price: ${parseFloat(coin.price).toFixed(2)}</span>
+            <span>Price Change: {coin['1d'].price_change_pct}%</span>
+            <span>Market Cap: ${coin.market_cap}</span>
+            <span>Circulating Supply: {coin.circulating_supply} {coin.currency}</span>
+          </div>
         </div>
       </div>
     )
