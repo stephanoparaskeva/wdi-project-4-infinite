@@ -94,7 +94,7 @@ class Portfolio extends React.Component{
       })
       .then(res => {
         const actual = this.getUserBalanceBuySell(res)
-        this.setState({ change: actual - this.state.balance })
+        this.setState({ change: this.state.balance - actual })
         const data = this.makeUserCoins(res)
         const holdings = []
         for (const key in data) {

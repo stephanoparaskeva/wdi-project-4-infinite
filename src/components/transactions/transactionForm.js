@@ -157,7 +157,7 @@ class TransactionForm extends React.Component {
               return obj
             }, {})
           }).then(holdings => {
-            holdings[this.state.coin1.currency] = (holdings[this.state.coin1.currency] || 0) + this.state.data.buy_quantity - this.state.data.sell_quantity
+            holdings[this.state.coin1.currency] = (holdings[this.state.coin1.currency] || 0) + parseFloat(this.state.data.buy_quantity) - parseFloat(this.state.data.sell_quantity)
             return holdings
           }).then(newHoldings => {
             return Object.keys(newHoldings).map(holdingCurrency => {
@@ -172,7 +172,6 @@ class TransactionForm extends React.Component {
                 .then(() => this.props.history.push('/portfolio'))
             } else if (this.quantityCheck() && !edit && this.state.isHidden || this.quantityCheck() && !edit && this.checkTransactions(this.state.data.sell_quantity)) {
               axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
-                
                 .then(() => console.log('new'))
             }
           })
