@@ -202,7 +202,7 @@ class TransactionForm extends React.Component {
         </div>
         {this.state.isHidden &&
           <BuyForm
-            className="twelve columns"
+            className="twelve columns transactions"
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             toggleCalendar={this.toggleCalendar}
@@ -215,6 +215,7 @@ class TransactionForm extends React.Component {
         }
         {!this.state.isHidden &&
         <SellForm
+          className="twelve columns transactions"
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           toggleCalendar={this.toggleCalendar}
