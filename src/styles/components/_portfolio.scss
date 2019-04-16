@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
+    padding-bottom: 1em;
     border-bottom: 1px solid #808080;
 
     p {
@@ -13,16 +13,48 @@
     }
   }
 
+  .balance-graph {
+    padding-bottom: 5em;
+  }
+
   .pieToggle {
     cursor: pointer;
+  }
+
+  .pie-chart {
+
   }
 
   .fas {
     font-size: 4em;
     color: #808080;
+    padding-bottom: .5em;
 
     &:hover {
       color: white;
     }
   }
+
+  .transactions {
+
+    white-space: nowrap;
+    overflow-x: scroll;
+
+    .delete {
+
+      .fas {
+        color: $color-red;
+        font-size: 2em;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .holdings {
+    text-align: center;
+
+    .fas {
+      padding-right: .5em;
+    }
+}
 }

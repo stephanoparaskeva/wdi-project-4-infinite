@@ -28,7 +28,6 @@ class Transactions extends React.Component{
   }
 
   handleDelete(e, id) {
-    console.log(this.props)
     e.preventDefault()
     axios.delete(`/api/transactions/${id}`, {
       headers: {Authorization: `Bearer ${Auth.getToken()}`}
@@ -44,18 +43,18 @@ class Transactions extends React.Component{
     const transactionRequest = this.state.transactionRequest
     console.log(transactionRequest)
     return(
-      <div>
+      <div className="transactions">
         <table className="u-full-width">
           <thead>
             <tr>
               <th></th>
               <th>Symbol</th>
-              <th>Coin</th>
-              <th>Time</th>
+              <th>Asset</th>
+              <th>Date</th>
               <th>Buy Price</th>
-              <th>Bought</th>
+              <th>Amount Purchased</th>
               <th>Sell Price</th>
-              <th>Sold</th>
+              <th>Amount Sold</th>
               <th></th>
             </tr>
           </thead>
@@ -97,7 +96,7 @@ class Transactions extends React.Component{
                     pathname: '/transaction',
                     state: {transaction, changeBuy, coin: transaction.coin, edit}
                   }}>{transaction.sell_quantity || '-'}</Link></td>
-                  <td className="delete" onClick={(e) => this.handleDelete(e, transaction.id)}>delete</td>
+                  <td className="delete" onClick={(e) => this.handleDelete(e, transaction.id)}><i className="fas fa-minus-circle"></i></td>
                 </tr>
               </tbody>
             }

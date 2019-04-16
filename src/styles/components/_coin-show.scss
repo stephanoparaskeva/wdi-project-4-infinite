@@ -1,0 +1,24 @@
+.coin-show {
+
+  .candle-graph {
+    padding-bottom: 1em;
+  }
+
+  .coin-add {
+
+    display: flex;
+    justify-content: center;
+
+    .fas {
+      font-size: 4em;
+      color: #808080;
+      padding-right: .5em;
+      padding-bottom: .5em;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
+
+}

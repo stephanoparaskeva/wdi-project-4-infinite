@@ -149,23 +149,25 @@ class Portfolio extends React.Component{
     const transactionRequest = this.state.transactionRequest
     const holdings = this.state.holdings
     return(
-      <div className="container portfolio">
+      <div className="portfolio">
         <div className="row balance">
           <h4>Balance</h4>
           <h3>{this.state.balance && numeral(this.state.balance).format('($ 0.00 a)') || 0}</h3>
           <p className={Common.checkBalanceChange(this.state.change)}>
             {this.state.change ? numeral(this.state.change).format('$ 0,0.00') : '∞'}
           </p>
-          <button onClick={this.holdingsToggle}>{this.state.holdingsToggle ? 'Transactions' : 'Holdings'}</button>
           <Link to="/coins"><i className="fas fa-plus-circle"></i></Link>
         </div>
-        <div className="row">
+        <div className="row balance-graph">
           {transactionRequest && this.checkGraph() ? <BalanceGraph transactionRequest={transactionRequest}/> : null}
         </div>
         <div className="row">
+          <div className="row">
+            <button onClick={this.holdingsToggle}>{this.state.holdingsToggle ? 'Transactions' : 'Holdings'}</button>
+          </div>
           {holdings && holdings.length > 0 && this.state.holdingsToggle &&
-            <div>
-              <i onClick={this.pieToggle} className={`${this.checkPie()} pieToggle`}></i>
+            <div className="row">
+              <i onClick={this.pieToggle} className={`${this.checkPie()} pieToggle u-pull-right`}></i>
               {this.state.pieToggle &&
               <Holdings nomics={this.props.nomics} holdings={holdings}/>
               }
@@ -175,7 +177,7 @@ class Portfolio extends React.Component{
             </div>
           }
           {transactionRequest && !this.state.holdingsToggle &&
-          <div>
+          <div className="row">
             <Transactions nomics={this.props.nomics} transactionRequest={transactionRequest} getTransactionQuantities={this.getTransactionQuantities} />
           </div>
           }
