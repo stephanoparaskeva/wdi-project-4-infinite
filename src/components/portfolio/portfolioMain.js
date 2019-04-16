@@ -89,7 +89,7 @@ class Portfolio extends React.Component{
         })
         console.log(sorted[sorted.length-1])
         this.setState({ balance: sorted[sorted.length-1].end_of_day_balance})
-        this.setState({ transactionRequest: res })
+        this.setState({ transactionRequest: sorted })
         return res
       })
       .then(res => {

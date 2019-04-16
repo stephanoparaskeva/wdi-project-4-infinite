@@ -124,8 +124,6 @@ class TransactionForm extends React.Component {
     return num
   }
 
-
-
   handleSubmit(e) {
     const timestamp = moment(this.state.data.timestamp).format()
     e.preventDefault()
@@ -172,7 +170,7 @@ class TransactionForm extends React.Component {
                 .then(() => this.props.history.push('/portfolio'))
             } else if (this.quantityCheck() && !edit && this.state.isHidden || this.quantityCheck() && !edit && this.checkTransactions(this.state.data.sell_quantity)) {
               axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
-                .then(() => console.log('new'))
+                .then(() => this.props.history.push('/portfolio'))
             }
           })
       })
