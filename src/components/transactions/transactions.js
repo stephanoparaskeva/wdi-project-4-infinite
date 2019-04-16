@@ -40,7 +40,6 @@ class Transactions extends React.Component{
 
   render(){
     const transactionRequest = this.state.transactionRequest
-    console.log(transactionRequest)
     return(
       <div className="transactions">
         <table className="u-full-width">

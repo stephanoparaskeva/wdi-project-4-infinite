@@ -89,7 +89,6 @@ class TransactionForm extends React.Component {
 
   handleDate(date) {
     const data = {...this.state.data, timestamp: moment(date).format()}
-    console.log(data)
     this.setState({
       data, date
     })
@@ -124,9 +123,7 @@ class TransactionForm extends React.Component {
 
 
   handleSubmit(e) {
-    console.log('state', this.state.data.timestamp)
     const timestamp = moment(this.state.data.timestamp).startOf('hour').format()
-    console.log(moment(this.state.data.timestamp).startOf('hour').format())
     e.preventDefault()
     const edit = this.props.location.state.edit
     const transaction = this.props.location.state.transaction
@@ -165,18 +162,15 @@ class TransactionForm extends React.Component {
               return obj
             }, {})
           }).then(holdings => {
-            console.log(holdings)
             holdings[this.state.coin1.currency] = (holdings[this.state.coin1.currency] || 0) + parseFloat(this.state.data.buy_quantity) - parseFloat(this.state.data.sell_quantity)
             return holdings
           }).then(newHoldings => {
-            console.log(newHoldings)
             return Object.keys(newHoldings).map(holdingCurrency => {
               return parseFloat(this.state.lookupTable[holdingCurrency]) * newHoldings[holdingCurrency]
             })
           }).then(map => map.reduce((acc, curr) => {
             return acc += curr
           }, 0)).then(finalTransactionBalance => {
-            console.log('finalTransactionBalance', finalTransactionBalance)
             data.end_of_day_balance = finalTransactionBalance
             if (this.stopBuyToSell(data) === 0 && this.quantityCheck() && edit && this.state.isHidden || this.stopBuyToSell(data) === 0 && this.quantityCheck() && edit && this.checkTransactions(this.state.data.sell_quantity)) {
               axios.put(`/api/transactions/${transaction.id}`, data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})

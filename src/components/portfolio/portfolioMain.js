@@ -83,7 +83,6 @@ class Portfolio extends React.Component{
           if (moment(a.timestamp) > moment(b.timestamp)) return 1
           return - 1
         })
-        console.log(sorted[sorted.length-1])
         this.setState({ balance: sorted[sorted.length-1].end_of_day_balance})
         this.setState({ transactionRequest: sorted })
         return res
@@ -129,7 +128,6 @@ class Portfolio extends React.Component{
   render(){
     const transactionRequest = this.state.transactionRequest
     const holdings = this.state.holdings
-    console.log(holdings)
     return(
       <div className="portfolio">
         <div className="row balance">
@@ -149,13 +147,7 @@ class Portfolio extends React.Component{
           </div>
           {holdings && holdings.length > 0 && this.state.holdingsToggle &&
             <div className="row">
-
-
               <Holdings nomics={this.props.nomics} holdings={holdings}/>
-
-
-
-
             </div>
           }
           {transactionRequest && !this.state.holdingsToggle &&
