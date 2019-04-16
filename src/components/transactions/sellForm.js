@@ -13,7 +13,7 @@ class SellForm extends React.Component {
   render() {
     console.log(this.props.data, 'sell')
     return(
-      <div className="container transaction">
+      <div className="container transactions">
         <form onSubmit={ this.props.handleSubmit }>
           <div className="row">
             <div className="six columns">
