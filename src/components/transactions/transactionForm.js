@@ -88,11 +88,11 @@ class TransactionForm extends React.Component {
   }
 
   handleDate(date) {
-    const data = {...this.state.data, timestamp: moment(date).format('YYYY-MM-DD')}
+    const data = {...this.state.data, timestamp: moment(date).format()}
+    console.log(data)
     this.setState({
       data, date
     })
-    this.toggleCalendar()
   }
 
   toggleCalendar (e) {
@@ -124,7 +124,9 @@ class TransactionForm extends React.Component {
 
 
   handleSubmit(e) {
+    console.log('state', this.state.data.timestamp)
     const timestamp = moment(this.state.data.timestamp).format()
+    console.log(timestamp)
     e.preventDefault()
     const edit = this.props.location.state.edit
     const transaction = this.props.location.state.transaction

@@ -50,7 +50,8 @@ class BuyForm extends React.Component {
                 onChange={this.props.handleDate}
                 value={ this.props.data.timestamp || '' }
                 isClearable={true}
-                todayButton={'Today'}
+                showTimeSelect
+                onClickOutside={this.props.toggleCalendar}
                 withPortal
                 inline
               />

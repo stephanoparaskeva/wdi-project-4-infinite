@@ -51,8 +51,9 @@ class SellForm extends React.Component {
                 onChange={this.props.handleDate}
                 value={ this.props.data.timestamp || '' }
                 isClearable={true}
-                todayButton={'Today'}
                 withPortal
+                showTimeSelect
+                onClickOutside={this.props.toggleCalendar}
                 inline
               />
             )}

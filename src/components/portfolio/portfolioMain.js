@@ -127,7 +127,7 @@ class Portfolio extends React.Component{
   isDataOnSameDay() {
     const data = this.state.transactionRequest
     if (data.length === 2) {
-      return moment(data[0].timestamp).isSame(moment(data[1].timestamp), 'day')
+      return moment(data[0].timestamp).isSame(moment(data[1].timestamp), 'minute')
     } else {
       return false
     }

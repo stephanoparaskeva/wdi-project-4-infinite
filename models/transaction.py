@@ -9,7 +9,7 @@ class Transaction(db.Model, BaseModel):
 
     __tablename__ = 'transactions'
 
-    timestamp = db.Column(db.Date)
+    timestamp = db.Column(db.DateTime)
     buy = db.Column(db.Float)
     sell = db.Column(db.Float)
     buy_quantity = db.Column(db.Float)
