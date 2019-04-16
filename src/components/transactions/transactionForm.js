@@ -124,15 +124,20 @@ class TransactionForm extends React.Component {
     return num
   }
 
-
-
   handleSubmit(e) {
+    const timestamp = moment(this.state.data.timestamp).format()
     e.preventDefault()
     const edit = this.props.location.state.edit
     const transaction = this.props.location.state.transaction
     const data = {...this.state.data}
-    axios.get(`https://api.nomics.com/v1/currencies/sparkline?key=cfa361e67a06d9209da08f36a340410b&start=${this.state.data.timestamp}T00%3A00%3A00Z&end=${this.state.data.timestamp}T00%3A00%3A00Z`)
+    axios.get('/api/nomics/graph', {
+      params: {
+        start: timestamp,
+        end: timestamp
+      }
+    })
       .then(res => {
+        console.log(res)
         const lookupTable = res.data.reduce((obj, curr) => {
           obj[curr.currency] = curr.prices[0]
           return obj
@@ -150,7 +155,7 @@ class TransactionForm extends React.Component {
               return obj
             }, {})
           }).then(holdings => {
-            holdings[this.state.coin1.currency] = (holdings[this.state.coin1.currency] || 0) + this.state.data.buy_quantity - this.state.data.sell_quantity
+            holdings[this.state.coin1.currency] = (holdings[this.state.coin1.currency] || 0) + parseFloat(this.state.data.buy_quantity) - parseFloat(this.state.data.sell_quantity)
             return holdings
           }).then(newHoldings => {
             return Object.keys(newHoldings).map(holdingCurrency => {
@@ -165,8 +170,7 @@ class TransactionForm extends React.Component {
                 .then(() => this.props.history.push('/portfolio'))
             } else if (this.quantityCheck() && !edit && this.state.isHidden || this.quantityCheck() && !edit && this.checkTransactions(this.state.data.sell_quantity)) {
               axios.post('/api/transactions', data, { headers: {Authorization: `Bearer ${Auth.getToken()}`}})
-                // .then(() => this.props.history.push('/portfolio'))
-                .then(() => console.log('new'))
+                .then(() => this.props.history.push('/portfolio'))
             }
           })
       })
