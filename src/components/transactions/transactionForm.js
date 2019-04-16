@@ -36,8 +36,6 @@ class TransactionForm extends React.Component {
   }
 
   componentDidMount() {
-    this.testForGraph()
-
     axios.get('/api/transactions')
       .then(res => {
         return res.data.filter(transaction => {
@@ -102,7 +100,6 @@ class TransactionForm extends React.Component {
     this.setState({calenderOpen: !this.state.calenderOpen})
   }
 
-
   checkTransactions(sellQuantity) {
     const filtered = this.state.transactions.filter(transaction => transaction.coin !== null && transaction.coin.currency === this.props.location.state.coin.currency)
     const quantity = filtered.reduce((acc, curr) => acc += curr.buy_quantity - curr.sell_quantity, 0)
@@ -123,6 +120,8 @@ class TransactionForm extends React.Component {
     }
     return num
   }
+
+
 
   handleSubmit(e) {
     const timestamp = moment(this.state.data.timestamp).format()
@@ -149,8 +148,13 @@ class TransactionForm extends React.Component {
             return res.data.filter(transaction => {
               return transaction.user.id === Auth.getPayload().sub
             })
-          }).then(transactions => {
-            return transactions.reduce((obj, curr) => {
+          }).then(filteredByUser => {
+            return filteredByUser.sort((a, b) => {
+              if (moment(a.timestamp) > moment(b.timestamp)) return 1
+              return - 1
+            })
+          }).then(filteredByDate => {
+            return filteredByDate.reduce((obj, curr) => {
               obj[curr.coin.currency] = (obj[curr.coin.currency] || 0) + curr.buy_quantity - curr.sell_quantity
               return obj
             }, {})
@@ -176,10 +180,6 @@ class TransactionForm extends React.Component {
       })
   }
 
-  testForGraph() {
-
-
-  }
 
   render() {
     const coin = this.props.location.state.coin

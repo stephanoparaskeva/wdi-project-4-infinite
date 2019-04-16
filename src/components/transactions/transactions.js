@@ -18,7 +18,6 @@ class Transactions extends React.Component{
     this.sortByDate()
   }
 
-
   sortByDate() {
     const sorted = this.props.transactionRequest.sort((a, b) => {
       if (moment(a.timestamp) > moment(b.timestamp)) return -1
