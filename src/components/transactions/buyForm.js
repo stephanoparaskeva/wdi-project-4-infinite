@@ -10,6 +10,7 @@ class BuyForm extends React.Component {
   }
 
   render() {
+    console.log(this.props.data, 'buy')
     return(
       <div className="container transaction">
         <form onSubmit={ this.props.handleSubmit }>

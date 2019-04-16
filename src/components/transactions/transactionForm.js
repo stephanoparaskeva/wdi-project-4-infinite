@@ -153,6 +153,10 @@ class TransactionForm extends React.Component {
               if (moment(a.timestamp) > moment(b.timestamp)) return 1
               return - 1
             })
+          }).then(sorted => {
+            return sorted.filter(item => {
+              return moment(item.timestamp).format() < moment(timestamp).format()
+            })
           }).then(filteredByDate => {
             return filteredByDate.reduce((obj, curr) => {
               obj[curr.coin.currency] = (obj[curr.coin.currency] || 0) + curr.buy_quantity - curr.sell_quantity
