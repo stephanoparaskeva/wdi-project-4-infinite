@@ -64,6 +64,7 @@ class App extends React.Component {
               return <PortfolioTransaction nomics={this.state.nomics2} />
             }} />
             <Route path='/coin' component={ CoinShow } />
+            <Route path='/loader' component={ Loader } />
             <Route path='/transaction' component={ TransactionForm } />
             <Route path='/register' component={ Register } />
             <Route path='/login' component={ Login } />
