@@ -144,7 +144,7 @@ class Portfolio extends React.Component{
           {transactionRequest && this.checkGraph() ? <BalanceGraph transactionRequest={transactionRequest}/> : null}
         </div>
         <div className="row">
-          <div className="row">
+          <div className="row holdings-toggle">
             <button onClick={this.holdingsToggle}>{this.state.holdingsToggle ? 'Transactions' : 'Holdings'}</button>
           </div>
           {holdings && holdings.length > 0 && this.state.holdingsToggle &&
@@ -152,7 +152,7 @@ class Portfolio extends React.Component{
 
 
               <Holdings nomics={this.props.nomics} holdings={holdings}/>
-              
+
 
 
 

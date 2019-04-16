@@ -30,12 +30,14 @@ class Coin extends React.Component {
             coin={ coin.currency }
           />
         </div>
-        <Link to={
-          {
-            pathname: '/transaction',
-            state: { coin }
-          }
-        }><i className="fas fa-plus-circle"></i></Link>
+        <div className="row coin-add">
+          <Link to={
+            {
+              pathname: '/transaction',
+              state: { coin }
+            }
+          } ><i className="fas fa-plus-circle"></i></Link>
+        </div>
       </div>
     )
   }
