@@ -38,7 +38,7 @@ class SellForm extends React.Component {
           <div className="row">
             <label htmlFor="date">Date</label>
             <button
-              className="twelve columns"
+              className="twelve columns sell"
               onClick={this.props.toggleCalendar}>
               {moment(this.props.data.timestamp).format('DD-MM-YYYY')}
             </button>
@@ -59,7 +59,7 @@ class SellForm extends React.Component {
           </div>
           <div className="row">
             <div className="twelve columns">
-              <button className="u-full-width">Add Transaction</button>
+              <button className="u-full-width sell">Add Transaction</button>
             </div>
           </div>
         </form>

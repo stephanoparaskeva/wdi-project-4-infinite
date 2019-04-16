@@ -224,6 +224,16 @@ input[type="button"].button-primary:focus {
   // border-color: #1EAEDB;
 }
 
+.buy {
+    color: $color-green;
+    border: 2px solid $color-green;
+  }
+
+.sell {
+    color: $color-red;
+    border: 2px solid $color-red;
+  }
+
 
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

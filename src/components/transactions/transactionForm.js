@@ -191,8 +191,8 @@ class TransactionForm extends React.Component {
       <div className="container">
         <h4>{coin.currency}</h4>
         <div className="row container">
-          <button onClick={ this.toggleBuy } className="six columns">BUY</button>
-          <button onClick={ this.toggleSell } className="six columns">SELL</button>
+          <button onClick={ this.toggleBuy } className="six columns buy">BUY</button>
+          <button onClick={ this.toggleSell } className="six columns sell">SELL</button>
         </div>
         {this.state.isHidden &&
           <BuyForm
