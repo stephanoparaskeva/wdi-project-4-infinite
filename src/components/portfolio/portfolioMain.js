@@ -83,12 +83,18 @@ class Portfolio extends React.Component{
         })
       })
       .then(res => {
+        const sorted = res.sort((a, b) => {
+          if (moment(a.timestamp) > moment(b.timestamp)) return 1
+          return - 1
+        })
+        console.log(sorted[sorted.length-1])
+        this.setState({ balance: sorted[sorted.length-1].end_of_day_balance})
         this.setState({ transactionRequest: res })
         return res
       })
       .then(res => {
-        const original = this.getUserBalanceBuySell(res)
-        this.setState({ original })
+        const actual = this.getUserBalanceBuySell(res)
+        this.setState({ change: actual - this.state.balance })
         const data = this.makeUserCoins(res)
         const holdings = []
         for (const key in data) {
@@ -96,20 +102,6 @@ class Portfolio extends React.Component{
           holdings.push(temp)
         }
         this.setState({holdings})
-        return this.makeUserCoins(res)
-      })
-      .then((userCoins) => {
-        return Promise.all([userCoins, this.getNomicsPrices()])
-      })
-      .then(res => {
-        const [ userCoins, prices ] = res
-        const balance = this.currencyConversion(prices, userCoins)
-        this.setState({ userCoins, balance})
-        console.log(balance, 'bal')
-        console.log(this.state.original, 'org')
-        return balance
-      }).then(balance => {
-        this.setState({change: balance - this.state.original})
       })
   }
 
