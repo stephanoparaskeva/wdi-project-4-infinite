@@ -7,7 +7,7 @@ class Common {
   }
 
   static checkBalanceChange(balance) {
-    if(balance >= 0) {
+    if(balance > 0) {
       return 'up'
     }
     return 'down'
