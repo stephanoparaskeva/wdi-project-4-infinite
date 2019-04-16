@@ -60,13 +60,14 @@ class Holdings extends React.Component {
                   pathname: '/coin',
                   state: {coin}
                 }}>{numeral(parseFloat(coin.price)).format('$ 0,0.00') || 0}</Link></td>
-                <td>
-                  {coin['1d'].price_change_pct > 0 && <p className="positive inner-p">+{coin['1d'].price_change_pct}%</p>}
-                  {coin['1d'].price_change_pct < 0 && <p className="negative inner-p">{coin['1d'].price_change_pct}%</p>}
-                  <Link to={{
-                    pathname: '/coin',
-                    state: {coin}
-                  }}></Link></td>
+                {coin['1d'].price_change_pct > 0 &&  <td className="positive"> <Link to={{
+                  pathname: '/coin',
+                  state: {coin}
+                }}>+{coin['1d'].price_change_pct}%</Link></td>}
+                {coin['1d'].price_change_pct < 0 && <td className="negative"><Link to={{
+                  pathname: '/coin',
+                  state: {coin}
+                }}> {coin['1d'].price_change_pct}%/</Link></td>}
               </tr>
             </tbody>
           }

@@ -95,7 +95,7 @@ class Transactions extends React.Component{
                     pathname: '/transaction',
                     state: {transaction, changeBuy, coin: transaction.coin, edit}
                   }}>{transaction.sell_quantity || '-'}</Link></td>
-                  <td className="delete" onClick={(e) => this.handleDelete(e, transaction.id)}><i className="fas fa-minus-circle"></i></td>
+                  <td className="delete" onClick={(e) => this.handleDelete(e, transaction.id)}>delete</td>
                 </tr>
               </tbody>
             }

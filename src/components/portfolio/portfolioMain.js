@@ -7,7 +7,6 @@ import moment from 'moment'
 import Holdings from './holdings'
 import Transactions from '../transactions/transactions'
 import BalanceGraph from './balanceGraph'
-import Pie from './pie'
 import Auth from '../../lib/auth'
 import Common from'../../lib/common'
 
@@ -18,16 +17,13 @@ class Portfolio extends React.Component{
 
     this.state = {
       holdingsToggle: true,
-      graphToggle: true,
-      pieToggle: true
+      graphToggle: true
     }
 
     this.getNomicsPrices = this.getNomicsPrices.bind(this)
     this.getTransactionQuantities = this.getTransactionQuantities.bind(this)
     this.getUserBalanceBuySell = this.getUserBalanceBuySell.bind(this)
     this.holdingsToggle = this.holdingsToggle.bind(this)
-    this.pieToggle = this.pieToggle.bind(this)
-    this.checkPie = this.checkPie.bind(this)
     this.checkGraph = this.checkGraph.bind(this)
   }
 
@@ -109,18 +105,11 @@ class Portfolio extends React.Component{
     this.setState({holdingsToggle: !this.state.holdingsToggle})
   }
 
-  pieToggle() {
-    this.setState({pieToggle: !this.state.pieToggle})
-  }
 
-  checkPie() {
-    if(this.state.pieToggle) return 'fas fa-chart-pie'
-    return 'fas fa-list-ul'
-  }
 
   checkGraph() {
     const transactionRequest = this.state.transactionRequest
-    if(transactionRequest.length >= 2 && !this.isDataOnSameDay())
+    if(transactionRequest.length >= 2 && !this.isDataOnSameDay() && this.state.holdings && this.state.holdings.length >= 2)
       return true
   }
 
@@ -140,6 +129,7 @@ class Portfolio extends React.Component{
   render(){
     const transactionRequest = this.state.transactionRequest
     const holdings = this.state.holdings
+    console.log(holdings)
     return(
       <div className="portfolio">
         <div className="row balance">
@@ -159,13 +149,13 @@ class Portfolio extends React.Component{
           </div>
           {holdings && holdings.length > 0 && this.state.holdingsToggle &&
             <div className="row">
-              <i onClick={this.pieToggle} className={`${this.checkPie()} pieToggle u-pull-right`}></i>
-              {this.state.pieToggle &&
+
+
               <Holdings nomics={this.props.nomics} holdings={holdings}/>
-              }
-              {!this.state.pieToggle &&
-                <Pie holdings={holdings}/>
-              }
+              
+
+
+
             </div>
           }
           {transactionRequest && !this.state.holdingsToggle &&

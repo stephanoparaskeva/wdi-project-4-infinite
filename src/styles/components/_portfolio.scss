@@ -41,12 +41,9 @@
     overflow-x: scroll;
 
     .delete {
-
-      .fas {
-        color: $color-red;
-        font-size: 2em;
-        cursor: pointer;
-      }
+      background-color: red;
+      vertical-align: middle;
+      padding-right: 1em;
     }
   }
 
