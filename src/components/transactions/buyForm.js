@@ -50,6 +50,7 @@ class BuyForm extends React.Component {
                 onChange={this.props.handleDate}
                 value={ this.props.data.timestamp || '' }
                 isClearable={true}
+                timeIntervals={60}
                 showTimeSelect
                 onClickOutside={this.props.toggleCalendar}
                 withPortal
