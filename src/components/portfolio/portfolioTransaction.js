@@ -11,6 +11,10 @@ class CoinList extends React.Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
+  stopSubmit(e) {
+    e.preventDefault()
+  }
+
   handleChange(e) {
     this.setState({ search: e.target.value })
   }
@@ -28,7 +32,7 @@ class CoinList extends React.Component {
     return(
       <div className="search">
         <div className="index-search">
-          <form>
+          <form onSubmit={this.stopSubmit}>
             <input
               type="search"
               onChange={this.handleChange}

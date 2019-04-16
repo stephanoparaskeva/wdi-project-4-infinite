@@ -21,6 +21,10 @@ class CoinIndex extends React.Component {
     this.handleTime = this.handleTime.bind(this)
   }
 
+  stopSumbit(e) {
+    e.preventDefault()
+  }
+
   handleChange(e) {
     this.setState({ search: e.target.value })
   }
@@ -46,7 +50,7 @@ class CoinIndex extends React.Component {
         <div className="row">
           <h2>Markets</h2>
           <div className="search">
-            <form>
+            <form onSubmit={this.stopSumbit}>
               <input
                 type="search"
                 onChange={this.handleChange}
