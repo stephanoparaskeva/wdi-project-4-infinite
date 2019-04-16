@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Auth from '../../lib/auth'
-import Flash from '../../lib/flash'
 
 class Login extends React.Component {
   constructor() {
@@ -31,8 +30,6 @@ class Login extends React.Component {
     e.preventDefault()
     axios.post('/api/login', this.state.data)
       .then(res => {
-        Auth.setToken(res.data.token)
-        Flash.setMessage('success', res.data.message)
         Auth.setToken(res.data.token)
 
       }).then(() => this.props.history.push('/'))

@@ -136,7 +136,6 @@ class TransactionForm extends React.Component {
       }
     })
       .then(res => {
-        console.log(res)
         const lookupTable = res.data.reduce((obj, curr) => {
           obj[curr.currency] = curr.prices[0]
           return obj
@@ -149,20 +148,24 @@ class TransactionForm extends React.Component {
               return transaction.user.id === Auth.getPayload().sub
             })
           }).then(filteredByUser => {
+            if (filteredByUser.length < 1) return filteredByUser
             return filteredByUser.sort((a, b) => {
               if (moment(a.timestamp) > moment(b.timestamp)) return 1
               return - 1
             })
           }).then(sorted => {
+            if (sorted.length < 1) return sorted
             return sorted.filter(item => {
               return moment(item.timestamp).format() < moment(timestamp).format()
             })
           }).then(filteredByDate => {
+            if (filteredByDate.length < 1) return filteredByDate
             return filteredByDate.reduce((obj, curr) => {
               obj[curr.coin.currency] = (obj[curr.coin.currency] || 0) + curr.buy_quantity - curr.sell_quantity
               return obj
             }, {})
           }).then(holdings => {
+            if (holdings.length < 1) holdings = {}
             holdings[this.state.coin1.currency] = (holdings[this.state.coin1.currency] || 0) + parseFloat(this.state.data.buy_quantity) - parseFloat(this.state.data.sell_quantity)
             return holdings
           }).then(newHoldings => {

@@ -27,7 +27,6 @@ class Candle extends React.Component {
       },
       paper_bgcolor: '#111',
       plot_bgcolor: '#111',
-      dragmode: 'zoom',
       margin: {
         r: 10,
         t: 15,
@@ -36,6 +35,7 @@ class Candle extends React.Component {
       },
       showlegend: false,
       xaxis: {
+        fixedrange: true,
         showgrid: false,
         autorange: true,
         domain: [0, 1],
@@ -43,6 +43,7 @@ class Candle extends React.Component {
         zeroline: false
       },
       yaxis: {
+        fixedrange: true,
         showlegend: false,
         showgrid: false,
         autorange: true,

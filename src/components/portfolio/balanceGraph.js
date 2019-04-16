@@ -30,6 +30,7 @@ class BalanceGraph extends React.Component{
       },
       showlegend: false,
       xaxis: {
+        fixedrange: true,
         showgrid: false,
         autorange: true,
         domain: [0, 1],
@@ -37,6 +38,7 @@ class BalanceGraph extends React.Component{
         zeroline: false
       },
       yaxis: {
+        fixedrange: true,
         showlegend: false,
         showgrid: false,
         autorange: true,
