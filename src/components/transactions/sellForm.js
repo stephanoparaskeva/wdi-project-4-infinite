@@ -1,6 +1,7 @@
 import React from 'react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
+import numeral from 'numeral'
 
 class SellForm extends React.Component {
   constructor() {
@@ -22,7 +23,7 @@ class SellForm extends React.Component {
                 onChange={ this.props.handleChange }
                 name="sell"
                 type="number"
-                value={ this.props.data.sell || ''}
+                value={ parseFloat(this.props.data.sell) || ''}
               />
             </div>
             <div className="six columns">
@@ -32,7 +33,7 @@ class SellForm extends React.Component {
                 onChange={ this.props.handleChange }
                 name="sell_quantity"
                 type="number"
-                value={ this.props.data.sell_quantity || '' }
+                value={ parseFloat(this.props.data.sell_quantity) || '' }
               />
             </div>
           </div>

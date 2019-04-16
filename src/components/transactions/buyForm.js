@@ -21,7 +21,7 @@ class BuyForm extends React.Component {
                 onChange={ this.props.handleChange }
                 name="buy"
                 type="number"
-                value={ this.props.data.buy || ''}
+                value={ parseFloat(this.props.data.buy) || ''}
               />
             </div>
             <div className="six columns">
@@ -31,7 +31,7 @@ class BuyForm extends React.Component {
                 onChange={ this.props.handleChange }
                 name="buy_quantity"
                 type="number"
-                value={ this.props.data.buy_quantity || '' }
+                value={ parseFloat(this.props.data.buy_quantity) || '' }
               />
             </div>
           </div>

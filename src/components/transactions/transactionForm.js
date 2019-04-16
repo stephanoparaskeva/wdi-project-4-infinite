@@ -82,7 +82,7 @@ class TransactionForm extends React.Component {
   }
 
   handleChange({ target: {name, value}}) {
-    const data = {...this.state.data, [name]: parseFloat(value) || ''}
+    const data = {...this.state.data, [name]: value || ''}
     const errors = {...this.state.errors, [name]: ''}
     this.setState({ data, errors })
   }
