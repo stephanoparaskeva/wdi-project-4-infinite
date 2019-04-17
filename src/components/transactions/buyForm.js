@@ -54,6 +54,7 @@ class BuyForm extends React.Component {
                 onClickOutside={this.props.toggleCalendar}
                 withPortal
                 inline
+                calendarClassName="calendar"
               />
             )}
           </div>

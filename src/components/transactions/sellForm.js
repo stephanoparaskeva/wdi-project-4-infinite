@@ -54,6 +54,7 @@ class SellForm extends React.Component {
                 showTimeSelect
                 onClickOutside={this.props.toggleCalendar}
                 inline
+                calendarClassName="calendar"
               />
             )}
           </div>
