@@ -124,6 +124,7 @@ class TransactionForm extends React.Component {
 
   handleSubmit(e) {
     const timestamp = moment(this.state.data.timestamp).startOf('hour').format()
+    console.log(timestamp)
     e.preventDefault()
     const edit = this.props.location.state.edit
     const transaction = this.props.location.state.transaction

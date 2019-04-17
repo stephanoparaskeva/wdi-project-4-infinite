@@ -79,6 +79,7 @@ class Portfolio extends React.Component{
         })
       })
       .then(res => {
+        if (res.length === 0) return 0
         const sorted = res.sort((a, b) => {
           if (moment(a.timestamp) > moment(b.timestamp)) return 1
           return - 1
@@ -88,6 +89,11 @@ class Portfolio extends React.Component{
         return res
       })
       .then(res => {
+        console.log(res)
+        if (res === 0) {
+          this.setState({ balance: 0, change: 0})
+          return
+        }
         const actual = this.getUserBalanceBuySell(res)
         this.setState({ change: this.state.balance - actual })
         const data = this.makeUserCoins(res)
@@ -108,7 +114,7 @@ class Portfolio extends React.Component{
 
   checkGraph() {
     const transactionRequest = this.state.transactionRequest
-    if(transactionRequest.length >= 2 && !this.isDataOnSameDay() && this.state.holdings && this.state.holdings.length >= 2)
+    if(transactionRequest.length >= 2 && !this.isDataOnSameDay() && this.state.holdings)
       return true
   }
 

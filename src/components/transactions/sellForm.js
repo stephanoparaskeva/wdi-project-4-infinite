@@ -38,7 +38,7 @@ class SellForm extends React.Component {
           <div className="row">
             <label htmlFor="date">Date</label>
             <button
-              className="twelve columns sell"
+              className="twelve columns"
               onClick={this.props.toggleCalendar}>
               {moment(this.props.data.timestamp).format('DD-MM-YYYY')}
             </button>
