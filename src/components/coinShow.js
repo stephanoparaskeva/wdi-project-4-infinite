@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Auth from '../lib/auth'
 import Candle from '../candle'
 import Common from '../lib/common'
 import numeral from 'numeral'
@@ -30,7 +31,7 @@ class Coin extends React.Component {
             coin={ coin.currency }
           />
         </div>
-        <div className="row coin-add">
+        {Auth.isAuthenticated() && <div className="row coin-add">
           <Link to={
             {
               pathname: '/transaction',
@@ -38,6 +39,7 @@ class Coin extends React.Component {
             }
           } ><i className="fas fa-plus-circle"></i></Link>
         </div>
+        }
       </div>
     )
   }
