@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom'
 import numeral from 'numeral'
 
 import Common from '../lib/common'
-// <button className="three columns" onClick={this.handleTime} value="1d">1d</button>
-// <button className="three columns" onClick={this.handleTime} value="7d">1w</button>
-// <button className="three columns" onClick={this.handleTime} value="30d">1m</button>
-// <button className="three columns" onClick={this.handleTime} value="365d">1y</button>
 
 class CoinIndex extends React.Component {
   constructor() {
