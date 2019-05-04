@@ -90,8 +90,7 @@ class Candle extends React.Component {
           increasing: {line: {color: '#00b86c'}},
           type: 'candlestick',
           xaxis: 'x',
-          yaxis: 'y',
-          hoverinfo: 'none'
+          yaxis: 'y'
         }
       })).then(data => this.setState({data}))
       .catch(err => console.log(err))
