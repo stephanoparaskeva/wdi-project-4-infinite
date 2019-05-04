@@ -8,7 +8,8 @@ class BalanceGraph extends React.Component{
     this.state = {
       type: 'scatter',
       mode: 'lines',
-      fill: 'tonexty'
+      fill: 'tonexty',
+      hoverinfo: 'none'
     }
     this.sortTransactionTimestamps = this.sortTransactionTimestamps.bind(this)
 
