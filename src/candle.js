@@ -20,6 +20,7 @@ class Candle extends React.Component {
     }
 
     this.layout = {
+      dragmode: false,
       font: {
         family: 'arial, monospace',
         size: 10,
