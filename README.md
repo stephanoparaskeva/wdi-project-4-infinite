@@ -131,4 +131,4 @@ The aforementioned user portfolio page displays a graph of the users transaction
 ### Process:
 This was a team based project where I worked with one other developer. [Stephen Sabo](https://github.com/SaboHimself). We worked together using Version-Control via Git on GitHub where Stephen was the Git master. Both of us would communicate on what we were doing at each point in time. We'd handle any Git conflicts together and discuss what we wanted to keep and what we didn't. We both seperated responsibilites and gave eachother feedback. Where we were confused, we'd consult eachother for advice. Features were created on separate git branches before being merged into the development branch.
 
-This was a group project with one other developer, Caoimhe Clarke. We used Trello to manage the project and performed daily stand-ups. Features were prioritised using the MoSCoW method. Features were created on separate git branches before being merged into the development branch.
+
