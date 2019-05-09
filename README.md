@@ -40,7 +40,7 @@ A cryptocurrency portfolio tracker with real-time price change data and candle g
 ![](https://i.imgur.com/SWtIxZL.png?1)
 
 2. Once a coin is clicked, a show page of the coin with it's details magnified is rendered. A candle graph charted via Plotly.js is also rendered. To acheive this, the symbol of the coin the user previously selected is transferred to the state of the linked component (show page) and then passed down via props to the candle graph component. 
-![](https://i.imgur.com/LCASC4M.png)
+![](https://i.imgur.com/LCASC4M.png) /newline
 This is then used as part of the query in an Axios request to the external API (Nomics) in the graph component, where the data is then used for the axis of the graph.
 ![](https://i.imgur.com/uO9AeBz.png)
 And finally the coin show page is rendered. Additionally there are buttons to select timeframes for the historical data (1w, 1m, 1y, 5y) where each button selected sends a new request.
