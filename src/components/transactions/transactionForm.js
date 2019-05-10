@@ -124,7 +124,6 @@ class TransactionForm extends React.Component {
 
   handleSubmit(e) {
     const timestamp = moment(this.state.data.timestamp).startOf('hour').format()
-    console.log(timestamp)
     e.preventDefault()
     const edit = this.props.location.state.edit
     const transaction = this.props.location.state.transaction
@@ -170,6 +169,7 @@ class TransactionForm extends React.Component {
               return parseFloat(this.state.lookupTable[holdingCurrency]) * newHoldings[holdingCurrency]
             })
           }).then(map => map.reduce((acc, curr) => {
+            console.log('map',map)
             return acc += curr
           }, 0)).then(finalTransactionBalance => {
             data.end_of_day_balance = finalTransactionBalance
