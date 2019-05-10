@@ -1,4 +1,4 @@
-# General Assembly WDI Project 4
+# General Assembly WDI Project 4 ![](https://ga-core.s3.amazonaws.com/production/uploads/program/default_image/9142/thumb_CMYK-Red_Small_GeneralAssembly-Cog.png)
 ## Infinite
 ![](https://media.giphy.com/media/llCNvZSV4KK7NksgdQ/giphy.gif)
 ___
@@ -258,7 +258,7 @@ attachCoinToNomics() {
 
 ### Future Features:
 
-Features we would like to add, include:
+*Features we would like to add, include:*
 
 * More user feedback, as the site should let the user know if they successfully log in, register or if these things where unsuccessful and why. Whether a transaction was successful or why it was not.
 
@@ -269,3 +269,5 @@ Features we would like to add, include:
 * A coin index with data that updates more regularly, as currently it is the daily prices.
 
 ### Key Learnings:
+
+This project was a very holistic learning experience for myself. Full of realisations on how to do things better in the future. It has taught me the necessity of a robust back-end architecture, as I learned fast that having a stronger foundation would have reduced and refactored a lot of work that should not have been required later on. It taught me further, how to truly utilise my basic programming tools. Dealing with such vast amounts of data meant that I repetitively got to use the stretch of my knowledge. Map, reduce, filter, sort. Constantly writing code and then re-writing after finding a better solution. And lastly this project put my team-working ability to the test. As the challenges were big, myself and my teammate had to become closer and really scrutinise each others work, while pushing each other to achieve more. Overall I enjoyed working on this project a lot and will carry what I learned over to what I work on next. 
