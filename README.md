@@ -1,19 +1,21 @@
-# General Assembly WDI Project 4 ![](https://ga-core.s3.amazonaws.com/production/uploads/program/default_image/9142/thumb_CMYK-Red_Small_GeneralAssembly-Cog.png)
+# General Assembly WDI Project 4
 ## Infinite
+[Deployed project](http://crypto-infinite.herokuapp.com)
+
 ![](https://media.giphy.com/media/llCNvZSV4KK7NksgdQ/giphy.gif)
 ___
 ### Overview:
 A cryptocurrency portfolio tracker with real-time price change data and candle graphs. The user can make transactions, see their balance and a graph of their balance over time based on the coins they own.
 ___
 ### Timeframe:
-    9 days
+    8 days
 ### The Brief:
 
-* **Build a full-stack application** by making your own backend and your own front-end
-* **Use a Python Flask API** to serve your data from a Postgres database
-* **Consume your API with a separate front-end** built with React
-* **Be a complete product** which most likely means multiple relationships and CRUD functionality for at least a couple of models
-* **Implement thoughtful user stories/wireframes** that are significant enough to help you know which features are core MVP and which you can cut
+* **Build a full-stack application** by making your own backend and your own front-end.
+* **Use a Python Flask API** to serve your data from a PostgreSQL database.
+* **Consume your API with a separate front-end** built with React.
+* **Be a complete product** which most likely means multiple relationships and CRUD functionality for at least a couple of models.
+* **Implement thoughtful user stories/wireframes** that are significant enough to help you know which features are core MVP and which you can cut.
 * **Have a visually impressive design** to kick your portfolio up a notch and have something to wow future clients & employers. **ALLOW** time for this.
 * **Be deployed online** so it's publicly accessible.
 
@@ -33,7 +35,7 @@ ___
 
 ### Walkthrough:
 
-1. The Markets page is an index of the top 50 cryptocurrencies by rank. It presents a table of the Rank, Symbol, Price, Change, ATH, Market Cap, Circulating Supply and Max supply of each coin. On mobile, half of the table is scrollable on the X axis.
+1. The Markets page is an index of the top 50 cryptocurrencies by rank, it features a search bar that searches for over 1500 cryptocurrencies. The page presents a table of the Rank, Symbol, Price, Change, ATH, Market Cap, Circulating Supply and Max supply of each coin. On mobile, half of the table is scrollable on the X axis.
 
  ![](https://i.imgur.com/SWtIxZL.png?1)
 
@@ -78,7 +80,7 @@ This is then used as part of the query in an Axios request to the external API (
 
  ![](https://i.imgur.com/jka6FeJ.png?1)
 
-3. Steps 1 and 2 highlight the limit of functionality for users that are not registered and logged in to the app. Login and register are both are accessed via the door icon in the top right of the header). Once logged in, the user can access their personal portfolio via a new icon of a graph that appears in the header.
+3. Steps 1 and 2 are the limit of functionality for users that are not registered and logged in to the app. Login and register are both accessed via the door icon in the top right of the header). Once logged in, the user can access their personal portfolio via a new icon of a graph that appears in the header.
 
  ![](https://i.imgur.com/iajeTNc.png)
 
@@ -228,7 +230,7 @@ Going forward, I would have added this to my models originally.
 
 The biggest blocker for me was the portfolio graph. I had found it hard to graph the user balance over time as the balance depends on the price of multiple cryptocurrencies at once. Where each coin that the user holds will have a price that changes independently of another. This created much confusion in how to actually create the graph. It was not until later in the project where myself and my teammate broke the problem down step-by-step and arrived at possible solution.
 
-A win for the app was the extensive seed file I managed to create, utilising key-board commands and using functions I managed to build a giant string of coins with images using a second API to provide each image. I then combined these images into the response object of the API we were using for our data.
+A win for the app was the extensive seed file I managed to create. Utilising one-time-use temporary functions (not included in the app) I built a giant string of coins with images where each image was provided by a second API, in a seperate file. Then using keyboard commands I turned this string into multiple lines of code. I then combined these images into the response object of the API we were using (Nomics) for our data.
 
 ```python
   BTC = Coin(currency='BTC', full_name='Bitcoin', id='BTC', url='https://www.cryptocompare.com/media/19633/btc.png')
@@ -241,8 +243,8 @@ A win for the app was the extensive seed file I managed to create, utilising key
   DOGE = Coin(currency='DOGE', full_name='Dogecoin', id='DOGE', url='https://www.cryptocompare.com/media/19684/doge.png')
   ZEC = Coin(currency='ZEC', full_name='ZCash', id='ZEC', url='https://www.cryptocompare.com/media/351360/zec.png')
 ```
-There are some 3500 such lines of coins.
-These coins are attached to the data with the below code:
+There are some 3500 such lines of code.
+These coins are combined with the data from the API we were actually using via the code below:
 
 ```javascript
 attachCoinToNomics() {
