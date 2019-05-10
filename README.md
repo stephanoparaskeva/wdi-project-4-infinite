@@ -10,7 +10,7 @@ ___
 ### The Brief:
 
 * **Build a full-stack application** by making your own backend and your own front-end.
-* **Use a Python Flask API** to serve your data from a Postgres database.
+* **Use a Python Flask API** to serve your data from a PostgreSQL database.
 * **Consume your API with a separate front-end** built with React.
 * **Be a complete product** which most likely means multiple relationships and CRUD functionality for at least a couple of models.
 * **Implement thoughtful user stories/wireframes** that are significant enough to help you know which features are core MVP and which you can cut.
@@ -33,7 +33,7 @@ ___
 
 ### Walkthrough:
 
-1. The Markets page is an index of the top 100 cryptocurrencies based on daily price. It presents a table of the Rank, Symbol, Price, Change, ATH, Market Cap, Circulating Supply and Max supply of each coin. On mobile, half of the table is scrollable on the X axis.
+1. The Markets page is an index of the top 100 cryptocurrencies based on daily price, it features a search bar that searches for over 1500 cryptocurrencies. The page presents a table of the Rank, Symbol, Price, Change, ATH, Market Cap, Circulating Supply and Max supply of each coin. On mobile, half of the table is scrollable on the X axis.
 
  ![](https://i.imgur.com/SWtIxZL.png?1)
 
