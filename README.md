@@ -1,5 +1,7 @@
 # General Assembly WDI Project 4
 ## Infinite
+[Deployed project](http://crypto-infinite.herokuapp.com)
+
 ![](https://media.giphy.com/media/llCNvZSV4KK7NksgdQ/giphy.gif)
 ___
 ### Overview:
