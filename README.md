@@ -77,16 +77,24 @@ This is then used as part of the query in an Axios request to the external API (
     And thus the coin show page is rendered. Additionally there are buttons to select timeframes for the historical data (1w, 1m, 1y, 5y) where each button selected sends a new request.
 
  ![](https://i.imgur.com/jka6FeJ.png?1)
+
 3. Steps 1 and 2 highlight the limit of functionality for users that are not registered and logged in to the app. Login and register are both are accessed via the door icon in the top right of the header). Once logged in, the user can access their personal portfolio via a new icon of a graph that appears in the header.
 
  ![](https://i.imgur.com/iajeTNc.png)
+
 4. The user can then add their past transactions (buy/sell) via the 'plus' icon or via the aforementioned coin show page that now has a new 'plus' icon. The user then see's their balance based on these transactions. Once two or more transactions are logged, the user also sees a graph of their balance over time.
+
     ##### Graph:
-    ![](https://i.imgur.com/4rt83tF.png)
+
+      ![](https://i.imgur.com/4rt83tF.png)
+
     ##### Transactions:
-    ![](https://i.imgur.com/i9tehB7.png)
+
+      ![](https://i.imgur.com/i9tehB7.png)
+
     ##### Holdings:
-    ![](https://i.imgur.com/8T5iL3X.png)
+
+      ![](https://i.imgur.com/8T5iL3X.png)
 
 
 ### Portfolio:
