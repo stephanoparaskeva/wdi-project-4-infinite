@@ -1,4 +1,4 @@
-# General Assembly WDI Project 4 ![](https://ga-core.s3.amazonaws.com/production/uploads/program/default_image/9142/thumb_CMYK-Red_Small_GeneralAssembly-Cog.png)
+# General Assembly WDI Project 4
 ## Infinite
 ![](https://media.giphy.com/media/llCNvZSV4KK7NksgdQ/giphy.gif)
 ___
