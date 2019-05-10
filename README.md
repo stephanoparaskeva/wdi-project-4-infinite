@@ -33,7 +33,7 @@ ___
 
 ### Walkthrough:
 
-1. The Markets page is an index of the top 100 cryptocurrencies based on daily price. It presents a table of the Rank, Symbol, Price, Change, ATH, Market Cap, Circulating Supply and Max supply of each coin. On mobile, half of the table is scrollable on the X axis.
+1. The Markets page is an index of the top 50 cryptocurrencies by rank. It presents a table of the Rank, Symbol, Price, Change, ATH, Market Cap, Circulating Supply and Max supply of each coin. On mobile, half of the table is scrollable on the X axis.
 
  ![](https://i.imgur.com/SWtIxZL.png?1)
 
@@ -270,4 +270,4 @@ attachCoinToNomics() {
 
 ### Key Learnings:
 
-This project was a very holistic learning experience for myself. Full of realisations on how to do things better in the future. It has taught me the necessity of a robust back-end architecture, as I learned fast that having a stronger foundation would have reduced and refactored a lot of work that should not have been required later on. It taught me further, how to truly utilise my basic programming tools. Dealing with such vast amounts of data meant that I repetitively got to use the stretch of my knowledge. Map, reduce, filter, sort. Constantly writing code and then re-writing after finding a better solution. And lastly this project put my team-working ability to the test. As the challenges were big, myself and my teammate had to become closer and really scrutinise each others work, while pushing each other to achieve more. Overall I enjoyed working on this project a lot and will carry what I learned over to what I work on next. 
+This project was a very holistic learning experience for myself. Full of realisations on how to do things better in the future. It has taught me the necessity of a robust back-end architecture, as I learned fast that having a stronger foundation would have reduced and refactored a lot of work that should not have been required later on. It taught me further, how to truly utilise my basic programming tools. Dealing with such vast amounts of data meant that I repetitively got to use the stretch of my knowledge. Map, reduce, filter, sort. Constantly writing code and then re-writing after finding a better solution. And lastly this project put my team-working ability to the test. As the challenges were big, myself and my teammate had to become closer and really scrutinise each others work, while pushing each other to achieve more. Overall I enjoyed working on this project a lot and will carry what I learned over to what I work on next.
