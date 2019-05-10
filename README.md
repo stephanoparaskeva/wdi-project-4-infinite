@@ -228,7 +228,7 @@ Going forward, I would have added this to my models originally.
 
 The biggest blocker for me was the portfolio graph. I had found it hard to graph the user balance over time as the balance depends on the price of multiple cryptocurrencies at once. Where each coin that the user holds will have a price that changes independently of another. This created much confusion in how to actually create the graph. It was not until later in the project where myself and my teammate broke the problem down step-by-step and arrived at possible solution.
 
-A win for the app was the extensive seed file I managed to create, utilising key-board commands and using functions I managed to build a giant string of coins with images using a second API to provide each image. I then combined these images into the response object of the API we were using for our data.
+A win for the app was the extensive seed file I managed to create. Utilising temporary functions (not included in the app) I built a giant string of coins with images where each image was provided by a second API, in a seperate file. Then using keyboard commands I turned this string into multiple lines of code. I then combined these images into the response object of the API we were using (Nomics) for our data.
 
 ```python
   BTC = Coin(currency='BTC', full_name='Bitcoin', id='BTC', url='https://www.cryptocompare.com/media/19633/btc.png')
@@ -242,7 +242,7 @@ A win for the app was the extensive seed file I managed to create, utilising key
   ZEC = Coin(currency='ZEC', full_name='ZCash', id='ZEC', url='https://www.cryptocompare.com/media/351360/zec.png')
 ```
 There are some 3500 such lines of code.
-These coins are attached to the data with the below code:
+These coins are combined with the data from the API we were actually using via the code below:
 
 ```javascript
 attachCoinToNomics() {
