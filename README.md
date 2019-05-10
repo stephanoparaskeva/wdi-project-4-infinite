@@ -241,7 +241,7 @@ A win for the app was the extensive seed file I managed to create, utilising key
   DOGE = Coin(currency='DOGE', full_name='Dogecoin', id='DOGE', url='https://www.cryptocompare.com/media/19684/doge.png')
   ZEC = Coin(currency='ZEC', full_name='ZCash', id='ZEC', url='https://www.cryptocompare.com/media/351360/zec.png')
 ```
-There are some 3500 such lines of coins.
+There are some 3500 such lines of code.
 These coins are attached to the data with the below code:
 
 ```javascript
