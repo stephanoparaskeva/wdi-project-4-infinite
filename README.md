@@ -33,6 +33,10 @@ ___
 * Axios
 * Plotly.js
 
+### Approach:
+
+Previously I had worked on a financial data related [project](https://github.com/stephanoparaskeva/wdi-project-2-hackathon) in a two day hackathon. However there was not enough time to add a lot of the functionality I hoped to add. So myself and another developer decided to do so with Infinite. We derived inspiration from apps like Delta and approached Infinite from an external API focused perspective as the app requires a huge amount of data. We wanted to build the app mobile-first as it is something we were both very interested in using. Having invested in crypto ourselves we thus wanted to use the app on-the-go in our personal lives.
+
 ### Walkthrough:
 
 1. The Markets page is an index of the top 50 cryptocurrencies by rank, it features a search bar that searches for over 1500 cryptocurrencies. The page presents a table of the Rank, Symbol, Price, Change, ATH, Market Cap, Circulating Supply and Max supply of each coin. On mobile, half of the table is scrollable on the X axis.
@@ -198,6 +202,9 @@ To reduce time taken further, I added queries to all of the requests made where 
 
 The coin show page still requires a separate request as each coin requires full candle data for the graph.
 
+### Styling:
+From the beginning of the project we had decided to build mobile-first, and therefore chose to use a framework early on that was both lightweight and responsive. We decided to go with the Skeleton CSS framework. This early design choice benefited us later as it allowed for a very mobile responsive site that we could easily customise straight out of the box. We also liked the polish of the Delta app, so chose a similar layout. As we were dealing with very large numbers for example Market Cap, we wanted to display these numbers in a more friendly way and so utilised a library called Numeral, which changed how numbers were formatted. For example a number with 9 digits would be '1.5 b', for 1.5 billion. Lastly to really make our site stand out, we chose to pick a colour scheme that looked original and a logo design that reflected the cyclical nature of how the site was supposed to be navigated and thus chose an infinity symbol.
+
 ### Process:
 This was a team based project where I worked with one other developer, [Stephen Sabo](https://github.com/SaboHimself). We worked together using Version-Control via Git on GitHub where Stephen was the Git master. Both of us would communicate on what we were doing at each point in time. We'd handle any Git conflicts together and discuss what we wanted to keep and what we didn't. Features were created on separate Git branches before being merged into the development branch.
 
@@ -207,7 +214,7 @@ I planned my models beforehand using an entity relationship diagram in order to 
 
 Going forward, I would have added this to my models originally.
 
-
+Myself and my teammate used Slack messaging in order to communicate with each other about what tasks we were working on. We decided to play to our strengths, where he was great at implementing external components and frameworks, like the React Datepicker, Numeral, Skeleton and was strong at styling. And I decided to focus on the back-end, graphs, interacting with the external API and the RESTful routes (index, show, edit, post, delete).
 
 ### Bugs
 *Below is a list of some of the known issues*:
