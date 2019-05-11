@@ -86,7 +86,7 @@ This is then used as part of the query in an Axios request to the external API (
 
 3. Steps 1 and 2 are the limit of functionality for users that are not registered and logged in to the app. Login and register are both accessed via the door icon in the top right of the header. Once logged in, the user can access their personal portfolio via a new icon of a graph that appears.
 
- ![](https://i.imgur.com/iajeTNc.png)
+ ![](https://i.imgur.com/j4QDdkM.png?1)
 
 4. The user can then add their past transactions (buy/sell) via the 'plus' icon on the portfolio page or via the aforementioned coin show page that now has a new 'plus' icon. The user then sees their balance based on these transactions. Once two or more transactions are logged, the user also sees a graph of their balance over time.
 
