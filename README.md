@@ -39,7 +39,7 @@ Previously I had worked on a financial data related [project](https://github.com
 
 ### Walkthrough:
 
-1. The Markets page is an index of the top 50 cryptocurrencies by rank, it features a search bar that searches for over 1500 cryptocurrencies. The page presents a table of the Rank, Symbol, Price, Change, ATH, Market Cap, Circulating Supply and Max supply of each coin. On mobile, half of the table is scrollable on the X axis.
+1. The Markets page is an index of the top 50 cryptocurrencies by rank, it features a search bar that searches for over 1500 cryptocurrencies. The Markets page presents a table of the Rank, Symbol, Price, Change, ATH, Market Cap, Circulating Supply and Max Supply of each coin. On mobile, half of the table is scrollable on the X axis.
 
  ![](https://i.imgur.com/SWtIxZL.png?1)
 
@@ -84,11 +84,11 @@ This is then used as part of the query in an Axios request to the external API (
 
  ![](https://i.imgur.com/jka6FeJ.png?1)
 
-3. Steps 1 and 2 are the limit of functionality for users that are not registered and logged in to the app. Login and register are both accessed via the door icon in the top right of the header). Once logged in, the user can access their personal portfolio via a new icon of a graph that appears in the header.
+3. Steps 1 and 2 are the limit of functionality for users that are not registered and logged in to the app. Login and register are both accessed via the door icon in the top right of the header. Once logged in, the user can access their personal portfolio via a new icon of a graph that appears.
 
  ![](https://i.imgur.com/iajeTNc.png)
 
-4. The user can then add their past transactions (buy/sell) via the 'plus' icon or via the aforementioned coin show page that now has a new 'plus' icon. The user then see's their balance based on these transactions. Once two or more transactions are logged, the user also sees a graph of their balance over time.
+4. The user can then add their past transactions (buy/sell) via the 'plus' icon on the portfolio page or via the aforementioned coin show page that now has a new 'plus' icon. The user then sees their balance based on these transactions. Once two or more transactions are logged, the user also sees a graph of their balance over time.
 
     ##### Graph:
 
@@ -104,7 +104,7 @@ This is then used as part of the query in an Axios request to the external API (
 
 
 ### Portfolio:
-The aforementioned user portfolio page displays a graph of the user's transactions and said user's balance. To obtain the data for the graph, the balance of the user must be updated after each transaction. This is because the balance of the user depends on the current price of the user's holdings, which changes. As each transaction is made at a different time, the price for all of the coins in the user's holdings must be requested every time a new transaction is made and used to calculate a current balance relative to the time of the last transaction. This balance is stored on the transaction model. As a the prices change, a new Axios request is made to the external API (Nomics), before every post to the infinite API. This is all built using the following code.
+The aforementioned user portfolio page displays a graph of the user's transactions and said user's balance. To obtain the data for the graph, the balance of the user must be updated after each transaction. This is because the balance of the user depends on the current price of the user's holdings, at each moment in time, and thus must be updated every time a user makes a transaction. To do this, the price for all of the coins in the user's holdings must be requested every time a new transaction is made, and used to calculate a current balance. This balance is stored on the transaction model. As a the prices change, a new Axios request is made to the external API (Nomics), before every post to the infinite API. This is all built using the following code:
 ```javascript
   handleSubmit(e) {
     const timestamp = moment(this.state.data.timestamp).startOf('hour').format()
@@ -168,19 +168,19 @@ The aforementioned user portfolio page displays a graph of the user's transactio
   }
  ```
 #### Step-by-step:
-1. First the date that the user sets is stored as a variable (timestamp). To be used to get the price data of all coins for that day.
+1. First the date that the user sets is stored as a variable 'timestamp'. To be used to get the price data of all coins for that day.
 2. Once the price data is returned, it is then reduced into a lookup-table object. The object has the symbol as a key and the price as a value for each coin.
-3. Then, a request is made to the Infinite database for all transactions and the response is filtered by the current user.
+3. Then, a request is made to the Infinite database for all transactions, and the response is filtered by the current user.
 4. This response is then sorted by date.
-5. Next it the response is reduced into a holdings object for the user where each transaction is grouped based on coin with quantities are stored as values.
-6. As the user is currently making a transaction, the holdings will change. Because of this, the previous holdings are then combined with the new holdings. Whether that be a sell, or buy.
+5. Next the response is reduced into a holdings object for the user where each transaction is grouped based on coin with quantities are stored as values.
+6. As the user is currently making a transaction, the holdings will change. Because of this, the previous holdings are then combined with the new holdings, just before the post. And depend on whether the transaction is a sell or buy.
 7. Next the lookup-table (created from the price data of the external API) is used to give the price of each of the coins in the new holdings. And this is made into an array. The array is then reduced to form the user's balance at the time of the new transaction and added to the data object as 'end_of_day_balance' ready to be posted.
-8. A post is finally made to the infinite API.
+8. A post is finally made to the Infinite API.
 
 ### Optimisation:
 As the external API (Nomics) provided a huge amount of data on any one request, it meant that the site was originally very slow. Loading times were around 10 seconds on initial site load and persisted to be slow throughout the site. I therefore aimed to reduce this
-time by finding small ways to optimise the site. One of the ways I achieved this was to
-change our multiple API requests into a single request in app.js during initial app load.
+time by finding ways to optimise the site. One particular way I acheived this was by
+changing our multiple API requests into a single request in app.js during initial app load.
 
 ```javascript
 componentDidMount() {
