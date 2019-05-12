@@ -216,7 +216,7 @@ Going forward, I would have added this to my models originally.
 
 Myself and my teammate used Slack messaging in order to communicate with each other about what tasks we were working on. We decided to play to our strengths, where he was great at implementing external components and frameworks, like the React Datepicker, Numeral, Skeleton and was strong at styling. I decided to focus on the back-end, graphs, interacting with the external API and the RESTful routes (index, show, edit, post, delete).
 
-### Bugs
+### Bugs:
 *Below is a list of some of the known issues*:
 
 ---
