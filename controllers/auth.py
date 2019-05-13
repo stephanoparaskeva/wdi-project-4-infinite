@@ -18,11 +18,11 @@ def register():
     if not is_unique(model=User, key='email', value=data['email']):
         errors['email'] = errors.get('email', []) + ['Email already taken']
 
-    if not validate_email(data['email']):
-        errors['email'] = errors.get('email', []) + ['Email invalid']
-
-    if not re.match(r"^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])[\w\d@#$]{6,12}$", data['password']):
-        errors['password'] = errors.get('password', []) + ['Password must contain at least one uppercase character, one lowercase and one number']
+    # if not validate_email(data['email']):
+    #     errors['email'] = errors.get('email', []) + ['Email invalid']
+    #
+    # if not re.match(r"^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])[\w\d@#$]{6,12}$", data['password']):
+    #     errors['password'] = errors.get('password', []) + ['Password must contain at least one uppercase character, one lowercase and one number']
 
     if errors:
         return jsonify(errors), 422
