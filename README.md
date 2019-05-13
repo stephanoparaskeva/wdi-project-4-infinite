@@ -1,6 +1,6 @@
 # General Assembly WDI Project 4: Flask + React App
 ## Infinite
-[Deployed project](http://crypto-infinite.herokuapp.com)
+[Deployed project](https://crypto-infinite.herokuapp.com)
 
 ![](https://media.giphy.com/media/llCNvZSV4KK7NksgdQ/giphy.gif)
 ___
