@@ -7,8 +7,8 @@ ___
 ### Overview:
 A cryptocurrency portfolio tracker with real-time price change data and candle graphs. The user can make transactions, see their balance and a graph of their balance over time based on the coins they own.
 ___
-### Timeframe:
-    8 days
+### Timeframe & Team:
+    8 days, team of 2
 ### The Brief:
 
 * **Build a full-stack application** by making your own backend and your own front-end.
