@@ -27,11 +27,19 @@ ___
 * Flask
 * PostgreSQL
 * CSS
-* SCSS
-* Skeleton
+* SASS
+* Skeleton.css
 * HTML
 * Axios
 * Plotly.js
+* Slack
+* Git
+* GitHub
+* Heroku
+* Yarn
+* pip3
+* Bash
+
 
 ### Approach:
 
