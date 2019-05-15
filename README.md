@@ -100,15 +100,15 @@ This is then used as part of the query in an Axios request to the external API (
 
     ##### Graph:
 
-      ![](https://i.imgur.com/4rt83tF.png)
+      ![](https://i.imgur.com/w2At725.png?1)
 
     ##### Transactions:
 
-      ![](https://i.imgur.com/i9tehB7.png)
+      ![](https://i.imgur.com/nAaIdSM.png)
 
     ##### Holdings:
 
-      ![](https://i.imgur.com/8T5iL3X.png)
+      ![](https://i.imgur.com/zD0bisG.png
 
 
 ### Portfolio:
@@ -176,13 +176,13 @@ The aforementioned user portfolio page displays a graph of the user's transactio
   }
  ```
 #### Step-by-step:
-1. First the date that the user sets is stored as a variable 'timestamp'. To be used to get the price data of all coins for that day.
+1. First the date that the user sets is stored as a variable `timestamp`. To be used to get the price data of all coins for that day.
 2. Once the price data is returned, it is then reduced into a lookup-table object. The object has the symbol as a key and the price as a value for each coin.
 3. Then, a request is made to the Infinite database for all transactions, and the response is filtered by the current user.
 4. This response is then sorted by date.
 5. Next the response is reduced into a holdings object for the user where each transaction is grouped based on coin with quantities are stored as values.
 6. As the user is currently making a transaction, the holdings will change. Because of this, the previous holdings are then combined with the new holdings, just before the post. And depend on whether the transaction is a sell or buy.
-7. Next the lookup-table (created from the price data of the external API) is used to give the price of each of the coins in the new holdings. And this is made into an array. The array is then reduced to form the user's balance at the time of the new transaction and added to the data object as 'end_of_day_balance' ready to be posted.
+7. Next the lookup-table (created from the price data of the external API) is used to give the price of each of the coins in the new holdings. And this is made into an array. The array is then reduced to form the user's balance at the time of the new transaction and added to the data object as `end_of_day_balance` ready to be posted.
 8. A post is finally made to the Infinite API.
 
 ### Optimisation:
@@ -216,7 +216,7 @@ From the beginning of the project we had decided to build mobile-first, and ther
 ### Process:
 This was a team based project where I worked with one other developer, [Stephen Sabo](https://github.com/SaboHimself). We worked together using Version-Control via Git on GitHub where Stephen was the Git master. Both of us would communicate on what we were doing at each point in time. We'd handle any Git conflicts together and discuss what we wanted to keep and what we didn't. Features were created on separate Git branches before being merged into the development branch.
 
-I planned my models beforehand using an entity relationship diagram in order to construct the back-end. Originally had not included an 'end_of_day_balance' on my models and in hindsight, this was a mistake.
+I planned my models beforehand using an entity relationship diagram in order to construct the back-end. Originally had not included an `end_of_day_balance` on my models and in hindsight, this was a mistake.
 
 ![](https://i.imgur.com/AZFHDEj.png)
 
@@ -231,7 +231,7 @@ Myself and my teammate used Slack messaging in order to communicate with each ot
 
 **Problem**: The portfolio graph will work when the user follows a specific order of posting or editing their transactions in order of time. If however the user adds a transaction with a date that is in between the dates of other transactions, this causes a problem. The graph and balance will not take into this into account and become misrepresentative.
 
-**Solution**: If the user adds a transaction in between their other transactions, all transactions after this point in time must change. If I were to build this app again I would instead add (add for a buy, subtract for a sell) the difference that this new transaction makes, to the 'end_of_day_balance' of all transactions that the user has made with a date that is after that point.
+**Solution**: If the user adds a transaction in between their other transactions, all transactions after this point in time must change. If I were to build this app again I would instead add (add for a buy, subtract for a sell) the difference that this new transaction makes, to the `end_of_day_balance` of all transactions that the user has made with a date that is after that point.
 
 ---
 
