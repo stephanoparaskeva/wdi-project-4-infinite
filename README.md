@@ -104,11 +104,11 @@ This is then used as part of the query in an Axios request to the external API (
 
     ##### Transactions:
 
-      ![](https://i.imgur.com/nAaIdSM.png)
+      ![](https://i.imgur.com/dbf3ue2.png?1)
 
     ##### Holdings:
 
-      ![](https://i.imgur.com/zD0bisG.png
+      ![](https://i.imgur.com/dV8b4R6.png?1)
 
 
 ### Portfolio:
