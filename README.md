@@ -112,7 +112,7 @@ This is then used as part of the query in an Axios request to the external API (
 
 
 ### Portfolio:
-The aforementioned user portfolio page displays a graph of the user's transactions and said user's balance. To obtain the data for the graph, the balance of the user must be updated after each transaction. This is because the balance of the user depends on the current price of the user's holdings, at each moment in time, and thus must be updated every time a user makes a transaction. To do this, the price for all of the coins in the user's holdings must be requested every time a new transaction is made, and used to calculate a current balance. This balance is stored on the transaction model. As a the prices change, a new Axios request is made to the external API (Nomics), before every post to the infinite API. This is all built using the following code:
+The aforementioned user portfolio page displays a graph of the user's transactions and said user's balance. To obtain the data for the graph, the balance of the user must be updated after each transaction. This is because the balance of the user depends on the current price of the user's holdings, at each moment in time, and thus must be updated every time a user makes a transaction. To do this, the price for all of the coins in the user's holdings must be requested every time a new transaction is made, and used to calculate a current balance. This balance is stored on the transaction model. As the prices change, a new Axios request is made to the external API (Nomics), before every post to the infinite API. This is all built using the following code:
 ```javascript
   handleSubmit(e) {
     const timestamp = moment(this.state.data.timestamp).startOf('hour').format()
