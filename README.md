@@ -216,7 +216,7 @@ From the beginning of the project we had decided to build mobile-first, and ther
 ### Process:
 This was a team based project where I worked with one other developer, [Stephen Sabo](https://github.com/SaboHimself). We worked together using Version-Control via Git on GitHub where Stephen was the Git master. Both of us would communicate on what we were doing at each point in time. We'd handle any Git conflicts together and discuss what we wanted to keep and what we didn't. Features were created on separate Git branches before being merged into the development branch.
 
-I planned my models beforehand using an entity relationship diagram in order to construct the back-end. Originally had not included an `end_of_day_balance` on my models and in hindsight, this was a mistake.
+I planned my models beforehand using an entity relationship diagram in order to construct the back-end. Originally I had not included an `end_of_day_balance` on my models and in hindsight, this was a mistake.
 
 ![](https://i.imgur.com/AZFHDEj.png)
 
@@ -229,7 +229,7 @@ Myself and my teammate used Slack messaging in order to communicate with each ot
 
 ---
 
-**Problem**: The portfolio graph will work when the user follows a specific order of posting or editing their transactions in order of time. If however the user adds a transaction with a date that is in between the dates of other transactions, this causes a problem. The graph and balance will not take into this into account and become misrepresentative.
+**Problem**: The portfolio graph will work when the user follows a specific order of posting or editing their transactions in order of time. If however the user adds a transaction with a date that is in between the dates of other transactions, this causes a problem. The graph and balance will not take this into account and become misrepresentative.
 
 **Solution**: If the user adds a transaction in between their other transactions, all transactions after this point in time must change. If I were to build this app again I would instead add (add for a buy, subtract for a sell) the difference that this new transaction makes, to the `end_of_day_balance` of all transactions that the user has made with a date that is after that point.
 
@@ -243,7 +243,7 @@ Myself and my teammate used Slack messaging in order to communicate with each ot
 
 ### Wins and Blockers:
 
-The biggest blocker for me was the portfolio graph. I had found it hard to graph the user balance over time as the balance depends on the price of multiple cryptocurrencies at once. Where each coin that the user holds will have a price that changes independently of another. This created much confusion in how to actually create the graph. It was not until later in the project where myself and my teammate broke the problem down step-by-step and arrived at possible solution.
+The biggest blocker for me was the portfolio graph. I had found it hard to graph the user balance over time as the balance depends on the price of multiple cryptocurrencies at once. Where each coin that the user holds will have a price that changes independently of another. This created much confusion in how to actually create the graph. It was not until later in the project where myself and my teammate broke the problem down step-by-step and arrived at a possible solution.
 
 A win for the app was the extensive seed file I managed to create. Utilising one-time-use temporary functions (not included in the app) I built a giant string of coins with images where each image was provided by a second API, in a seperate file. Then using keyboard commands I turned this string into multiple lines of code. I then combined these images into the response object of the API we were using (Nomics) for our data.
 
